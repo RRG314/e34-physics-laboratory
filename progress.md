@@ -35,3 +35,17 @@ Original prompt: Build a serious, high-fidelity, web-based interactive physics l
 - Started the repository development server at `http://127.0.0.1:5173/`, opened it in the app browser, and corrected the narrow-screen landing/navigation layout found there.
 - A separate GitHub Projects board remains pending because the current GitHub CLI token lacks `project` and `read:project` scopes.
 - Remaining roadmap work: real-E34 dataset capture, calibrated parameters, deeper domain solvers/overlays, executable capstones, derivation trees, semantic search, route-level code splitting, and independent experimental validation.
+
+## 2026-09-02 — curriculum and game-concept R&D
+
+- Replaced the college-level starting language with a high-school-first course architecture.
+- Researched and documented OpenStax High School Physics, NGSS, AP Physics 1/2, Common Core mathematics, AP Precalculus/Calculus, MIT OCW, Modeling Instruction, PhET, active learning, IES study guidance, CAST UDL, Quality Matters, and cautious mastery-learning evidence.
+- Added a canonical 12-module syllabus from measurement through graduate experiment design. Each module aligns a driving question, measurable outcome, substantial mathematics, vehicle system, investigation, misconception check, assessment, standards, and unlock.
+- Defined a mandatory nine-part lesson quality contract to prevent disconnected content accumulation.
+- Reframed the game loop as `learn → predict → test → explain → certify → install → prove → retrieve later`, with compatibility-constrained modification branches rather than generic XP.
+- Expanded the vehicle pathway to the real E34 family: 518i, 520i, 525i, 525iX/Touring branches, 530i, 535i, 540i, market-specific 540i M-Sport, and M5. The mapping follows added system/modeling complexity rather than price or horsepower alone.
+- Added a virtual proving ground with adjustable ramp, impact-pulse, and ideal-drop scenarios, synchronized graphs, equations, assumptions, and a prominent simulation-only safety boundary.
+- Added pure/tested ramp, impulse, and drop solvers; unit coverage now totals 15 passing tests.
+- Researched open E34 geometry through the official Sketchfab API. Selected a CC BY 525i candidate and replaced the homepage's schematic hero with its attributed high-resolution reference render; authenticated archive acquisition remains required before integrating the actual mesh.
+- Visually inspected the homepage, garage, course, and proving-ground pages at 1280 × 720. The full fresh-learner browser progression passed on the production preview.
+- Cleared only regenerable npm and test/build caches after local free space fell below the amount required for browser verification.

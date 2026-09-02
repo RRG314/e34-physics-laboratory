@@ -7,10 +7,11 @@ import { isBroadlyMastered } from '../../domain/mastery'
 import { getNextRecommendedConcepts } from '../../domain/progressionEngine'
 import { mathematicsConcepts } from '../../data/mathematics'
 import { useLabLearningStore } from '../../store/labLearningStore'
+import { courseModules, courseStages, vehicleProgression } from '../../data/courseArchitecture'
 
 const lanes = [
-  { label: 'Foundation', tier: 'foundation' },
-  { label: 'First-year physics', tier: 'tier1' },
+  { label: 'Pre-course foundations', tier: 'foundation' },
+  { label: 'High-school physics · 525i', tier: 'tier1' },
 ] as const
 
 export function LearnPage() {
@@ -24,7 +25,12 @@ export function LearnPage() {
   const filteredConcepts = normalizedQuery ? concepts.filter((concept) => `${concept.title} ${concept.domain} ${concept.vehicleLinks.join(' ')}`.toLowerCase().includes(normalizedQuery)) : concepts
   return (
     <div className="content-page learn-page">
-      <header className="content-header"><p className="eyebrow">Directed prerequisite map</p><h1>Capability grows from evidence.</h1><p>Only the immediate neighborhood is shown. Mastered ideas stay connected to the vehicle systems they unlock.</p></header>
+      <header className="content-header"><p className="eyebrow">Coherent course map</p><h1>Start in high school. Grow toward research.</h1><p>The numbered syllabus is the spine; prerequisites are the connective tissue. Lessons, mathematics, experiments, assessments, and vehicle upgrades stay aligned to the same measurable outcomes.</p></header>
+      <section className="syllabus-spine">
+        <div className="stage-strip">{vehicleProgression.map((stage) => <span key={`${stage.year}-${stage.model}`}><strong>{stage.model}</strong>{stage.year}</span>)}</div>
+        <div className="module-list">{courseModules.map((module) => <details key={module.id} open={module.chapter === 1}><summary><span>{String(module.chapter).padStart(2, '0')}</span><div><small>{courseStages.find((stage) => stage.id === module.stage)?.model}</small><strong>{module.title}</strong></div><em>{module.unlock}</em></summary><div className="module-contract"><p><b>Driving question</b>{module.drivingQuestion}</p><p><b>Student can</b>{module.measurableOutcome}</p><p><b>Mathematics</b>{module.mathematics.join(' · ')}</p><p><b>Vehicle investigation</b>{module.investigation}</p><p><b>Misconception check</b>{module.misconception}</p><p><b>Evidence required</b>{module.assessment}</p><small>{module.standards.join(' · ')}</small></div></details>)}</div>
+      </section>
+      <header className="map-subhead"><p className="eyebrow">Current playable prerequisite slice</p><h2>Motion certification map</h2><p>The detailed course above is the canonical sequence. This graph shows what is currently interactive—not a false claim that every chapter is already built.</p></header>
       <div className="graph-summary"><span><strong>{mastered.length}</strong> broadly mastered</span><span><strong>{recommended.length}</strong> recommended next</span><span><strong>{concepts.length}</strong> mapped in slice</span></div>
       <label className="physics-search"><Search size={16} /><input aria-label="Search physics and vehicle systems" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search velocity, pressure, wheel, differential…" /></label>
       {lanes.map((lane) => (

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { idealDrop, rampClimb, rectangularImpactPulse } from '../src/domain/trackPhysics'
 import { concepts } from '../src/data/curriculum'
 import { targetVehicle } from '../src/data/vehicle'
 import { validateConceptGraph } from '../src/domain/curriculumGraph'
@@ -83,5 +84,24 @@ describe('learning quality systems', () => {
 
   it('parses measurement values with uncertainty', () => {
     expect(parseMeasurementCsv('time,value,unit,uncertainty\n0,0.646,m,0.003')).toEqual([{ time: 0, value: 0.646, unit: 'm', uncertainty: 0.003 }])
+  })
+})
+
+describe('virtual proving ground', () => {
+  it('conserves energy in the ideal drop model', () => {
+    const drop = idealDrop(20)
+    expect(.5 * drop.impactSpeed ** 2).toBeCloseTo(drop.specificEnergy, 10)
+  })
+
+  it('keeps impact impulse fixed while stop time changes force', () => {
+    const short = rectangularImpactPulse(1600, 10, .1)
+    const long = rectangularImpactPulse(1600, 10, .2)
+    expect(short.impulse).toBe(long.impulse)
+    expect(short.averageForce).toBeCloseTo(long.averageForce * 2)
+  })
+
+  it('returns the kinematic stopping distance for an ideal ramp climb', () => {
+    const ramp = rampClimb(12, 15)
+    expect(2 * ramp.accelerationMagnitude * ramp.distance).toBeCloseTo(12 ** 2, 10)
   })
 })
