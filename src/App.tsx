@@ -9,6 +9,8 @@ import { LearnPage } from './ui/pages/LearnPage'
 import { ReferencePage } from './ui/pages/ReferencePage'
 import { ExperimentPage } from './ui/pages/ExperimentPage'
 import { NotebookPage } from './ui/pages/NotebookPage'
+import { GaragePage } from './ui/pages/GaragePage'
+import { TrackLabPage } from './ui/pages/TrackLabPage'
 import { useLearnerStore } from './store/learnerStore'
 import { useVehicleSimulation } from './hooks/useVehicleSimulation'
 import { vehicleSimulation } from './simulation/vehicleSimulation'
@@ -58,7 +60,7 @@ function RuntimeHooks() {
         modelLevel: liveSimulation.modelLevel,
       },
       learningQuality: { mathematicsConceptsWithEvidence: Object.keys(mathematicsMastery), latestDiagnostic: diagnostics[0]?.category ?? null, notebookEntries: notebook.length, selectedModelLevel: modelLevel, activeRepresentation: overlay },
-      visibleInteraction: location.pathname === '/laboratory' ? `motion mission ${Math.min(missionIndex + 1, 4)} of 4` : location.pathname === '/drive' ? 'W/up accelerate; S/down brake; contextual Why path' : location.pathname === '/explore' ? `wheel checkpoint ${Math.min(wheelMissionIndex + 1, 2)} of 2; select one of four wheels` : 'navigation and vehicle orbit',
+      visibleInteraction: location.pathname === '/laboratory' ? `motion mission ${Math.min(missionIndex + 1, 4)} of 4` : location.pathname === '/drive' ? 'W/up accelerate; S/down brake; contextual Why path' : location.pathname === '/explore' ? `wheel checkpoint ${Math.min(wheelMissionIndex + 1, 2)} of 2; select one of four wheels` : location.pathname === '/track' ? 'ramp, impact pulse, and ideal drop telemetry sandboxes' : location.pathname === '/garage' ? 'learn, predict, test, install, prove progression and upgrade branches' : location.pathname === '/learn' ? '12-module aligned syllabus and current playable prerequisite graph' : 'navigation and licensed E34 visual reference',
       })
     }
   }, [location.pathname, mastery, missionIndex, wheelMissionIndex, selectedComponentId, simulation, mathematicsMastery, diagnostics, notebook.length, modelLevel, overlay])
@@ -92,12 +94,14 @@ function AppRoutes() {
         <Route element={<AppShell />}>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/learn" element={<LearnPage />} />
+          <Route path="/garage" element={<GaragePage />} />
+          <Route path="/track" element={<TrackLabPage />} />
           <Route path="/laboratory" element={<LaboratoryPage />} />
           <Route path="/drive" element={<DrivePage />} />
           <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/reference" element={<ReferencePage />} />
-        <Route path="/experiments" element={<ExperimentPage />} />
-        <Route path="/notebook" element={<NotebookPage />} />
+          <Route path="/reference" element={<ReferencePage />} />
+          <Route path="/experiments" element={<ExperimentPage />} />
+          <Route path="/notebook" element={<NotebookPage />} />
           <Route path="*" element={<DashboardPage />} />
         </Route>
       </Routes>
