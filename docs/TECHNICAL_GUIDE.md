@@ -44,6 +44,14 @@ Learner evidence, preferences, and notebook entries are stored in browser local 
 
 Any future synchronization service will require a separate privacy design, data-retention policy, consent model, and migration path. Do not add learner telemetry to a remote service as an incidental feature.
 
+## Static hosting and offline use
+
+The production output is a static site. It makes no runtime API calls and can be served by GitHub Pages or an ordinary local file server. Routing uses URL fragments so every screen remains reachable on a host that cannot rewrite requests, and asset URLs are relative so the build works below GitHub Pages' repository path.
+
+The Pages workflow builds `main` and publishes `dist`. Local use follows the same path: run `npm ci` once while the packages are available, then `npm run build` and `npm run preview`. After installation, the application itself does not need a network connection or backend. The GitHub Pages copy is not currently an installable offline web app; a service worker should only be added with a clear cache-update and content-version policy.
+
+When a backend is introduced, local-only mode must remain a supported path. Synchronization should be optional, and simulations, lessons, source records, and existing progress must not fail when the service is unavailable.
+
 ## Accessibility
 
 Canvas interactions need an equivalent DOM control or text representation. `window.render_game_to_text()` exposes a concise state description for browser verification and nonvisual inspection. `window.advanceTime(ms)` advances the simulation deterministically during tests.
@@ -73,4 +81,3 @@ The current build loads the 3D dependencies in the main bundle. Route-level code
 Start with the learner outcome and source record. Add prerequisites and the vehicle relationship to the data registry, keep calculations in a pure domain or physics module, and let the interface consume the result. Do not duplicate constants in UI components.
 
 The requirements for lesson contributions are in [CONTRIBUTING.md](../CONTRIBUTING.md), while evidence and validation expectations are in [RESEARCH_METHODS.md](RESEARCH_METHODS.md).
-

@@ -31,6 +31,7 @@ The application also distinguishes conceptual, arithmetic, sign, unit, model-sel
 | Vehicle graphics | Interactive visual proxy | Recognizable and useful for selection, but not measured production geometry |
 | Learning effectiveness | Not yet established | The design follows published practice, but no learner study has demonstrated outcomes |
 | Persistence | Local browser storage | There are no accounts, cloud sync, or remote learner analytics |
+| Hosting | Static build | GitHub Pages and local static serving require no application backend |
 | Accessibility | Partial | Ordinary controls and text state exist, but a full keyboard and assistive-technology audit is still required |
 
 ## Vehicle evidence
@@ -47,6 +48,7 @@ The exact example-car mass, dimensions, factory wheel and tire fitment, final-dr
 - Wheel rolling assumes no slip and begins with nominal unloaded tire geometry.
 - The curriculum map extends far beyond the amount of finished teaching content.
 - Local progress can be cleared by the browser and does not transfer between devices.
+- The hosted copy is not yet an installable offline web app; offline use currently means running the static build locally after dependencies have been installed.
 - The project must not be used for vehicle repair, road safety, crash prediction, or engineering certification.
 
 ## What would justify the next release

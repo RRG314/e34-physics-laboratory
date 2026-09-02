@@ -9,7 +9,7 @@ export function DashboardPage() {
   const unlocked = canAccessTarget('controlled-drive', mastery)
   return (
     <div className="dashboard-page page-fill">
-      <img className="dashboard-photo" src="/assets/e34-525i-reference.jpg" alt="Open-source BMW 525i E34 model" />
+      <img className="dashboard-photo" src={`${import.meta.env.BASE_URL}assets/e34-525i-reference.jpg`} alt="Open-source BMW 525i E34 model" />
       <div className="dashboard-shade" />
       <div className="dashboard-overlay">
         <p className="eyebrow">Your first build · High school physics · 525i</p>

@@ -5,7 +5,7 @@ export function GaragePage() {
   return (
     <div className="content-page garage-page">
       <header className="garage-hero">
-        <img src="/assets/e34-525i-reference.jpg" alt="Open-source BMW 525i E34 reference model" />
+        <img src={`${import.meta.env.BASE_URL}assets/e34-525i-reference.jpg`} alt="Open-source BMW 525i E34 reference model" />
         <div><p className="eyebrow">The progression is the build</p><h1>Learn it. Certify it. Install it. Prove it.</h1><p>You begin in a stock 525i high-school garage. Physics certifications—not points—unlock tools, parts, and harder test facilities. A modification is useful only when your model predicts whether the surrounding system can support it.</p><div className="garage-loop"><span>01 Learn</span><i /><span>02 Predict</span><i /><span>03 Test</span><i /><span>04 Install</span><i /><span>05 Prove</span></div></div>
       </header>
 

@@ -12,4 +12,4 @@ First public research-prototype baseline.
 - Twelve-module curriculum map and E34-family learning progression.
 - Experimental notebook, CSV import, uncertainty metadata, and source registry.
 - Public contribution, research, attribution, and governance documentation.
-
+- Backend-free GitHub Pages deployment and documented local offline use.

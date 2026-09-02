@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { AppShell } from './ui/AppShell'
 import { DashboardPage } from './ui/pages/DashboardPage'
 import { DrivePage } from './ui/pages/DrivePage'
@@ -110,5 +110,5 @@ function AppRoutes() {
 }
 
 export default function App() {
-  return <BrowserRouter><AppRoutes /></BrowserRouter>
+  return <HashRouter><AppRoutes /></HashRouter>
 }

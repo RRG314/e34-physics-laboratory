@@ -12,6 +12,8 @@ The idea is not to decorate ordinary lessons with pictures of a car. A learner s
 
 The project currently runs as a browser-based research prototype. It is not a finished course, a driving simulator, or a source of repair or safety advice.
 
+[Try the laboratory on GitHub Pages](https://rrg314.github.io/e34-physics-laboratory/). The hosted demo and the local application are the same static build; neither requires an application server or account.
+
 ## What you can explore today
 
 - A guided sequence on position, displacement, speed, velocity, acceleration, and graph interpretation.
@@ -36,6 +38,15 @@ npm run dev
 ```
 
 Open `http://localhost:5173`. On macOS, `Start E34 Physics Lab.command` provides the same local start-up flow.
+
+After the first dependency install, the laboratory can be used without an internet connection:
+
+```bash
+npm run build
+npm run preview
+```
+
+Open `http://localhost:4173`. The preview command serves the static files on your own computer; it is not a backend. Lessons, simulation, vehicle data, and graphics are included in the repository, and learner progress stays in that browser's local storage. A first `npm ci` still needs access to the npm packages unless they are already cached.
 
 To run the full check locally:
 
