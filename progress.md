@@ -31,5 +31,7 @@ Original prompt: Build a serious, high-fidelity, web-based interactive physics l
 - Expanded automated validation from 7 to 12 unit tests. Typecheck, tests, and production build pass in the stable verification copy.
 - Full browser journey passed after correcting model-level hydration across reloads. It now covers estimation, motion, model selection, driving, wheel telemetry, the scientific-method import, and notebook persistence with zero console errors.
 - Visually inspected the new laboratory, experimental-method, and notebook states; layout and content are readable at 1440 × 900.
-- Standalone repository files are ready for the initial Git commit and private GitHub push.
+- Created the standalone private GitHub repository at `https://github.com/RRG314/e34-physics-laboratory`, pushed `main`, and added project topics.
+- Started the repository development server at `http://127.0.0.1:5173/`, opened it in the app browser, and corrected the narrow-screen landing/navigation layout found there.
+- A separate GitHub Projects board remains pending because the current GitHub CLI token lacks `project` and `read:project` scopes.
 - Remaining roadmap work: real-E34 dataset capture, calibrated parameters, deeper domain solvers/overlays, executable capstones, derivation trees, semantic search, route-level code splitting, and independent experimental validation.
