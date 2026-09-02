@@ -2,6 +2,12 @@
   "name": "e34-physics-laboratory",
   "private": true,
   "version": "0.1.0",
+  "description": "An interactive research and education project that teaches physics through the BMW E34.",
+  "license": "MIT",
+  "repository": "github:RRG314/e34-physics-laboratory",
+  "engines": {
+    "node": ">=22"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
@@ -11,7 +17,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc -b --pretty false",
-    "test:e2e": "node scripts/e2e-progression.mjs"
+    "test:e2e": "node scripts/e2e-progression.mjs",
+    "check": "npm run typecheck && npm test && npm run build"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -28,6 +35,7 @@
     "@types/react-dom": "^19.1.9",
     "@types/three": "^0.185.0",
     "@vitejs/plugin-react": "^6.0.1",
+    "playwright": "^1.62.1",
     "typescript": "^5.9.2",
     "vite": "^8.2.2",
     "vitest": "^4.1.11"

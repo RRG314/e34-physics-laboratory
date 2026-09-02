@@ -1,0 +1,47 @@
+name: Software bug
+description: Report a reproducible problem in the application or repository.
+title: "Bug: "
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for helping make the laboratory more dependable. Please do not include personal learner data.
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened?
+      description: Tell us what you observed and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How can we reproduce it?
+      placeholder: "1. Open…\n2. Choose…\n3. Enter…"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and device
+      placeholder: Firefox 128 on Windows 11; keyboard only
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: What is affected?
+      options:
+        - A lesson or explanation
+        - A calculation or graph
+        - Progress or unlocking
+        - The vehicle or 3D scene
+        - Accessibility
+        - Installation, tests, or documentation
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting material
+      description: Add screenshots, console output, or a small example if useful. Drag files here rather than pasting sensitive paths.

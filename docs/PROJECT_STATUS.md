@@ -1,49 +1,56 @@
 # Project status
 
-Status date: 2026-09-01
+Last reviewed: 2 September 2026
 
-## Working vertical slice
+Current stage: research prototype
 
-The application supports an initial learner moving from observation of the complete car through four motion investigations. Passing the multidimensional motion gate unlocks guided driving and four selectable wheels. Two wheel checkpoints then unlock live circumference, angular velocity, RPM, and revolution telemetry from a shared canonical radius and road speed.
+E34 Physics Laboratory has a working browser application and a coherent direction, but it is not yet a complete course or a validated digital twin. This page is the plain-language boundary between what someone can use now, what has only been designed, and what still needs evidence.
 
-Mastery is represented as evidence across conceptual understanding, calculation, prediction, graph interpretation, and application—not a single completion flag. Every blocked capability explains its unmet prerequisites and the vehicle behavior that will become available.
+## What works now
 
-The learning-quality expansion adds:
+The current build supports a first learning journey through motion and wheel rotation. A new learner can:
 
-- A separate 22-node mathematics prerequisite graph with contextual just-in-time modules.
-- Diagnostic classification of conceptual, arithmetic, sign, unit, model-selection, and mathematical-manipulation failures.
-- Qualitative estimation before each exact motion calculation.
-- Idealized, intermediate road-load, and engineering-approximation model levels with an inspectable assumption hierarchy.
-- Pause, slow motion, real time, accelerated time, frame stepping, replay scrubbing, vector/energy representations, and `Explain this moment`.
-- A nine-stage scientific-method workspace, safe stationary-wheel comparison, CSV measurement import, residual analysis, and future real-E34 dataset schema.
-- Persistent notebook, diagnostic trail, and progressively unlocked equation library.
-- Typed quantities, dimensions, uncertainty and reference-frame metadata, reproducible seeded problem generation, and 12 automated physics/learning-quality tests.
+- investigate position, displacement, speed, velocity, acceleration, and motion graphs;
+- make a qualitative prediction before calculating and running an experiment;
+- unlock guided driving after showing several kinds of evidence;
+- select individual wheels and connect road speed to circumference, angular velocity, RPM, and revolutions;
+- run idealized ramp, impact-pulse, and drop experiments with synchronized plots;
+- compare model assumptions, import simple measurements, and save notebook entries locally;
+- inspect the proposed curriculum, vehicle family, prerequisite map, and garage progression.
 
-## Evidence maturity
+The application also distinguishes conceptual, arithmetic, sign, unit, model-selection, and algebra errors. Progress is recorded across explanation, calculation, prediction, graph reading, and application instead of being reduced to a single completion flag.
 
-Verified now:
+## Maturity by area
 
-- 1993-on E34 525i use of the M50TU with intake VANOS.
-- 2494 cm3 displacement.
-- US repair-manual ratings of 188 hp at 5900 rpm and 184 lb-ft at 4200 rpm.
-- Getrag S5D 250 G application from 7/1992 and its five forward ratios.
+| Area | Current maturity | What that means |
+| --- | --- | --- |
+| High-school mechanics sequence | Working opening chapter | Motion and introductory rotation are playable; later mechanics chapters remain planned |
+| Broader curriculum | Structured design | Twelve modules and their prerequisites are mapped, but most are not yet lessons |
+| Physics models | Educational prototypes | Core analytical cases are tested; road-load and crash models are simplified and uncalibrated |
+| E34 vehicle data | Mixed evidence | Several engine and transmission facts are sourced; mass, dimensions, gearing, and dynamics data still need variant-specific confirmation |
+| Vehicle graphics | Interactive visual proxy | Recognizable and useful for selection, but not measured production geometry |
+| Learning effectiveness | Not yet established | The design follows published practice, but no learner study has demonstrated outcomes |
+| Persistence | Local browser storage | There are no accounts, cloud sync, or remote learner analytics |
+| Accessibility | Partial | Ordinary controls and text state exist, but a full keyboard and assistive-technology audit is still required |
 
-Provisional or unresolved:
+## Vehicle evidence
 
-- US equipment-specific curb mass and body dimensions.
-- Factory wheel/tire fitment for the exact example car.
-- Final-drive ratio.
-- Suspension rates, damping, center of gravity, frontal area, and model-specific drag coefficient.
+The reference configuration is a US-market 1995 BMW 525i E34 with a manual transmission. The current source record supports the M50TU/M50B25TU engine family, 2,494 cm³ displacement, period US output figures, and the Getrag S5D 250 G application and ratios. These facts are useful anchors, not permission to assume that every E34 shares the same specifications.
 
-## Visual fidelity
+The exact example-car mass, dimensions, factory wheel and tire fitment, final-drive ratio, suspension rates, damping, center of gravity, frontal area, and drag coefficient remain provisional or unresolved. See [Vehicle data](VEHICLE_DATA.md) for the evidence policy.
 
-The current exterior is a dimensionally scaled procedural visualization proxy. It deliberately includes E34-recognizable proportions and features—three-box body, long hood, four doors, upright greenhouse, twin round lamps, kidney grille, lower black rub strips, and four independently selectable wheels—but it is marked `PLACEHOLDER` because the surface geometry has not been validated against owner measurements or licensed CAD/scan data.
+## Important limitations
 
-## Known limitations
+- Driving is presently a controlled longitudinal experiment, not a tire-force or handling simulation.
+- Ramp and drop modes are idealized teaching models. The impact mode uses an adjustable pulse, not a structural crash or injury model.
+- Road-load coefficients are sensitivity-study values and have not been calibrated against a real E34.
+- Wheel rolling assumes no slip and begins with nominal unloaded tire geometry.
+- The curriculum map extends far beyond the amount of finished teaching content.
+- Local progress can be cleared by the browser and does not transfer between devices.
+- The project must not be used for vehicle repair, road safety, crash prediction, or engineering certification.
 
-- Driving is a controlled one-dimensional kinematics experiment, not a tire-force vehicle-dynamics model.
-- Intermediate and engineering road-load coefficients are provisional sensitivity-study values, not calibrated real-E34 performance parameters.
-- Wheel rolling assumes no slip and uses unloaded nominal radius.
-- Mastery evidence is deliberately compact and deterministic for this vertical slice; it validates the non-binary progression architecture but is not yet a complete course or psychometric model.
-- The production bundle currently includes the Three.js scene on initial load and should be route-split as the laboratory expands.
-- The supplied Bentley manual is OCR-scanned; structured extraction requires human verification against rendered pages.
+## What would justify the next release
+
+Version 0.2 should deliver a complete, teachable high-school mechanics arc rather than another broad set of placeholders. That means connected chapters on measurement, motion, forces, energy, momentum, and rotation; worked mathematics and practice; useful feedback and remediation; reviewed sources; accessible interaction paths; and evaluation with real learners.
+
+Software passing its tests is necessary, but it will not by itself establish that the course teaches effectively. The [roadmap](ROADMAP.md) and [research methods](RESEARCH_METHODS.md) describe both kinds of work.

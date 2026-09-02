@@ -1,0 +1,44 @@
+name: Vehicle data or source
+description: Propose or correct a specification, measurement, model assumption, or visual reference.
+title: "Vehicle evidence: "
+body:
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim or correction
+      description: State the exact value, relationship, component, or visual detail under discussion.
+    validations:
+      required: true
+  - type: textarea
+    id: applicability
+    attributes:
+      label: Applicable vehicle
+      description: Include market, model, model year or production date, body style, engine, transmission, and relevant options where known.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source and location
+      description: Link or identify the source, edition, page, table, measurement method, and units. Do not upload copyrighted manuals.
+    validations:
+      required: true
+  - type: dropdown
+    id: source_class
+    attributes:
+      label: Source type
+      options:
+        - BMW publication or archive
+        - Homologation or regulatory record
+        - Technical manual
+        - Repeatable direct measurement
+        - Scholarly or engineering publication
+        - Community reference
+        - Simulation assumption
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: Uncertainty and limits
+      description: Explain tolerances, conflicting sources, assumptions, or reasons the claim should remain provisional.

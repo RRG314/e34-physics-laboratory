@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If this project supports your teaching or research, please cite the repository and the version or commit you used."
+title: "E34 Physics Laboratory"
+type: software
+authors:
+  - name: "E34 Physics Laboratory contributors"
+version: 0.1.0
+date-released: 2026-09-02
+url: "https://github.com/RRG314/e34-physics-laboratory"
+repository-code: "https://github.com/RRG314/e34-physics-laboratory"
+license: MIT
+keywords:
+  - physics education
+  - interactive simulation
+  - vehicle dynamics
+  - digital twin
+  - BMW E34
+abstract: >-
+  An open research and education project that uses the BMW E34 as a persistent
+  context for learning physics, mathematics, experimental reasoning, and model
+  validation.
+

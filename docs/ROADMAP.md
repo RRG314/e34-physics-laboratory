@@ -1,49 +1,53 @@
 # Roadmap
 
-## Phase 0 - audit and research
+The project is being built from the beginning of high-school physics outward. Each release should leave behind a coherent piece of learning, not simply a larger collection of screens.
 
-- [x] Audit repository and toolchain.
-- [x] Classify the supplied service manual.
-- [x] Establish initial curriculum and vehicle sources.
-- [ ] Obtain a primary US-market 1995 specification sheet.
-- [ ] Confirm market/transmission-specific final-drive, wheel, tire, and weight data.
+Dates are intentionally absent until the work has maintainers and evidence behind it. The sequence below expresses dependencies and priorities.
 
-## Phase 1 - application foundation
+## Version 0.2 — a complete mechanics foundation
 
-- [x] TypeScript build and test system.
-- [x] Curriculum, component, vehicle, and provenance schemas.
-- [x] Directed prerequisite validation.
-- [ ] Content authoring validation and schema migration tooling.
-- [ ] Account-backed learner-state synchronization.
+The next milestone is a short course that a high-school learner can follow from measurement through rotational motion using the 525i as the common system.
 
-## Phase 2 - E34 shell
+- Complete connected chapters on measurement and uncertainty, kinematics, forces, work and energy, momentum, and rotation.
+- Give each chapter an observable question, prediction, mathematics lesson, controlled experiment, explanation, transfer problem, and useful remediation.
+- Turn ramps, braking, impacts, and drops into safe virtual investigations with explicit assumptions and graphs.
+- Add free-body diagrams, energy and momentum representations, unit-aware calculations, and a larger bank of generated problems.
+- Complete keyboard, reduced-motion, contrast, narrow-screen, and screen-reader reviews.
+- Test the sequence with learners and teachers; publish the method and limits of what was learned.
+- Replace or calibrate provisional 525i data where reliable variant-specific evidence is available.
 
-- [x] Initial scaled procedural visualization proxy.
-- [x] Camera, lighting, PBR materials, selection, wheel hierarchy.
-- [ ] Owner-reference capture and dimensional calibration.
-- [ ] Licensed production exterior, underbody, interior, and engine-bay GLBs.
-- [ ] Runtime LOD and KTX2 pipeline.
+## Version 0.3 — systems, upgrades, and competing solutions
 
-## Phase 3 - complete-car motion
+This release should make vehicle modifications meaningful. An upgrade will require the knowledge needed to predict its effects and the supporting systems needed to use it safely.
 
-- [x] Constant-velocity and constant-acceleration solvers.
-- [x] Predict-run-measure learning sequence.
-- [x] Mastery gate and driving unlock.
-- [x] Initial graph-interpretation evidence in the motion gate.
-- [ ] Broader problem generation and measurement uncertainty.
+- Connect engine torque, gear ratios, differential ratio, wheel torque, traction, braking, heat, and efficiency.
+- Model compatibility limits so that a power increase can expose constraints in tires, cooling, brakes, gearbox, differential, and driveshaft.
+- Use 530i, 535i, 540i, 540i M-Sport, and M5 configurations as different engineering solutions, with market and model-year distinctions preserved.
+- Add comparison challenges in which similar performance can be reached through different mass, gearing, tire, power, or control choices.
+- Introduce uncertainty propagation and evidence-based model selection.
 
-## Phase 4 - wheel laboratory
+## Version 0.4 — oscillations, fluids, and electricity
 
-- [x] Wheel selection and component isolation.
-- [x] Radius, circumference, angular speed, RPM, and revolution relationships.
-- [ ] Tire pressure and temperature experiment.
-- [ ] Loaded radius, slip, and basic traction.
+- Build suspension and body-motion laboratories for springs, damping, resonance, and coupled oscillation.
+- Add pressure, flow, cooling, lubrication, and basic thermodynamic investigations.
+- Develop circuits, sensing, charging, starting, ignition, magnetism, and induction chapters.
+- Expand experimental data tools to support repeat trials, residuals, parameter fitting, and comparison with responsibly collected vehicle data.
 
-## Phase 5 - forces and drivetrain entry
+## Later work — university and research depth
 
-- [ ] Free-body diagram laboratory.
-- [ ] Tire-road friction envelope.
-- [ ] Wheel torque and ideal longitudinal force.
-- [ ] Gearbox/differential rotational state coupled to road speed.
+University-level and research pathways should grow only after the school-level foundation is usable and evaluated. Likely directions include multivariable mechanics, differential equations, numerical integration, tire and suspension models, controls, signal processing, materials, optics, and reproducible digital-twin calibration.
 
-Later phases follow the prerequisite graph: energy/brakes/heat, suspension vibration, fluids, electrical and induction, optics, diagnostics, materials, controls, and higher-fidelity numerical models.
+Higher vehicle tiers do not replace lower ones. A 518i or 525i can remain the clearest system for a particular question, while an M5 can expose interactions that require more advanced mathematics and modeling.
+
+## Work that is useful now
+
+Good contributions remove a specific uncertainty or improve a real learning path. Particularly useful work includes:
+
+- classroom review of the opening mechanics sequence;
+- accessible alternatives for 3D interactions and graphs;
+- primary-source E34 specifications tied to market, model year, body, engine, and transmission;
+- analytical benchmarks and tests for existing experiments;
+- clearer feedback for common learner mistakes;
+- performance work that makes the laboratory usable on ordinary school hardware.
+
+Before starting a large change, open an issue and connect it to a learner need, research question, or documented limitation. [CONTRIBUTING.md](../CONTRIBUTING.md) explains what evidence to include.

@@ -17,7 +17,6 @@ export const sources: SourceRecord[] = [
     id: 'bentley-e34-service-manual',
     title: 'BMW 5-Series (E34) Service Manual: 1989-1995',
     organization: 'Bentley Publishers',
-    localPath: 'E34 5 Series Service Manual.pdf',
     sourceClass: 'independent_technical_manual',
     reliability: 'authoritative_secondary',
     applicability: 'US-market 525i, 530i, 535i, and 540i including Touring; 1989-1995',

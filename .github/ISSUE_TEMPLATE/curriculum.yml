@@ -1,0 +1,37 @@
+name: Curriculum or teaching proposal
+description: Improve a lesson, sequence, explanation, assessment, or accessibility path.
+title: "Learning: "
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Learner need
+      description: Who is the learner, what should they understand or do, and where do they currently struggle?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the activity, explanation, feedback, or sequence in enough detail to discuss it.
+    validations:
+      required: true
+  - type: textarea
+    id: alignment
+    attributes:
+      label: Curriculum and prerequisites
+      description: Name the relevant standard, syllabus, or course level and the prior knowledge required.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Basis for the proposal
+      description: Link primary curriculum documents, educational research, classroom observations, or other relevant evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: evaluation
+    attributes:
+      label: How could we tell whether it helps?
+      description: Suggest an observable learner outcome, review method, or small evaluation.
