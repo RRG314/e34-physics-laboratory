@@ -7,6 +7,7 @@ E34 Physics Laboratory combines a learning product, a physics simulation, and a 
 - [Project overview](PROJECT_OVERVIEW.md) — the purpose of the project and the role of the E34.
 - [Project status](PROJECT_STATUS.md) — what works, what is provisional, and what has not been built.
 - [Learning design](LEARNING_DESIGN.md) — curriculum, mathematics, lesson structure, and assessment philosophy.
+- [Educational audit](EDUCATIONAL_AUDIT.md) — the evidence-based quality review, corrected progression, and release gates for playable chapters.
 - [Research methods](RESEARCH_METHODS.md) — standards for sources, measurements, model validation, and educational evaluation.
 
 ## For contributors
@@ -17,4 +18,3 @@ E34 Physics Laboratory combines a learning product, a physics simulation, and a 
 - [Governance](GOVERNANCE.md) — how decisions, reviews, and releases are handled.
 
 Repository-wide contribution and community policies are in [CONTRIBUTING.md](../CONTRIBUTING.md), [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md), [SECURITY.md](../SECURITY.md), and [SUPPORT.md](../SUPPORT.md).
-

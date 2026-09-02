@@ -22,7 +22,7 @@ This release should make vehicle modifications meaningful. An upgrade will requi
 
 - Connect engine torque, gear ratios, differential ratio, wheel torque, traction, braking, heat, and efficiency.
 - Model compatibility limits so that a power increase can expose constraints in tires, cooling, brakes, gearbox, differential, and driveshaft.
-- Use 530i, 535i, 540i, 540i M-Sport, and M5 configurations as different engineering solutions, with market and model-year distinctions preserved.
+- Use 535i, the two E34 530i engine eras, 540i, market-specific 540i M-Sport packages, and M5 configurations as different engineering solutions, with market and model-year distinctions preserved.
 - Add comparison challenges in which similar performance can be reached through different mass, gearing, tire, power, or control choices.
 - Introduce uncertainty propagation and evidence-based model selection.
 

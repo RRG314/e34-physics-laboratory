@@ -13,6 +13,7 @@ import { convert, dimensions, quantity, validateDimensions } from '../src/domain
 import { diagnoseMotionAnswer } from '../src/domain/assessmentDiagnostics'
 import { generateMotionProblem, validateGeneratedProblem } from '../src/domain/problemGenerator'
 import { parseMeasurementCsv } from '../src/domain/experiments'
+import { motionLessons, validateMotionLessons } from '../src/data/motionLessons'
 
 describe('kinematics', () => {
   it('matches the analytical constant-acceleration solution', () => {
@@ -63,6 +64,11 @@ describe('vehicle provenance', () => {
 })
 
 describe('learning quality systems', () => {
+  it('keeps motion lessons data-driven and requires calculation plus graph evidence', () => {
+    expect(validateMotionLessons()).toEqual({ valid: true, duplicateIds: [], invalidIds: [] })
+    expect(motionLessons.every((lesson) => lesson.calculationEvidence.length > 0 && lesson.graphEvidence.length > 0)).toBe(true)
+  })
+
   it('keeps the mathematics graph valid and linked just in time to physics', () => {
     expect(validateMathematicsGraph()).toEqual({ valid: true, missing: [], cycles: [] })
     expect(mathematicsForPhysics('angular-motion').map((item) => item.id)).toContain('math-geometry')

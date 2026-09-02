@@ -24,7 +24,7 @@ The project currently runs as a browser-based research prototype. It is not a fi
 - An E34-family progression that includes the 518i, 520i, 525i, 525iX and Touring, 530i, 535i, 540i, 540i M-Sport, and M5.
 - A notebook, data import, model comparison, uncertainty labels, and source records.
 
-The [project status](docs/PROJECT_STATUS.md) separates working features from planned ones. That distinction matters here: a model is only as useful as its assumptions, evidence, and limits.
+The [project status](docs/PROJECT_STATUS.md) separates working features from planned ones. The [educational audit](docs/EDUCATIONAL_AUDIT.md) explains what is and is not yet good enough for teaching, the research behind the curriculum direction, and the release gate for future chapters.
 
 ## Run the laboratory
 
@@ -77,6 +77,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Go
 - [Project overview](docs/PROJECT_OVERVIEW.md)
 - [Current status and limitations](docs/PROJECT_STATUS.md)
 - [Learning design and curriculum](docs/LEARNING_DESIGN.md)
+- [Educational audit and priorities](docs/EDUCATIONAL_AUDIT.md)
 - [Research and evidence methods](docs/RESEARCH_METHODS.md)
 - [Vehicle data and visual assets](docs/VEHICLE_DATA.md)
 - [Technical guide](docs/TECHNICAL_GUIDE.md)

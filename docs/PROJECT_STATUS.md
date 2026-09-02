@@ -10,7 +10,7 @@ E34 Physics Laboratory has a working browser application and a coherent directio
 
 The current build supports a first learning journey through motion and wheel rotation. A new learner can:
 
-- investigate position, displacement, speed, velocity, acceleration, and motion graphs;
+- investigate position, displacement, speed, velocity, acceleration, and motion graphs through qualitative estimates, entered calculations, and graph-reading checks;
 - complete a scaffolded wheel-and-tire mathematics investigation using free-response quantities, unit conversion, circle geometry, RPM, and an interactive model-comparison graph;
 - make a qualitative prediction before calculating and running an experiment;
 - unlock guided driving after showing several kinds of evidence;
@@ -47,7 +47,8 @@ The exact example-car mass, dimensions, factory wheel and tire fitment, final-dr
 - Ramp and drop modes are idealized teaching models. The impact mode uses an adjustable pulse, not a structural crash or injury model.
 - Road-load coefficients are sensitivity-study values and have not been calibrated against a real E34.
 - Wheel rolling assumes no slip and begins with nominal unloaded tire geometry.
-- The opening motion gate still relies on four fixed multiple-choice calculations and awards several hard-coded competency gains. It does not yet collect enough learner work to support those inferences.
+- The opening motion gate now separates estimation, entered calculation, and graph-reading evidence, but it still needs generated variants, written explanation, transfer, and delayed retrieval before it can support a strong mastery claim.
+- Mastery thresholds are unvalidated design hypotheses. The current build should be read as evidence-gated progression, not a psychometrically validated assessment.
 - Most mathematics cards are an honest roadmap only. They are labeled as planned and award no evidence; the wheel-and-tire investigation is the first implemented mathematics sequence.
 - The curriculum map extends far beyond the amount of finished teaching content.
 - Local progress can be cleared by the browser and does not transfer between devices.
@@ -58,4 +59,4 @@ The exact example-car mass, dimensions, factory wheel and tire fitment, final-dr
 
 Version 0.2 should deliver a complete, teachable high-school mechanics arc rather than another broad set of placeholders. That means connected chapters on measurement, motion, forces, energy, momentum, and rotation; worked mathematics and practice; useful feedback and remediation; reviewed sources; accessible interaction paths; and evaluation with real learners.
 
-Software passing its tests is necessary, but it will not by itself establish that the course teaches effectively. The [roadmap](ROADMAP.md) and [research methods](RESEARCH_METHODS.md) describe both kinds of work.
+Software passing its tests is necessary, but it will not by itself establish that the course teaches effectively. The [educational audit](EDUCATIONAL_AUDIT.md), [roadmap](ROADMAP.md), and [research methods](RESEARCH_METHODS.md) describe both kinds of work.

@@ -64,7 +64,7 @@ class VehicleSimulation {
     this.publish({ ...initialSnapshot(), mode, timeScale, modelLevel })
   }
 
-  startExperiment(initialVelocity: number, acceleration: number, duration: number) {
+  startExperiment(initialVelocity: number, acceleration: number, duration: number, initialPosition = 0) {
     const timeScale = this.snapshot.timeScale
     const modelLevel = this.snapshot.modelLevel
     this.historyAccumulator = 0
@@ -72,13 +72,14 @@ class VehicleSimulation {
       ...initialSnapshot(),
       mode: 'experiment',
       running: true,
+      position: initialPosition,
       velocity: initialVelocity,
       acceleration,
       duration,
       timeScale,
       modelLevel,
       wheelAngularVelocity: wheelAngularSpeed(initialVelocity, targetVehicle.runningGear.unloadedWheelRadius.value),
-      history: [{ time: 0, position: 0, velocity: initialVelocity }],
+      history: [{ time: 0, position: initialPosition, velocity: initialVelocity }],
     })
   }
 
