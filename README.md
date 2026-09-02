@@ -2,7 +2,7 @@
 
 An interactive physics laboratory organized around a persistent digital model of a US-market 1995 BMW 525i E34 sedan.
 
-This standalone repository implements two coherent vertical slices: complete-car motion through wheel rotation, plus learning-quality and experimental-science infrastructure. It now includes separate mathematics mastery, error diagnosis, estimation gates, model assumptions and fidelity levels, replay/time controls, scientific-method and data-import workflows, a notebook, an equation library, typed physical quantities, reproducible problem generation, and physics validation benchmarks.
+This standalone repository implements three coherent vertical slices: complete-car motion through wheel rotation; learning-quality and experimental-science infrastructure; and a high-school-first garage/proving-ground progression. It includes a 12-module aligned syllabus, the real E34-family learning path, compatibility-based upgrade branches, adjustable ramp/impact/drop telemetry labs, separate mathematics mastery, error diagnosis, estimation gates, model assumptions and fidelity levels, replay/time controls, data import, a notebook, typed physical quantities, reproducible problem generation, and physics validation benchmarks.
 
 ## Run locally
 
@@ -38,4 +38,4 @@ npm run test:e2e
 
 The application deliberately separates idealized, intermediate, engineering, high-fidelity, and experimental models. Only the first three are currently executable; the remaining levels are explicit architecture targets rather than simulated claims.
 
-The current procedural E34 shell is a calibrated visualization proxy, not production body geometry. See `docs/PROJECT_STATUS.md` for current fidelity and open work.
+The interactive laboratory shell remains a calibrated visualization proxy, not production body geometry. The homepage and garage use an attributed real CC BY 525i model render, and `docs/vehicle/OPEN_MODEL_RESEARCH.md` records the selected downloadable mesh candidate and authenticated acquisition requirement. See `docs/PROJECT_STATUS.md` for current fidelity and open work.
