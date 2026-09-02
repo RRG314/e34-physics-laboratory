@@ -18,7 +18,7 @@ The project currently runs as a browser-based research prototype. It is not a fi
 
 - A guided sequence on position, displacement, speed, velocity, acceleration, and graph interpretation.
 - A persistent evidence model that opens driving and inspection tools as the learner demonstrates understanding.
-- Wheel geometry and the relationship between linear and angular speed.
+- A wheel-and-tire mathematics investigation with free-response calculations, unit conversion, circle geometry, RPM, and interactive comparison of unloaded and loaded-radius models.
 - Adjustable ramp, impact-pulse, and ideal-drop models with synchronized graphs and visible assumptions.
 - A twelve-module curriculum map beginning with high-school physics and extending toward university and research work.
 - An E34-family progression that includes the 518i, 520i, 525i, 525iX and Touring, 530i, 535i, 540i, 540i M-Sport, and M5.

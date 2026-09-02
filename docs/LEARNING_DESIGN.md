@@ -25,7 +25,7 @@ The supporting mathematics follows the high-school categories in the [Common Cor
 | 11 | Calculus-based vehicle dynamics | Continuous-time, coupled, and numerical models |
 | 12 | Research practice | Identifiability, uncertainty, validation, and falsification |
 
-Only the opening mechanics sequence and a set of proving-ground models are fully playable today. The table defines the intended course, not a claim of completed content.
+The opening motion sequence, one scaffolded wheel-and-tire mathematics investigation, and a set of proving-ground models are playable today. They do not yet satisfy this entire course plan. The table defines the intended sequence, not a claim of completed content.
 
 ## What every lesson must contain
 
@@ -58,4 +58,3 @@ Correct answers are evidence, not proof of permanent mastery. Current thresholds
 ## Evaluation
 
 The educational approach is evidence-informed; the application itself is not yet a proven intervention. Evaluation should include expert review, usability work with learners at different levels of mathematical readiness, concept and transfer measures, delayed retention, accessibility testing, and analysis of where progression gates help or frustrate learning. Completion time and click-through rate are not sufficient educational outcomes.
-

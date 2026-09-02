@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { deriveTireGeometry, distanceAfterRevolutions, teachingTire, wheelRpm } from '../src/domain/tireMath'
 import { idealDrop, rampClimb, rectangularImpactPulse } from '../src/domain/trackPhysics'
 import { concepts } from '../src/data/curriculum'
 import { targetVehicle } from '../src/data/vehicle'
@@ -84,6 +85,16 @@ describe('learning quality systems', () => {
 
   it('parses measurement values with uncertainty', () => {
     expect(parseMeasurementCsv('time,value,unit,uncertainty\n0,0.646,m,0.003')).toEqual([{ time: 0, value: 0.646, unit: 'm', uncertainty: 0.003 }])
+  })
+
+  it('derives the teaching tire geometry and wheel speed from dimensional inputs', () => {
+    const geometry = deriveTireGeometry(teachingTire)
+    expect(geometry.sidewallHeightMm).toBeCloseTo(133.25)
+    expect(geometry.rimDiameterMm).toBeCloseTo(381)
+    expect(geometry.unloadedDiameterMm).toBeCloseTo(647.5)
+    expect(geometry.circumferenceM).toBeCloseTo(2.03418, 4)
+    expect(wheelRpm(100, geometry.circumferenceM)).toBeCloseTo(819.3, 1)
+    expect(distanceAfterRevolutions(10, geometry.unloadedRadiusM)).toBeCloseTo(geometry.circumferenceM * 10)
   })
 })
 

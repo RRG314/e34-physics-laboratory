@@ -11,6 +11,7 @@ E34 Physics Laboratory has a working browser application and a coherent directio
 The current build supports a first learning journey through motion and wheel rotation. A new learner can:
 
 - investigate position, displacement, speed, velocity, acceleration, and motion graphs;
+- complete a scaffolded wheel-and-tire mathematics investigation using free-response quantities, unit conversion, circle geometry, RPM, and an interactive model-comparison graph;
 - make a qualitative prediction before calculating and running an experiment;
 - unlock guided driving after showing several kinds of evidence;
 - select individual wheels and connect road speed to circumference, angular velocity, RPM, and revolutions;
@@ -46,6 +47,8 @@ The exact example-car mass, dimensions, factory wheel and tire fitment, final-dr
 - Ramp and drop modes are idealized teaching models. The impact mode uses an adjustable pulse, not a structural crash or injury model.
 - Road-load coefficients are sensitivity-study values and have not been calibrated against a real E34.
 - Wheel rolling assumes no slip and begins with nominal unloaded tire geometry.
+- The opening motion gate still relies on four fixed multiple-choice calculations and awards several hard-coded competency gains. It does not yet collect enough learner work to support those inferences.
+- Most mathematics cards are an honest roadmap only. They are labeled as planned and award no evidence; the wheel-and-tire investigation is the first implemented mathematics sequence.
 - The curriculum map extends far beyond the amount of finished teaching content.
 - Local progress can be cleared by the browser and does not transfer between devices.
 - The hosted copy is not yet an installable offline web app; offline use currently means running the static build locally after dependencies have been installed.
