@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111311" />
+    <meta name="description" content="A physics laboratory centered on the 1995 BMW 525i E34." />
+    <title>E34 Physics Laboratory</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      if (location.protocol === 'file:') {
+        addEventListener('DOMContentLoaded', () => {
+          document.getElementById('root').innerHTML = '<main style="max-width:720px;margin:10vh auto;padding:48px;font:16px/1.6 system-ui;color:#20231f"><p style="letter-spacing:.14em;font-size:12px;color:#8a6b43">E34 PHYSICS LABORATORY</p><h1 style="font:48px Georgia,serif;margin:.2em 0">Start the laboratory server first.</h1><p>This application cannot run directly from a <code>file://</code> page. Double-click <strong>Start E34 Physics Lab.command</strong> in this folder, or run <code>npm run dev</code> in Terminal.</p><p><a style="display:inline-block;margin-top:16px;padding:12px 18px;background:#171a16;color:white;text-decoration:none" href="http://127.0.0.1:5173">Open the served laboratory</a></p></main>'
+        })
+      }
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

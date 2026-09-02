@@ -1,0 +1,9 @@
+node_modules
+node_modules.stalled
+.node_modules.stalled-to-delete
+dist
+.DS_Store
+*.tsbuildinfo
+tmp/pdfs
+test-results
+screenshots
