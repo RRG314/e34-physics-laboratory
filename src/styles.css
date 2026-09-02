@@ -346,6 +346,7 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
   .lab-stage { min-height: 420px; }
   .mission-panel, .explore-panel { border-left: 0; border-top: 1px solid var(--line); padding: 20px; }
   .dashboard-overlay { left: 24px; top: auto; bottom: 25px; transform: none; width: min(380px, calc(100% - 48px)); }
+  .dashboard-overlay { padding: 18px; background: rgba(247,248,243,.86); border: 1px solid rgba(30,34,29,.12); box-shadow: 0 16px 36px rgba(28,31,27,.12); backdrop-filter: blur(12px); }
   .dashboard-overlay h1 { font-size: 40px; }
   .hero-copy { width: 100%; margin: 13px 0 17px; font-size: 11px; }
   .dashboard-rail { display: none; }
@@ -358,8 +359,12 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
 
 @media (max-width: 560px) {
   .brand span { display: none; }
+  .sidenav { justify-content: space-between; overflow-x: hidden; }
+  .sidenav a { min-width: 0; flex: 1; font-size: 7px; }
   .progress-chip { width: 125px; }
+  .dashboard-overlay { left: 12px; bottom: 10px; width: calc(100% - 24px); padding: 15px; }
   .dashboard-overlay h1 { font-size: 34px; }
+  .dashboard-overlay .hero-copy { font-size: 10px; line-height: 1.45; }
   .content-page { padding: 30px 18px 50px; }
   .graph-summary { overflow-x: auto; }
   .locked-card { padding: 28px; }
