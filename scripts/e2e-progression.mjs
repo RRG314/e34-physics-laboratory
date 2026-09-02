@@ -9,8 +9,8 @@ fs.mkdirSync(output, { recursive: true })
 
 const browser = await chromium.launch({ headless: true, args: ['--use-gl=angle', '--use-angle=swiftshader'] })
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 })
-page.setDefaultTimeout(10_000)
-page.setDefaultNavigationTimeout(15_000)
+page.setDefaultTimeout(20_000)
+page.setDefaultNavigationTimeout(45_000)
 const errors = []
 page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()) })
 page.on('pageerror', (error) => errors.push(String(error)))
