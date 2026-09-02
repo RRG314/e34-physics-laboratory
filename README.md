@@ -1,41 +1,81 @@
 # E34 Physics Laboratory
 
-An interactive physics laboratory organized around a persistent digital model of a US-market 1995 BMW 525i E34 sedan.
+[![Continuous integration](https://github.com/RRG314/e34-physics-laboratory/actions/workflows/ci.yml/badge.svg)](https://github.com/RRG314/e34-physics-laboratory/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-2f6c53.svg)](LICENSE)
+[![Project stage: research prototype](https://img.shields.io/badge/stage-research%20prototype-a9783f.svg)](docs/PROJECT_STATUS.md)
 
-This standalone repository implements three coherent vertical slices: complete-car motion through wheel rotation; learning-quality and experimental-science infrastructure; and a high-school-first garage/proving-ground progression. It includes a 12-module aligned syllabus, the real E34-family learning path, compatibility-based upgrade branches, adjustable ramp/impact/drop telemetry labs, separate mathematics mastery, error diagnosis, estimation gates, model assumptions and fidelity levels, replay/time controls, data import, a notebook, typed physical quantities, reproducible problem generation, and physics validation benchmarks.
+![A BMW 525i E34 used as the visual reference for the laboratory](public/assets/e34-525i-reference.jpg)
 
-## Run locally
+E34 Physics Laboratory is an open research and education project built around one unusually rich teaching object: the BMW E34. It connects school physics, mathematics, vehicle systems, experiments, and engineering models in a single learning environment.
 
-Requirements: Node.js 22 or newer.
+The idea is not to decorate ordinary lessons with pictures of a car. A learner studies motion to gain access to driving controls, uses rotational physics to understand the wheels and driveline, and applies momentum and energy to safe virtual ramp and impact experiments. As the physics becomes more demanding, the vehicle changes from a simple system to a more complex one.
 
-On macOS, double-click `Start E34 Physics Lab.command`. It starts the required local server and opens the correct URL. Do not open `index.html` directly as a `file://` page.
+The project currently runs as a browser-based research prototype. It is not a finished course, a driving simulator, or a source of repair or safety advice.
+
+## What you can explore today
+
+- A guided sequence on position, displacement, speed, velocity, acceleration, and graph interpretation.
+- A persistent evidence model that opens driving and inspection tools as the learner demonstrates understanding.
+- Wheel geometry and the relationship between linear and angular speed.
+- Adjustable ramp, impact-pulse, and ideal-drop models with synchronized graphs and visible assumptions.
+- A twelve-module curriculum map beginning with high-school physics and extending toward university and research work.
+- An E34-family progression that includes the 518i, 520i, 525i, 525iX and Touring, 530i, 535i, 540i, 540i M-Sport, and M5.
+- A notebook, data import, model comparison, uncertainty labels, and source records.
+
+The [project status](docs/PROJECT_STATUS.md) separates working features from planned ones. That distinction matters here: a model is only as useful as its assumptions, evidence, and limits.
+
+## Run the laboratory
+
+You will need Node.js 22 or later.
 
 ```bash
-npm install
+git clone https://github.com/RRG314/e34-physics-laboratory.git
+cd e34-physics-laboratory
+npm ci
 npm run dev
 ```
 
-Open `http://localhost:5173`.
+Open `http://localhost:5173`. On macOS, `Start E34 Physics Lab.command` provides the same local start-up flow.
 
-## Verification
+To run the full check locally:
 
 ```bash
-npm run typecheck
-npm test
-npm run build
+npm run check
+npx playwright install chromium
 npm run test:e2e
 ```
 
-## Project boundaries
+## How the learning design works
 
-- `src/data`: authoritative curriculum, component, vehicle, and source registries.
-- `src/domain`: schemas and prerequisite logic.
-- `src/physics`: framework-independent analytical models.
-- `src/simulation`: deterministic runtime state and solvers.
-- `src/scene`: 3D rendering and interaction.
-- `src/ui`: application pages and learning interactions.
-- `docs`: research, architecture, provenance, and project status.
+The core loop is:
 
-The application deliberately separates idealized, intermediate, engineering, high-fidelity, and experimental models. Only the first three are currently executable; the remaining levels are explicit architecture targets rather than simulated claims.
+`observe → predict → calculate → test → explain → apply`
 
-The interactive laboratory shell remains a calibrated visualization proxy, not production body geometry. The homepage and garage use an attributed real CC BY 525i model render, and `docs/vehicle/OPEN_MODEL_RESEARCH.md` records the selected downloadable mesh candidate and authenticated acquisition requirement. See `docs/PROJECT_STATUS.md` for current fidelity and open work.
+Each chapter starts with a physical question and ends with evidence that the learner can use the idea in a different situation. Mathematics is taught alongside the physics rather than hidden inside an answer checker. Vehicle upgrades act as applications and design constraints, not as arbitrary rewards.
+
+The course structure draws on OpenStax High School Physics, the Next Generation Science Standards, AP Physics, MIT OpenCourseWare, Modeling Instruction, and research on active learning and course alignment. The [learning design](docs/LEARNING_DESIGN.md) explains how those sources are used and where the project still needs evaluation.
+
+## Contributing
+
+Contributions are welcome from educators, students, physicists, engineers, E34 owners, researchers, designers, and web developers. You do not need to work on the 3D application to make a useful contribution. Source review, lesson testing, accessibility feedback, vehicle measurements, and clearer explanations are equally valuable.
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Good first contributions are listed in the [roadmap](docs/ROADMAP.md) and issue templates are provided for software bugs, curriculum proposals, and vehicle data.
+
+## Documentation
+
+- [Project overview](docs/PROJECT_OVERVIEW.md)
+- [Current status and limitations](docs/PROJECT_STATUS.md)
+- [Learning design and curriculum](docs/LEARNING_DESIGN.md)
+- [Research and evidence methods](docs/RESEARCH_METHODS.md)
+- [Vehicle data and visual assets](docs/VEHICLE_DATA.md)
+- [Technical guide](docs/TECHNICAL_GUIDE.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Governance](docs/GOVERNANCE.md)
+
+## Safety, names, and licensing
+
+All crash, ramp, drop, and high-speed situations in this project are virtual. Do not reproduce them with a real vehicle. Simulation results are educational approximations and must not be used to make safety-critical engineering decisions.
+
+BMW, E34, 5 Series, M5, and related marks belong to their respective owners. This independent educational project is not affiliated with or endorsed by BMW AG.
+
+Original project code and writing are available under the [MIT License](LICENSE). Third-party material keeps its original license and attribution; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
