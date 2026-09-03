@@ -53,7 +53,7 @@ function SceneContents({ sceneMode }: { sceneMode: 'static' | 'experiment' | 'dr
       </group>}
       {overlay === 'energy' && <mesh position={[carOffset, 0.08, 0]} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[1.2, 1.38, 64]} /><meshBasicMaterial color="#c59a48" transparent opacity={Math.min(0.75, 0.15 + Math.abs(simulation.velocity) / 25)} /></mesh>}
       <ContactShadows position={[0, 0.012, 0]} opacity={0.35} scale={11} blur={2.4} far={4} />
-      <OrbitControls makeDefault target={[initialTargetX, 0.78, 0]} minDistance={4.6} maxDistance={10} minPolarAngle={0.55} maxPolarAngle={1.48} enablePan={false} />
+      <OrbitControls makeDefault target={[initialTargetX, 0.38, 0]} minDistance={4.6} maxDistance={10} minPolarAngle={0.55} maxPolarAngle={1.48} enablePan={false} />
     </>
   )
 }
@@ -61,9 +61,10 @@ function SceneContents({ sceneMode }: { sceneMode: 'static' | 'experiment' | 'dr
 export function LaboratoryScene({ sceneMode = 'static', className = '' }: { sceneMode?: 'static' | 'experiment' | 'drive'; className?: string }) {
   const initialTargetX = sceneMode === 'experiment' ? -1.9 : 0
   const compactViewport = typeof window !== 'undefined' && window.matchMedia('(max-width: 700px)').matches
+  const shortDesktopViewport = typeof window !== 'undefined' && window.matchMedia('(max-height: 650px) and (min-width: 701px)').matches
   return (
     <div className={`scene-shell ${className}`} data-testid="laboratory-scene">
-      <Canvas shadows dpr={[1, 1.75]} camera={{ position: [initialTargetX - 5.8, 3.25, 5.6], fov: compactViewport ? 45 : 37, near: 0.1, far: 100 }} gl={{ antialias: true, powerPreference: 'high-performance' }}>
+      <Canvas shadows dpr={[1, 1.75]} camera={{ position: [initialTargetX - 5.8, 2.9, 5.6], fov: compactViewport ? 45 : shortDesktopViewport ? 31 : 37, near: 0.1, far: 100 }} gl={{ antialias: true, powerPreference: 'high-performance' }}>
         <SceneContents sceneMode={sceneMode} />
       </Canvas>
       <div className="scene-label"><span>LAB 01</span><strong>COMPLETE VEHICLE</strong></div>

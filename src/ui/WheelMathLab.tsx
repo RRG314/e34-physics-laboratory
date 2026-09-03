@@ -1,8 +1,10 @@
 import { useMemo, useState, type FormEvent } from 'react'
-import { Check, RotateCcw } from 'lucide-react'
+import { ArrowRight, Check, RotateCcw } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { deriveTireGeometry, distanceAfterRevolutions, teachingTire, wheelRpm, withinTolerance } from '../domain/tireMath'
 import { useLabLearningStore } from '../store/labLearningStore'
 import { useLearnerStore } from '../store/learnerStore'
+import { isFoundationMathematicsComplete } from '../domain/foundationPath'
 
 const geometry = deriveTireGeometry(teachingTire)
 const loadedRadiusM = 0.312
@@ -106,16 +108,18 @@ function DistanceGraph({ revolutions, onChange }: { revolutions: number; onChang
 }
 
 export function WheelMathLab() {
+  const mathematicsMastery = useLabLearningStore((state) => state.mathematicsMastery)
+  const previouslyCompleted = isFoundationMathematicsComplete(mathematicsMastery)
   const recordMathematicsEvidence = useLabLearningStore((state) => state.recordMathematicsEvidence)
   const addNotebookEntry = useLabLearningStore((state) => state.addNotebookEntry)
   const recordAttempt = useLearnerStore((state) => state.recordAttempt)
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(previouslyCompleted ? tasks.length : 0)
   const [entry, setEntry] = useState('')
   const [attempts, setAttempts] = useState(0)
   const [message, setMessage] = useState('Use the tire marking and diagram. Enter a number; the unit is already shown.')
   const [revolutions, setRevolutions] = useState(10)
   const [modelChoice, setModelChoice] = useState<string | null>(null)
-  const [complete, setComplete] = useState(false)
+  const [complete, setComplete] = useState(previouslyCompleted)
   const task = tasks[Math.min(step, tasks.length - 1)]
   const progress = useMemo(() => complete ? 100 : step / 5 * 100, [complete, step])
 
@@ -205,7 +209,7 @@ export function WheelMathLab() {
               <button className={modelChoice === 'loaded' ? 'selected correct' : ''} onClick={() => chooseModel('loaded')}>The tire deflects, reducing effective rolling radius</button>
               <button className={modelChoice === 'revolutions' ? 'selected' : ''} onClick={() => chooseModel('revolutions')}>The graph secretly adds revolutions</button>
             </div>
-            {complete && <button className="button button-quiet wheel-reset" onClick={reset}><RotateCcw size={14} /> Run with fresh work</button>}
+            {complete && <div className="wheel-complete-actions"><Link className="button button-primary" to="/laboratory">Continue to motion <ArrowRight size={14} /></Link><button className="button button-quiet wheel-reset" onClick={reset}><RotateCcw size={14} /> Practice again</button></div>}
           </>}
           <div className={`wheel-feedback ${complete ? 'complete' : attempts ? 'needs-work' : ''}`}>{complete && <Check size={15} />}{message}</div>
           <details><summary>What is being assessed?</summary><p>Ratio meaning, inch-to-millimetre conversion, circle geometry, multi-step unit reasoning, graph reading, and the distinction between nominal geometry and a loaded physical model.</p></details>

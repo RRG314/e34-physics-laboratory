@@ -33,9 +33,9 @@ export function ExplorePage() {
           <LockKeyhole size={28} />
           <p className="eyebrow">Subsystem locked</p>
           <h1>The car is still one object.</h1>
-          <p>Complete the motion gate to reveal the four wheels as selectable physical systems.</p>
+          <p>Complete the wheel mathematics, motion investigations, and controlled-stop drive to reveal the four wheels as selectable physical systems.</p>
           <LockedExplanation targetId="basic-wheel-inspection" mastery={mastery} />
-          <Link className="button button-primary" to="/laboratory">Continue motion study</Link>
+          <Link className="button button-primary" to="/garage">See the required path</Link>
         </div>
       </div>
     )

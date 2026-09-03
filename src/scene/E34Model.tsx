@@ -83,7 +83,7 @@ function LicensedWheel({
           <primitive object={wheel} />
         </group>
       </group>
-      {selected && (
+      {selected && unlocked && (
         <mesh position={[0, 0, outward * 0.14]}>
           <torusGeometry args={[0.41, 0.025, 14, 64]} />
           <meshBasicMaterial color="#d6a750" toneMapped={false} />
@@ -93,15 +93,62 @@ function LicensedWheel({
   )
 }
 
+function CorrectedRearLights({ exteriorTexture }: { exteriorTexture?: THREE.Texture }) {
+  const lampTextures = useMemo(() => {
+    if (!exteriorTexture) return []
+    return [
+      { offset: [0.293, 0.226], repeat: [0.079, 0.043] },
+      { offset: [0.293, 0.271], repeat: [0.079, 0.032] },
+    ].map(({ offset, repeat }) => {
+      const texture = exteriorTexture.clone()
+      texture.offset.set(offset[0], offset[1])
+      texture.repeat.set(repeat[0], repeat[1])
+      texture.needsUpdate = true
+      return texture
+    })
+  }, [exteriorTexture])
+
+  return (
+    <group name="rear-light-correction">
+      {[-0.72, 0.72].map((z, index) => (
+          <group key={z}>
+            <mesh position={[2.92, 0.79, z]}>
+              <boxGeometry args={[0.045, 0.28, 0.56]} />
+              <meshStandardMaterial color="#171615" roughness={0.62} />
+            </mesh>
+            <mesh position={[2.951, 0.79, z]} rotation={[0, Math.PI / 2, 0]}>
+              <planeGeometry args={[0.5, 0.21]} />
+              {lampTextures[index]
+                ? <meshStandardMaterial map={lampTextures[index]} roughness={0.34} metalness={0.02} />
+                : <meshStandardMaterial color="#9f211c" roughness={0.38} />}
+            </mesh>
+          </group>
+        ))}
+    </group>
+  )
+}
+
 export function E34Model({ wheelAngle, sceneMode, simulationPosition }: E34ModelProps) {
   const { scene } = useGLTF(bodyModelUrl)
   const body = useMemo(() => prepareClone(scene), [scene])
+  const exteriorTexture = useMemo(() => {
+    let texture: THREE.Texture | undefined
+    scene.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return
+      const materials = Array.isArray(child.material) ? child.material : [child.material]
+      for (const material of materials) {
+        if (material.name === 'body-white' && 'map' in material && material.map instanceof THREE.Texture) texture = material.map
+      }
+    })
+    return texture
+  }, [scene])
   const mastery = useLearnerStore((state) => state.mastery)
   const exploded = useLearnerStore((state) => state.exploded)
   const selectedComponentId = useLearnerStore((state) => state.selectedComponentId)
   const selectComponent = useLearnerStore((state) => state.selectComponent)
-  const wheelsUnlocked = canAccessTarget('basic-wheel-inspection', mastery)
-  const deepWheelAccess = canUseInstrument('wheel-telemetry', mastery)
+  const inspectable = sceneMode === 'static'
+  const wheelsUnlocked = inspectable && canAccessTarget('basic-wheel-inspection', mastery)
+  const deepWheelAccess = inspectable && canUseInstrument('wheel-telemetry', mastery)
   const experimentOffset = sceneMode === 'experiment'
     ? Math.max(-3.4, Math.min(3.4, simulationPosition * 0.105 - 1.9))
     : 0
@@ -112,15 +159,16 @@ export function E34Model({ wheelAngle, sceneMode, simulationPosition }: E34Model
         <group
           onClick={(event) => {
             event.stopPropagation()
-            selectComponent('vehicle-shell')
+            if (inspectable) selectComponent('vehicle-shell')
           }}
-          onPointerOver={() => { document.body.style.cursor = 'pointer' }}
+          onPointerOver={() => { if (inspectable) document.body.style.cursor = 'pointer' }}
           onPointerOut={() => { document.body.style.cursor = 'default' }}
         >
           <primitive object={body} />
+          <CorrectedRearLights exteriorTexture={exteriorTexture} />
         </group>
 
-        {selectedComponentId === 'vehicle-shell' && (
+        {inspectable && selectedComponentId === 'vehicle-shell' && (
           <mesh position={[0.12, 0.025, 0]} rotation={[-Math.PI / 2, 0, 0]}>
             <ringGeometry args={[2.58, 2.67, 96]} />
             <meshBasicMaterial color="#d6a750" transparent opacity={0.72} toneMapped={false} />

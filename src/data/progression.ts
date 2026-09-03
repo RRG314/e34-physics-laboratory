@@ -18,8 +18,10 @@ export const progressionTargets: ProgressionTarget[] = [
     requirements: [
       { conceptId: 'speed', dimension: 'conceptualUnderstanding', threshold: 0.6 },
       { conceptId: 'acceleration', dimension: 'predictionSkill', threshold: 0.6 },
+      { conceptId: 'wheel-circumference', dimension: 'calculationSkill', threshold: 0.45 },
+      { conceptId: 'drive-access', dimension: 'applicationSkill', threshold: 0.6 },
     ],
-    unlockEffect: 'The four wheels become separate selectable physical systems.',
+    unlockEffect: 'After the wheel mathematics and motion path, the four wheels become separate selectable physical systems.',
   },
   {
     id: 'wheel-telemetry', kind: 'instrument', title: 'Wheel rotation telemetry',

@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import { Check, LockKeyhole, RotateCcw } from 'lucide-react'
+import { ArrowRight, Check, LockKeyhole, RotateCcw } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { motionLessons } from '../data/motionLessons'
 import { diagnoseMotionAnswer, type DiagnosticEvent } from '../domain/assessmentDiagnostics'
 import { useVehicleSimulation } from '../hooks/useVehicleSimulation'
@@ -17,6 +18,7 @@ export function MotionMission() {
   const recordDiagnostic = useLabLearningStore((state) => state.recordDiagnostic)
   const recordMathematicsEvidence = useLabLearningStore((state) => state.recordMathematicsEvidence)
   const addNotebookEntry = useLabLearningStore((state) => state.addNotebookEntry)
+  const resetLearning = useLabLearningStore((state) => state.resetLearning)
   const [entry, setEntry] = useState('')
   const [feedback, setFeedback] = useState<'idle' | 'wrong' | 'correct'>('idle')
   const [estimateAccepted, setEstimateAccepted] = useState(false)
@@ -89,9 +91,10 @@ export function MotionMission() {
   if (complete) return (
     <aside className="mission-panel mission-complete" data-testid="mission-complete">
       <div className="unlock-mark"><Check size={22} /></div><p className="eyebrow">Motion gate / evidence complete</p><h2>The E34 can move.</h2>
-      <p>You made four estimates, entered four calculations, and interpreted four position–time graphs. Guided drive and basic wheel inspection are now available.</p>
-      <div className="unlock-list"><span><Check size={15} /> Drive laboratory</span><span><Check size={15} /> Wheel selection</span><span><Check size={15} /> Rotation sequence</span></div>
-      <button className="button button-quiet" onClick={() => { resetProgress(); vehicleSimulation.reset() }}><RotateCcw size={15} /> Reset progression</button>
+      <p>You made four estimates, entered four calculations, and interpreted four position–time graphs. The controlled-stop drive is now available; completing it opens wheel inspection.</p>
+      <div className="unlock-list"><span><Check size={15} /> Guided drive unlocked</span><span><Check size={15} /> Motion evidence recorded</span><span><LockKeyhole size={15} /> Wheel sequence follows the drive challenge</span></div>
+      <Link className="button button-primary" to="/drive">Continue to controlled drive <ArrowRight size={15} /></Link>
+      <button className="button button-quiet" onClick={() => { resetProgress(); resetLearning(); vehicleSimulation.reset() }}><RotateCcw size={15} /> Reset all learning progress</button>
     </aside>
   )
 

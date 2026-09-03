@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Check } from 'lucide-react'
+import { ArrowRight, Check } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useLearnerStore } from '../store/learnerStore'
 
 const checks = [
@@ -12,7 +13,7 @@ export function WheelCheckpoint() {
   const complete = useLearnerStore((state) => state.completeWheelStep)
   const recordAttempt = useLearnerStore((state) => state.recordAttempt)
   const [wrong, setWrong] = useState<number | null>(null)
-  if (index >= checks.length) return <div className="wheel-check-complete"><Check size={16} /><span>Checkpoint 3 complete</span><strong>Wheel telemetry revealed</strong></div>
+  if (index >= checks.length) return <div className="wheel-check-complete"><Check size={16} /><span>Foundation Path complete</span><strong>Wheel telemetry revealed</strong><Link to="/garage">Review the path <ArrowRight size={13} /></Link></div>
   const check = checks[index]
   return (
     <div className="wheel-checkpoint" data-testid={`wheel-check-${index + 1}`}>

@@ -16,6 +16,7 @@ import { parseMeasurementCsv } from '../src/domain/experiments'
 import { motionLessons, validateMotionLessons } from '../src/data/motionLessons'
 import { courseModules, courseStages, curriculumLevels, validateCourseArchitecture, vehicleProgression } from '../src/data/courseArchitecture'
 import { sourceById } from '../src/data/sources'
+import { foundationProgress, getFoundationPath, getNextFoundationStage } from '../src/domain/foundationPath'
 
 describe('kinematics', () => {
   it('matches the analytical constant-acceleration solution', () => {
@@ -55,6 +56,33 @@ describe('progression engine', () => {
     angular.conceptualUnderstanding = 0.7
     angular.predictionSkill = 0.65
     expect(canAccessTarget('wheel-telemetry', { 'wheel-circumference': circumference, 'angular-motion': angular })).toBe(true)
+  })
+
+  it('keeps wheel inspection locked until controlled-stop evidence exists', () => {
+    const speed = emptyMastery('speed'); speed.conceptualUnderstanding = 0.8
+    const acceleration = emptyMastery('acceleration'); acceleration.predictionSkill = 0.8
+    const circumference = emptyMastery('wheel-circumference'); circumference.calculationSkill = 0.8
+    expect(canAccessTarget('basic-wheel-inspection', { speed, acceleration, 'wheel-circumference': circumference })).toBe(false)
+    const stop = emptyMastery('drive-access'); stop.applicationSkill = 0.7
+    expect(canAccessTarget('basic-wheel-inspection', { speed, acceleration, 'wheel-circumference': circumference, 'drive-access': stop })).toBe(true)
+  })
+})
+
+describe('foundation path', () => {
+  const completeMath = Object.fromEntries(['math-ratios', 'math-unit-conversion', 'math-geometry', 'math-graph-interpretation'].map((id) => [id, { conceptual: 0.7, procedural: 0.7 }]))
+
+  it('starts at wheel mathematics and opens only the next supported stage', () => {
+    const fresh = { mathematicsMastery: {}, motionMissionIndex: 0, driveChallengeComplete: false, wheelMissionIndex: 0 }
+    const stages = getFoundationPath(fresh)
+    expect(getNextFoundationStage(fresh)?.id).toBe('wheel-mathematics')
+    expect(stages.map((stage) => stage.available)).toEqual([true, false, false, false])
+  })
+
+  it('requires mathematics, motion, and the controlled stop before wheel telemetry', () => {
+    const ready = { mathematicsMastery: completeMath, motionMissionIndex: 4, driveChallengeComplete: true, wheelMissionIndex: 0 }
+    expect(getNextFoundationStage(ready)?.id).toBe('wheel-telemetry')
+    expect(getFoundationPath(ready).at(-1)?.available).toBe(true)
+    expect(foundationProgress({ ...ready, wheelMissionIndex: 2 })).toEqual({ completed: 4, total: 4, percent: 100 })
   })
 })
 

@@ -1,35 +1,41 @@
 import { BookOpenText, CarFront, FlaskConical, Gauge, LayoutDashboard, Map, Microscope, Network, NotebookPen, ScanLine, Wrench } from 'lucide-react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { useLearnerStore } from '../store/learnerStore'
-import { canAccessTarget } from '../domain/progressionEngine'
+import { foundationProgress, getFoundationPath, type FoundationPathStage } from '../domain/foundationPath'
+import { useLabLearningStore } from '../store/labLearningStore'
 
 const nav = [
   { to: '/', label: 'Home', icon: LayoutDashboard },
-  { to: '/garage', label: 'Garage', icon: Wrench },
-  { to: '/learn', label: 'Course', icon: Network },
-  { to: '/laboratory', label: 'Lab', icon: FlaskConical },
-  { to: '/track', label: 'Track', icon: Map },
-  { to: '/drive', label: 'Drive', icon: Gauge, lock: 'controlled-drive' },
-  { to: '/explore', label: 'Explore', icon: ScanLine, lock: 'basic-wheel-inspection' },
-  { to: '/experiments', label: 'Method', icon: Microscope },
+  { to: '/garage', label: 'Path', icon: Wrench },
+  { to: '/learn', label: 'Curriculum', icon: Network, stage: 'wheel-mathematics' },
+  { to: '/laboratory', label: 'Lesson', icon: FlaskConical, stage: 'motion' },
+  { to: '/drive', label: 'Drive', icon: Gauge, stage: 'controlled-drive' },
+  { to: '/explore', label: 'Explore', icon: ScanLine, stage: 'wheel-telemetry' },
+  { to: '/track', label: 'Sandbox', icon: Map },
+  { to: '/experiments', label: 'Research', icon: Microscope },
   { to: '/notebook', label: 'Notes', icon: NotebookPen },
-  { to: '/reference', label: 'Reference', icon: BookOpenText },
+  { to: '/reference', label: 'Sources', icon: BookOpenText },
 ]
 
 export function AppShell() {
-  const mastery = useLearnerStore((state) => state.mastery)
   const missionIndex = useLearnerStore((state) => state.motionMissionIndex)
-  const progress = Math.round((Math.min(missionIndex, 4) / 4) * 100)
+  const wheelMissionIndex = useLearnerStore((state) => state.wheelMissionIndex)
+  const driveChallengeComplete = useLearnerStore((state) => state.driveChallengeComplete)
+  const mathematicsMastery = useLabLearningStore((state) => state.mathematicsMastery)
+  const pathInput = { mathematicsMastery, motionMissionIndex: missionIndex, driveChallengeComplete, wheelMissionIndex }
+  const progress = foundationProgress(pathInput)
+  const stages = getFoundationPath(pathInput)
   return (
     <div className="app-shell">
       <header className="topbar">
         <div className="brand"><CarFront size={18} /><strong>E34</strong><span>PHYSICS LABORATORY</span></div>
-        <div className="topbar-context"><span className="live-dot" /> HIGH SCHOOL GARAGE · 525i <i /> <span>MODEL A</span></div>
-        <div className="progress-chip"><span>Motion gate</span><strong>{progress}%</strong><i><b style={{ width: `${progress}%` }} /></i></div>
+        <div className="topbar-context"><span className="live-dot" /> FOUNDATION PATH · 525i <i /> <span>MODEL A</span></div>
+        <div className="progress-chip"><span>Path {progress.completed}/{progress.total}</span><strong>{progress.percent}%</strong><i><b style={{ width: `${progress.percent}%` }} /></i></div>
       </header>
       <nav className="sidenav" aria-label="Primary">
         {nav.map((item) => {
-          const locked = item.lock ? !canAccessTarget(item.lock, mastery) : false
+          const stage = 'stage' in item ? stages.find((candidate) => candidate.id === item.stage as FoundationPathStage['id']) : undefined
+          const locked = Boolean(stage && !stage.available)
           return (
             <NavLink key={item.to} to={item.to} end={item.to === '/'} className={({ isActive }) => `${isActive ? 'active' : ''} ${locked ? 'nav-locked' : ''}`}>
               <item.icon size={19} />
@@ -40,7 +46,6 @@ export function AppShell() {
         })}
       </nav>
       <main className="app-main"><Outlet /></main>
-      <footer className="app-footer"><span>OBJECTIVE → EXPERIMENT → EVIDENCE → UPGRADE</span><span><kbd>F</kbd> FULLSCREEN</span></footer>
     </div>
   )
 }

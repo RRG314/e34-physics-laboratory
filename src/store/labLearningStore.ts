@@ -18,6 +18,7 @@ interface LabLearningState {
   setModelLevel: (level: ModelLevel) => void
   setOverlay: (overlay: 'none' | 'vectors' | 'energy') => void
   clearNotebook: () => void
+  resetLearning: () => void
 }
 
 export const useLabLearningStore = create<LabLearningState>()(
@@ -31,6 +32,7 @@ export const useLabLearningStore = create<LabLearningState>()(
       }),
       addNotebookEntry: (entry) => set((state) => ({ notebook: [{ ...entry, id: crypto.randomUUID(), createdAt: new Date().toISOString() }, ...state.notebook].slice(0, 100) })),
       setModelLevel: (modelLevel) => set({ modelLevel }), setOverlay: (overlay) => set({ overlay }), clearNotebook: () => set({ notebook: [] }),
+      resetLearning: () => set({ mathematicsMastery: {}, diagnostics: [], notebook: [], modelLevel: 'idealized', overlay: 'none' }),
     }),
     { name: 'e34-physics-lab-learning-v1', storage: createJSONStorage(() => localStorage) },
   ),

@@ -18,9 +18,11 @@ The project is not an accredited school or credentialing body. Progress markers 
 
 ## What you can explore today
 
+- A four-stage Foundation Path with visible prerequisites and persisted completion: wheel mathematics, motion, a controlled stop, and wheel telemetry.
 - A guided sequence on position, displacement, speed, velocity, acceleration, and graph interpretation.
 - A persistent evidence model that opens driving and inspection tools as the learner demonstrates understanding.
-- A wheel-and-tire mathematics investigation with free-response calculations, unit conversion, circle geometry, RPM, and interactive comparison of unloaded and loaded-radius models.
+- A wheel-and-tire mathematics investigation that is the real prerequisite for later motion and wheel-system work, with free-response calculations, unit conversion, circle geometry, RPM, and interactive comparison of unloaded and loaded-radius models.
+- A measurable driving assignment that requires the learner to reach a target speed and stop inside a defined position window before wheel inspection opens.
 - Adjustable ramp, impact-pulse, and ideal-drop models with synchronized graphs and visible assumptions.
 - Ten recurring mathematics-and-physics domain families, each mapped from high-school foundations through research depth.
 - One consistent 525i whose model becomes more detailed as the learner's physics and mathematics advance.

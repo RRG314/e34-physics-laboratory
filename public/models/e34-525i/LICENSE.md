@@ -11,6 +11,7 @@ Adaptations made for this project:
 - aligned the model with the laboratory coordinate system;
 - separated and recentered a wheel so it can be animated and reused at four suspension positions;
 - converted the selected geometry and 2K textures to web-ready GLB files; and
+- applied the source white exterior and interior atlases to the assembled sedan, corrected source UV defects that put lamp pixels on the roof and rear pillars, and reconstructed the lamp lenses at the rear corners; and
 - scaled the rendered model so its unloaded tire radius matches the laboratory's documented wheel assumption.
 
 These two model files remain available under CC BY 4.0. They are not covered by the surrounding project's MIT License.
