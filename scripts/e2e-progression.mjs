@@ -26,7 +26,7 @@ page.on('request', (request) => {
 const state = async () => JSON.parse(await page.evaluate(() => window.render_game_to_text()))
 const shot = async (name) => {
   // Let an actively rendered WebGL frame settle before Playwright samples it.
-  await page.waitForTimeout(600)
+  await page.waitForTimeout(name === '03-guided-drive' ? 2400 : 600)
   await page.screenshot({ path: new URL(`${name}.png`, output).pathname, fullPage: true, timeout: 30_000 })
 }
 const requireState = (condition, message) => { if (!condition) throw new Error(message) }

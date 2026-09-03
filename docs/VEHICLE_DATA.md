@@ -28,11 +28,11 @@ BMW's [5 Series heritage material](https://www.press.bmwgroup.com/usa/article/at
 
 ## Current visuals
 
-The interactive laboratory currently uses a procedural body as a selectable physics diagram. It is recognizable as an E34, but it has not been validated as production exterior geometry and should not be used for dimensional work.
+The interactive laboratory uses an adapted copy of **BMW 525i e34 | Project Zomboid** by [Uralvagonzavod](https://sketchfab.com/UVZZZ). The [Sketchfab model page](https://sketchfab.com/3d-models/bmw-525i-e34-project-zomboid-c65aa3b7687d4f5dbbabdfad0b7816bb) reports a Creative Commons Attribution 4.0 license. The same work supplies the homepage image, so the opening view and interactive vehicle now share one visual source.
 
-The homepage image comes from **BMW 525i e34 | Project Zomboid** by [Uralvagonzavod](https://sketchfab.com/UVZZZ). The [Sketchfab model page](https://sketchfab.com/3d-models/bmw-525i-e34-project-zomboid-c65aa3b7687d4f5dbbabdfad0b7816bb) reports a Creative Commons Attribution 4.0 license. The repository includes the attributed preview image, not the model archive.
+The downloaded multi-vehicle scene was reduced to one white 525i sedan. Its body and wheel were aligned to the laboratory axes, the source display floor and unused variants were removed, and the wheel was separated so four instances can rotate, be selected, and move outward in the first exploded-view lesson. The rendered scale is set from the laboratory's documented unloaded-wheel-radius assumption.
 
-Before an external model becomes the interactive vehicle, contributors must obtain it through the creator-authorized download process, preserve attribution, inspect embedded materials, verify scale and coordinate axes, establish component names and pivots, and separate visual geometry from measurement evidence.
+This is a visual teaching mesh, not a metrology model or a verified digital replica of a particular VIN. Its panel geometry, wheelbase, track, materials, interior, and movable-part pivots have not been checked against factory CAD or physical measurements. Physics calculations continue to use the sourced and explicitly provisional values in the vehicle record rather than dimensions inferred from the mesh. Adaptation and licensing details are recorded in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) and beside the model files.
 
 ## Contributing owner references
 
@@ -41,4 +41,3 @@ Reference photography is most useful when taken on a level surface with diffuse 
 Never work under an unsupported vehicle, use the factory jack as a work stand, run an engine in an enclosed space, or dismantle a safety-critical system for this project. Existing service work performed with appropriate equipment is the right opportunity to document inaccessible areas.
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for submission and privacy requirements and [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) for attribution.
-
