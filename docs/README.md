@@ -13,6 +13,7 @@ E34 Physics Laboratory combines a learning product, a physics simulation, and a 
 ## For contributors
 
 - [Vehicle data](VEHICLE_DATA.md) — target configuration, evidence quality, asset licensing, and measurement submissions.
+- [Vehicle evidence plan](VEHICLE_EVIDENCE_PLAN.md) — the data boundary and completion checklist for the production 525i.
 - [Technical guide](TECHNICAL_GUIDE.md) — application structure, simulation boundaries, testing, and extension points.
 - [Roadmap](ROADMAP.md) — planned releases and useful areas for contribution.
 - [Governance](GOVERNANCE.md) — how decisions, reviews, and releases are handled.

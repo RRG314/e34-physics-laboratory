@@ -8,7 +8,7 @@
 
 E34 Physics Laboratory is an open research and education project built around one unusually rich teaching object: the BMW E34. It connects school physics, mathematics, vehicle systems, experiments, and engineering models in a single learning environment.
 
-The idea is not to decorate ordinary lessons with pictures of a car. A learner studies motion to gain access to driving controls, uses rotational physics to understand the wheels and driveline, and applies momentum and energy to safe virtual ramp and impact experiments. As the physics becomes more demanding, the vehicle changes from a simple system to a more complex one.
+The idea is not to decorate ordinary lessons with pictures of a car. A learner studies motion to gain access to driving controls, uses rotational physics to understand the wheels and driveline, and applies momentum and energy to safe virtual ramp and impact experiments. As the physics becomes more demanding, the same vehicle model gains better evidence, more interacting systems, and more rigorous mathematics.
 
 The project currently runs as a browser-based research prototype. It is not a finished course, a driving simulator, or a source of repair or safety advice.
 
@@ -21,7 +21,7 @@ The project currently runs as a browser-based research prototype. It is not a fi
 - A wheel-and-tire mathematics investigation with free-response calculations, unit conversion, circle geometry, RPM, and interactive comparison of unloaded and loaded-radius models.
 - Adjustable ramp, impact-pulse, and ideal-drop models with synchronized graphs and visible assumptions.
 - A twelve-module curriculum map beginning with high-school physics and extending toward university and research work.
-- An E34-family progression that includes the 518i, 520i, 525i, 525iX and Touring, 530i, 535i, 540i, 540i M-Sport, and M5.
+- One consistent 525i whose model becomes more detailed as the learner's physics and mathematics advance.
 - A notebook, data import, model comparison, uncertainty labels, and source records.
 
 The [project status](docs/PROJECT_STATUS.md) separates working features from planned ones. The [educational audit](docs/EDUCATIONAL_AUDIT.md) explains what is and is not yet good enough for teaching, the research behind the curriculum direction, and the release gate for future chapters.
@@ -80,6 +80,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Go
 - [Educational audit and priorities](docs/EDUCATIONAL_AUDIT.md)
 - [Research and evidence methods](docs/RESEARCH_METHODS.md)
 - [Vehicle data and visual assets](docs/VEHICLE_DATA.md)
+- [525i release scope and evidence boundary](docs/VEHICLE_EVIDENCE_PLAN.md)
 - [Technical guide](docs/TECHNICAL_GUIDE.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Governance](docs/GOVERNANCE.md)

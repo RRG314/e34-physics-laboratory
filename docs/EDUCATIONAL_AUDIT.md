@@ -35,7 +35,7 @@ If those answers do not align, the screen can still be orientation or exploratio
 | Experiments | Method reference and import demo | The scientific method is described rather than enacted | Implement hypothesis, controls, trials, residuals, conclusion, and revision as reusable states |
 | Notebook | Evidence support | Entries persist, but retrieval, revision, and comparison are not prompted | Link claims to runs and graphs; add revision history and retrieval prompts |
 | Curriculum and math maps | Planning | Breadth is visible, but most topics are not playable | Label every item playable, prototype, mapped, or research-needed; planned content earns no credit |
-| Vehicle view | Illustration | Procedural geometry supports interaction testing but is not an accurate E34 model | Use a licensed optimized model while preserving semantic parts and evidence status |
+| Vehicle view | Licensed interactive 525i teaching mesh | Detailed enough for orientation and selection, but not factory CAD or measurement evidence | Expand semantic parts only when their visuals and data pass the vehicle evidence gate |
 | Mastery | Heuristic progression | Evidence is better tied to actions, but scores and thresholds are not validated | Store task-level evidence, require multiple contexts, and separate practice from certification |
 
 ## Course architecture
@@ -57,7 +57,7 @@ The app's long-term spine should be:
 | Electricity and magnetism | voltage, current, resistance, power, fields, induction | battery, grounds, starter, alternator, lamps, sensors | proportionality, systems of equations, power and energy |
 | Light and instrumentation | reflection, refraction, geometric optics, measurement systems | headlights, mirrors, optical sensors | geometry, inverse relationships, ray diagrams |
 | Integrated capstone | model choice, experiment design, uncertainty, communication | diagnose or improve a stock 525i under constraints | statistics, residuals, sensitivity, estimation |
-| Advanced branch | AP integration, calculus mechanics, E&M, thermal systems, numerical methods, estimation and validation | 525iX/Touring, 535i, 530i version study, 540i, M5 | derivatives, integrals, differential equations, linear algebra, probability, optimization |
+| Advanced branch | AP integration, calculus mechanics, E&M, thermal systems, numerical methods, estimation and validation | increasingly calibrated 525i models; admitted variant comparisons only when evidence permits | derivatives, integrals, differential equations, linear algebra, probability, optimization |
 
 Modern and nuclear physics should not be forced into a false mechanical analogy. Honest bridges include semiconductors in sensors, material characterization, and radiation-based imaging; otherwise it should stand as a physics extension with the limits of the vehicle analogy stated.
 
@@ -87,21 +87,17 @@ The garage is for inspection and installation. The classroom is for concise inst
 
 ## Vehicle progression
 
-[BMW Group Classic](https://www.bmwgroup-classic.com/en/services/spare-parts/bmw.html) identifies the 518i, 520i, 525i, 525iX, 530i, 535i, 540i, M5 3.6, and M5 3.8 as E34 models. BMW's [history of the 5 Series](https://www.press.bmwgroup.com/usa/article/detail/T0022190EN_US/the-history-of-the-bmw-5-series?language=en_US) records the arrival of 525iX all-wheel drive, Touring, and the later V8s. That history supports branching, not a simple horsepower ladder.
+The earlier badge ladder was too far ahead of the available evidence and visuals. The active progression now keeps the 1995 US manual 525i sedan constant while model fidelity increases.
 
-| Period | Configuration | Purpose |
+| Period | Representation | Purpose |
 | --- | --- | --- |
-| High school year 1 | 518i orientation car | Measurement, representation, motion, forces, and explicit idealization |
-| High school year 2 | 520i six-cylinder study | Repeated cycles, frequency, sound, smoothness, and heat |
-| High school year 3 | 525i reference laboratory | Main stock vehicle for a complete algebra-based course |
-| High school year 4 / AP | 525iX and Touring branches | Drivetrain topology, traction, load distribution, center of mass, model comparison |
-| Undergraduate year 1 | 535i | Large inline-six torque, gearing, road load, braking, multivariable models |
-| Undergraduate year 2 | 530i version study | Provenance and model identity across inline-six and later V8 configurations |
-| Undergraduate years 3–4 | 540i | V8 powertrain, cooling, driveline, coupled numerical models |
-| Master's studio | 540i M-Sport where market-specific evidence supports it | Suspension, braking, tires, optimization, package tradeoffs |
-| Doctoral research | M5 3.6 and 3.8 | Identification, uncertainty, state estimation, competing models, falsification |
+| Orientation | Licensed 525i visual | Measurement language, coordinates, and the distinction between appearance and evidence |
+| High school | 525i Model A | Point-mass and rigid-wheel mechanics with declared inputs and explicit idealization |
+| Advanced high school | 525i Model B | Semantic systems, competing models, and uncertainty as component evidence is added |
+| University | 525i Model C | Calibrated continuous-time models, parameter fitting, residuals, and validation |
+| Research | One identified 525i | Identifiability, state estimation, uncertainty propagation, and falsification |
 
-This is a curriculum device, not a claim that a 518i contains “easy physics” or an M5 represents intelligence. Any model can support advanced investigation. The order only controls how many interacting systems and uncertain parameters appear at once.
+Other E34 configurations are outside the first production release. They may become later comparison studies, but only when a lesson needs the comparison and the added vehicle has an exact configuration record, lesson-specific parameters, redistributable visuals, and validation. The [vehicle evidence plan](VEHICLE_EVIDENCE_PLAN.md) keeps the current course focused on the 525i.
 
 ## Assessment and progression
 
@@ -145,7 +141,7 @@ Different entry points should not lower the intellectual goal. Useful supports i
 - Build one tire or brake upgrade from inspection through compatibility calculation to proving-ground test.
 - Convert ramp, impact, and drop kernels into complete lessons before adding more sandboxes.
 - Implement the experiment workflow and link conclusions to runs and datasets.
-- Replace the procedural car with a licensed, optimized E34 model while retaining semantic parts.
+- Preserve the licensed 525i visual while adding semantic parts only where evidence and component visuals support the lesson.
 
 ### Then: expand and validate
 

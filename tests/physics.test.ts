@@ -14,6 +14,7 @@ import { diagnoseMotionAnswer } from '../src/domain/assessmentDiagnostics'
 import { generateMotionProblem, validateGeneratedProblem } from '../src/domain/problemGenerator'
 import { parseMeasurementCsv } from '../src/domain/experiments'
 import { motionLessons, validateMotionLessons } from '../src/data/motionLessons'
+import { courseStages, vehicleProgression } from '../src/data/courseArchitecture'
 
 describe('kinematics', () => {
   it('matches the analytical constant-acceleration solution', () => {
@@ -60,6 +61,11 @@ describe('vehicle provenance', () => {
   it('does not fabricate the unresolved final-drive ratio', () => {
     expect(targetVehicle.drivetrain.finalDriveRatio.value).toBeNull()
     expect(targetVehicle.drivetrain.finalDriveRatio.status).toBe('NEEDS_SOURCE')
+  })
+
+  it('keeps the first production course on one consistent 525i', () => {
+    expect(courseStages.every((stage) => stage.model.includes('525i'))).toBe(true)
+    expect(vehicleProgression.every((stage) => stage.model.includes('525i'))).toBe(true)
   })
 })
 

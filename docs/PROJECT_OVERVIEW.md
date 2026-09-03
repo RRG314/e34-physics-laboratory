@@ -22,21 +22,17 @@ The application should remain understandable to a learner who likes cars but has
 
 ## The learning progression
 
-The vehicle family provides a narrative for added complexity. It is a pedagogical progression, not a ranking of value or a claim that one model contains “more physics” than another.
+The current course follows one precisely scoped 525i sedan from high-school physics toward research. Complexity belongs to the model and the learner's reasoning, not to the badge.
 
-| Stage | Vehicle context | Added learning demand |
+| Stage | Vehicle representation | Added learning demand |
 | --- | --- | --- |
-| High school, year 1 | 518i | Measurement, motion, force, and energy in a deliberately simple system |
-| High school, year 2 | 520i | Periodic processes, frequency, sound, and heat in an inline-six context |
-| High school, year 3 | 525i | The complete algebra-based physics spine and the main laboratory vehicle |
-| High school, year 4 | 525iX or Touring | Branches in all-wheel-drive topology, load placement, and model comparison |
-| University, year 1 | 530i | Versioned evidence, fluid and thermal systems, and the importance of model year |
-| University, year 2 | 535i | Torque, gearing, road load, braking work, and multivariable experiments |
-| University, years 3–4 | 540i | Calculus-based coupled powertrain, thermal, and numerical models |
-| Graduate design studio | 540i M-Sport | Suspension, braking, tire balance, optimization, and package-level tradeoffs |
-| Research | M5 | Experiment design, parameter identification, uncertainty, and competing models |
+| Orientation | Licensed 525i visual reference | Observation, coordinates, units, and evidence labels |
+| High school | 525i Model A: idealized vehicle | Algebra-based mechanics, rotation, graphs, and declared assumptions |
+| Advanced high school | 525i Model B: semantic systems | Coupled components, uncertainty, and competing models |
+| University | 525i Model C: calibrated configuration | Calculus, differential equations, fitting, residuals, and validation |
+| Research | One identified 525i | Identifiability, state estimation, uncertainty, and falsification |
 
-The 525i remains the central high-school vehicle. The other models create branches and later contexts rather than replacing everything a learner already understands.
+Other E34s may become comparison branches after they have exact configuration records, lesson-specific data, redistributable visuals, and validation. They are not substitutes for academic levels. The [vehicle evidence plan](VEHICLE_EVIDENCE_PLAN.md) records the admission gate and current gaps.
 
 ## What makes it a game
 
@@ -51,4 +47,3 @@ The project avoids generic experience points. The reward is a new physical actio
 ## Boundaries
 
 This is an educational research prototype. It is not affiliated with BMW, is not a repair manual, and must not be used to approve a real modification or safety-critical design. Virtual impacts and drops exist because they are unsafe and unsuitable as real learner experiments.
-

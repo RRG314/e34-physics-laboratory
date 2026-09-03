@@ -25,6 +25,18 @@ export const sources: SourceRecord[] = [
     accessed: '2026-09-01',
   },
   {
+    id: 'sketchfab-uralvagonzavod-525i',
+    title: 'BMW 525i e34 | Project Zomboid',
+    organization: 'Uralvagonzavod / Sketchfab',
+    url: 'https://sketchfab.com/3d-models/bmw-525i-e34-project-zomboid-c65aa3b7687d4f5dbbabdfad0b7816bb',
+    sourceClass: 'licensed_visual_asset',
+    reliability: 'secondary',
+    applicability: 'Visual teaching reference for an E34 525i sedan; not dimensional evidence',
+    usage: 'Interactive body and wheel mesh, materials, and homepage image',
+    licensing: 'CC BY 4.0; adapted files and attribution are packaged in the repository',
+    accessed: '2026-09-03',
+  },
+  {
     id: 'openstax-university-physics-v1',
     title: 'University Physics Volume 1',
     organization: 'OpenStax, Rice University',

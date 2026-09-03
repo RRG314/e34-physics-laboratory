@@ -22,9 +22,9 @@ The first detailed configuration is a United States-market 1995 BMW 525i E34 sed
 
 Overall dimensions, equipment-specific curb mass, factory wheel and tire fitment, final-drive ratio, spring and damper rates, center of gravity, frontal area, and model-specific drag remain provisional or unresolved. The application's current 205/65 R15 wheel is an explicit teaching assumption, not a claim about every 1995 525i.
 
-## E34 family progression
+## Release scope
 
-BMW's [5 Series heritage material](https://www.press.bmwgroup.com/usa/article/attachment/T0079416EN_US/118688) documents the model family, including the four- and six-cylinder cars, 525iX, Touring, V8 530i and 540i, and M5. The learning progression uses those distinctions but does not present itself as a production chronology. M-Sport also needs market-specific wording: it is treated as a performance package context rather than a universal E34 model line.
+The first production release is deliberately limited to the selected 525i. Other E34 configurations are future work and do not appear as teaching vehicles, because the repository does not yet contain equally complete configuration records and approved visuals for them. The [vehicle evidence plan](VEHICLE_EVIDENCE_PLAN.md) defines what the 525i can honestly support now and what still needs to be measured or sourced.
 
 ## Current visuals
 

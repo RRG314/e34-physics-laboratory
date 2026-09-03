@@ -16,15 +16,16 @@ The next milestone is a short course that a high-school learner can follow from 
 - Test the sequence with learners and teachers; publish the method and limits of what was learned.
 - Replace or calibrate provisional 525i data where reliable variant-specific evidence is available.
 
-## Version 0.3 — systems, upgrades, and competing solutions
+## Version 0.3 — 525i systems, upgrades, and competing solutions
 
 This release should make vehicle modifications meaningful. An upgrade will require the knowledge needed to predict its effects and the supporting systems needed to use it safely.
 
 - Connect engine torque, gear ratios, differential ratio, wheel torque, traction, braking, heat, and efficiency.
 - Model compatibility limits so that a power increase can expose constraints in tires, cooling, brakes, gearbox, differential, and driveshaft.
-- Use 535i, the two E34 530i engine eras, 540i, market-specific 540i M-Sport packages, and M5 configurations as different engineering solutions, with market and model-year distinctions preserved.
+- Keep the 525i as the teaching vehicle while driveline, braking, thermal, suspension, and electrical components gain evidence and semantic visuals.
 - Add comparison challenges in which similar performance can be reached through different mass, gearing, tire, power, or control choices.
 - Introduce uncertainty propagation and evidence-based model selection.
+- Keep other E34 configurations out of the production course. A later comparison vehicle must have a specific educational purpose, complete lesson data, redistributable visuals, and validation.
 
 ## Version 0.4 — oscillations, fluids, and electricity
 
@@ -37,7 +38,7 @@ This release should make vehicle modifications meaningful. An upgrade will requi
 
 University-level and research pathways should grow only after the school-level foundation is usable and evaluated. Likely directions include multivariable mechanics, differential equations, numerical integration, tire and suspension models, controls, signal processing, materials, optics, and reproducible digital-twin calibration.
 
-Higher vehicle tiers do not replace lower ones. A 518i or 525i can remain the clearest system for a particular question, while an M5 can expose interactions that require more advanced mathematics and modeling.
+Higher academic tiers do not require a different badge. Advanced work should use the same 525i until another configuration has enough evidence and visual coverage to answer a specific comparison question honestly.
 
 ## Work that is useful now
 

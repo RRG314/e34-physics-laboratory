@@ -1,6 +1,6 @@
 # Project status
 
-Last reviewed: 2 September 2026
+Last reviewed: 3 September 2026
 
 Current stage: research prototype
 
@@ -17,7 +17,7 @@ The current build supports a first learning journey through motion and wheel rot
 - select individual wheels and connect road speed to circumference, angular velocity, RPM, and revolutions;
 - run idealized ramp, impact-pulse, and drop experiments with synchronized plots;
 - compare model assumptions, import simple measurements, and save notebook entries locally;
-- inspect the proposed curriculum, vehicle family, prerequisite map, and garage progression.
+- inspect the proposed curriculum, 525i model-fidelity progression, prerequisite map, and evidence boundary.
 
 The application also distinguishes conceptual, arithmetic, sign, unit, model-selection, and algebra errors. Progress is recorded across explanation, calculation, prediction, graph reading, and application instead of being reduced to a single completion flag.
 
@@ -29,7 +29,7 @@ The application also distinguishes conceptual, arithmetic, sign, unit, model-sel
 | Broader curriculum | Structured design | Twelve modules and their prerequisites are mapped, but most are not yet lessons |
 | Physics models | Educational prototypes | Core analytical cases are tested; road-load and crash models are simplified and uncalibrated |
 | E34 vehicle data | Mixed evidence | Several engine and transmission facts are sourced; mass, dimensions, gearing, and dynamics data still need variant-specific confirmation |
-| Vehicle graphics | Interactive visual proxy | Recognizable and useful for selection, but not measured production geometry |
+| Vehicle graphics | Licensed interactive 525i teaching mesh | Detailed and selectable, but not factory CAD or measured production geometry |
 | Learning effectiveness | Not yet established | The design follows published practice, but no learner study has demonstrated outcomes |
 | Persistence | Local browser storage | There are no accounts, cloud sync, or remote learner analytics |
 | Hosting | Static build | GitHub Pages and local static serving require no application backend |
@@ -39,7 +39,7 @@ The application also distinguishes conceptual, arithmetic, sign, unit, model-sel
 
 The reference configuration is a US-market 1995 BMW 525i E34 with a manual transmission. The current source record supports the M50TU/M50B25TU engine family, 2,494 cm³ displacement, period US output figures, and the Getrag S5D 250 G application and ratios. These facts are useful anchors, not permission to assume that every E34 shares the same specifications.
 
-The exact example-car mass, dimensions, factory wheel and tire fitment, final-drive ratio, suspension rates, damping, center of gravity, frontal area, and drag coefficient remain provisional or unresolved. See [Vehicle data](VEHICLE_DATA.md) for the evidence policy.
+The exact example-car mass, dimensions, factory wheel and tire fitment, final-drive ratio, suspension rates, damping, center of gravity, frontal area, and drag coefficient remain provisional or unresolved. Other E34 variants shown in earlier planning are now research candidates, not teaching vehicles. See [Vehicle data](VEHICLE_DATA.md) and the [vehicle evidence plan](VEHICLE_EVIDENCE_PLAN.md).
 
 ## Important limitations
 

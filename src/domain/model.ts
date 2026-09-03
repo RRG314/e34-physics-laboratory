@@ -14,6 +14,7 @@ export type SourceClass =
   | 'official_software_documentation'
   | 'independent_specification'
   | 'simulation_assumption'
+  | 'licensed_visual_asset'
 
 export interface SourceRecord {
   id: string

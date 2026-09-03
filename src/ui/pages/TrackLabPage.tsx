@@ -14,7 +14,7 @@ export function TrackLabPage() {
   const [speed, setSpeed] = useState(14)
   const [stopTime, setStopTime] = useState(.18)
   const [height, setHeight] = useState(12)
-  const mass = 1600
+  const [mass, setMass] = useState(1600)
 
   const result = useMemo(() => {
     if (lab === 'ramp') {
@@ -49,7 +49,7 @@ export function TrackLabPage() {
       { label: 'speed', unit: 'm/s', color: '#a92833', values: time.map((t) => g * t) },
       { label: 'KE/m', unit: 'J/kg', color: '#b78b4d', values: time.map((t) => .5 * (g * t) ** 2) },
     ] }
-  }, [lab, angle, speed, stopTime, height])
+  }, [lab, angle, speed, stopTime, height, mass])
 
   return (
     <div className="content-page track-page">
@@ -61,10 +61,11 @@ export function TrackLabPage() {
           <p className="eyebrow">Declare inputs</p>
           {lab === 'ramp' && <label>Ramp angle <output>{angle}°</output><input aria-label="Ramp angle" type="range" min="2" max="35" value={angle} onChange={(event) => setAngle(Number(event.target.value))} /></label>}
           {(lab === 'ramp' || lab === 'impact') && <label>Initial speed <output>{speed} m/s</output><input aria-label="Initial speed" type="range" min="3" max="28" value={speed} onChange={(event) => setSpeed(Number(event.target.value))} /></label>}
+          {lab === 'impact' && <label>Declared model mass <output>{mass} kg</output><input aria-label="Declared model mass" type="range" min="1000" max="2200" step="25" value={mass} onChange={(event) => setMass(Number(event.target.value))} /></label>}
           {lab === 'impact' && <label>Stopping time <output>{stopTime.toFixed(2)} s</output><input aria-label="Stopping time" type="range" min="0.05" max="0.6" step="0.01" value={stopTime} onChange={(event) => setStopTime(Number(event.target.value))} /></label>}
           {lab === 'drop' && <label>Drop height <output>{height} m</output><input aria-label="Drop height" type="range" min="1" max="40" value={height} onChange={(event) => setHeight(Number(event.target.value))} /></label>}
           <div className="result-block"><span>{result.label}</span><strong>{result.headline}</strong><code>{result.equation}</code><p>{result.note}</p></div>
-          <details open><summary>Model assumptions</summary><ul>{lab === 'ramp' && <><li>Point-mass vehicle</li><li>No drag, rolling resistance, or wheel inertia</li><li>Constant ramp angle</li></>}{lab === 'impact' && <><li>1D inelastic stop</li><li>Constant average-force pulse</li><li>Vehicle mass fixed at {mass} kg</li></>}{lab === 'drop' && <><li>Uniform g = 9.81 m/s²</li><li>No aerodynamic drag or rotation</li><li>Ground impact is not modeled</li></>}</ul></details>
+          <details open><summary>Model assumptions</summary><ul>{lab === 'ramp' && <><li>Point-mass vehicle</li><li>No drag, rolling resistance, or wheel inertia</li><li>Constant ramp angle</li></>}{lab === 'impact' && <><li>1D inelastic stop</li><li>Constant average-force pulse</li><li>{mass} kg is a learner-selected model input, not a measured 525i specification</li></>}{lab === 'drop' && <><li>Uniform g = 9.81 m/s²</li><li>No aerodynamic drag or rotation</li><li>Ground impact is not modeled</li></>}</ul></details>
         </div>
         <div className="track-graphs"><TelemetryPlot title={lab === 'ramp' ? 'Ramp state history' : lab === 'impact' ? 'Impact pulse history' : 'Drop energy history'} series={result.series} /><div className="graph-reading"><span>READ THE GRAPH</span><p>{lab === 'ramp' ? 'The velocity line reaches zero where position reaches its maximum; constant negative acceleration sets its slope.' : lab === 'impact' ? 'The final impulse is the area under the force–time curve. Stretch the pulse and watch force fall while area stays fixed.' : 'Gravitational potential per kilogram falls as kinetic energy per kilogram rises by the same amount.'}</p></div></div>
       </section>
