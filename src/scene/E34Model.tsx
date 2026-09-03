@@ -110,14 +110,14 @@ function CorrectedRearLights({ exteriorTexture }: { exteriorTexture?: THREE.Text
 
   return (
     <group name="rear-light-correction">
-      {[-0.72, 0.72].map((z, index) => (
+      {[-0.62, 0.62].map((z, index) => (
           <group key={z}>
-            <mesh position={[2.92, 0.79, z]}>
-              <boxGeometry args={[0.045, 0.28, 0.56]} />
+            <mesh position={[2.94, 0.79, z]} rotation={[0, Math.PI / 2, 0]}>
+              <planeGeometry args={[0.48, 0.27]} />
               <meshStandardMaterial color="#171615" roughness={0.62} />
             </mesh>
             <mesh position={[2.951, 0.79, z]} rotation={[0, Math.PI / 2, 0]}>
-              <planeGeometry args={[0.5, 0.21]} />
+              <planeGeometry args={[0.43, 0.2]} />
               {lampTextures[index]
                 ? <meshStandardMaterial map={lampTextures[index]} roughness={0.34} metalness={0.02} />
                 : <meshStandardMaterial color="#9f211c" roughness={0.38} />}
