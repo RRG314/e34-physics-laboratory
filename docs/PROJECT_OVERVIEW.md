@@ -26,19 +26,21 @@ The current course follows one precisely scoped 525i sedan from high-school phys
 
 | Stage | Vehicle representation | Added learning demand |
 | --- | --- | --- |
-| Orientation | Licensed 525i visual reference | Observation, coordinates, units, and evidence labels |
-| High school | 525i Model A: idealized vehicle | Algebra-based mechanics, rotation, graphs, and declared assumptions |
-| Advanced high school | 525i Model B: semantic systems | Coupled components, uncertainty, and competing models |
-| University | 525i Model C: calibrated configuration | Calculus, differential equations, fitting, residuals, and validation |
-| Research | One identified 525i | Identifiability, state estimation, uncertainty, and falsification |
+| High-school foundations | 525i Model A: idealized systems | Arithmetic through Algebra I, geometry, graphs, basic statistics, and a broad algebra-based physics foundation |
+| Advanced high school | 525i Model B: connected semantic systems | Algebra II, functions, trigonometry, regression, AP-style physics breadth, and experimental design |
+| College year 1 | 525i Model C: increasingly calibrated configuration | Precalculus support, single-variable calculus, numerical approximation, and continuous physical models |
+| College years 2–4 | 525i with coupled systems and compatible modifications | Multivariable calculus, differential equations, linear algebra, probability, computation, and system tradeoffs |
+| Graduate and research | One identified and measured 525i | Estimation, signal processing, optimization, uncertainty, identifiability, and falsification |
 
 Other E34s may become comparison branches after they have exact configuration records, lesson-specific data, redistributable visuals, and validation. They are not substitutes for academic levels. The [vehicle evidence plan](VEHICLE_EVIDENCE_PLAN.md) records the admission gate and current gaps.
+
+Ten recurring domain families connect this progression: measurement; motion; forces; energy and momentum; rotation and powertrain; oscillations and waves; thermal systems and fluids; electricity and sensing; light and materials; and integrated engineering. The [integrated mathematics and physics path](INTEGRATED_MATH_PHYSICS_PATH.md) maps each one across all five depths.
 
 ## What makes it a game
 
 Progress comes from demonstrated capability:
 
-`learn → predict → test → explain → certify → install → prove`
+`learn → predict → test → explain → demonstrate → install → prove`
 
 A learner earns access to a tool or modification by showing the physics needed to use it. A powerful part may still be a poor choice if the tires, brakes, cooling, driveline, or mathematical model cannot support it. More than one build can reach a similar result, allowing learners to compare the different physics and tradeoffs involved.
 

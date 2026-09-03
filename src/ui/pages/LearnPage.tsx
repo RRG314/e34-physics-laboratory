@@ -5,9 +5,9 @@ import { isConceptAccessible } from '../../domain/curriculumGraph'
 import { useLearnerStore } from '../../store/learnerStore'
 import { isBroadlyMastered } from '../../domain/mastery'
 import { getNextRecommendedConcepts } from '../../domain/progressionEngine'
-import { mathematicsConcepts } from '../../data/mathematics'
+import { mathematicsConcepts, type MathematicsTier } from '../../data/mathematics'
 import { useLabLearningStore } from '../../store/labLearningStore'
-import { courseModules, courseStages, vehicleProgression } from '../../data/courseArchitecture'
+import { courseModules, curriculumLevels } from '../../data/courseArchitecture'
 import { WheelMathLab } from '../WheelMathLab'
 
 const lanes = [
@@ -16,6 +16,14 @@ const lanes = [
 ] as const
 
 const wheelLabMathematics = new Set(['math-ratios', 'math-unit-conversion', 'math-geometry', 'math-graph-interpretation'])
+const mathTiers: { id: MathematicsTier; label: string }[] = [
+  { id: 'foundation', label: 'Foundations' },
+  { id: 'algebra', label: 'Algebra & functions' },
+  { id: 'precalculus', label: 'Precalculus' },
+  { id: 'calculus', label: 'Calculus' },
+  { id: 'systems', label: 'Systems mathematics' },
+  { id: 'research', label: 'Research mathematics' },
+]
 
 export function LearnPage() {
   const mastery = useLearnerStore((state) => state.mastery)
@@ -30,12 +38,16 @@ export function LearnPage() {
     <div className="content-page learn-page">
       <header className="content-header"><p className="eyebrow">Course · current assignment</p><h1>Begin with the wheel in front of you.</h1><p>Read a real vehicle marking, turn it into a mathematical model, and find where that model stops matching the physical car. The complete high-school-to-research pathway follows below.</p></header>
       <WheelMathLab />
-      <header className="map-subhead"><p className="eyebrow">Coherent course map</p><h2>Start in high school. Deepen one model toward research.</h2><p>The numbered syllabus is the spine; prerequisites are the connective tissue. The supported 525i stays constant while the mathematics, experiments, evidence, and model fidelity advance.</p></header>
+      <header className="map-subhead"><p className="eyebrow">Integrated mathematics + physics</p><h2>Learn the mathematics when the physical question gives it meaning.</h2><p>Essential readiness skills come first. New mathematics is then developed inside a 525i investigation, practiced in a short focused studio, and used again for prediction, measurement, and transfer. Mathematics and physics evidence remain separate so feedback can identify the real gap.</p></header>
+      <section className="integration-loop" aria-label="Integrated lesson sequence"><span><b>01</b> Check readiness</span><i /><span><b>02</b> Observe and model</span><i /><span><b>03</b> Build the mathematics</span><i /><span><b>04</b> Predict and test</span><i /><span><b>05</b> Explain and transfer</span></section>
       <section className="syllabus-spine">
-        <div className="stage-strip">{vehicleProgression.map((stage) => <span key={`${stage.year}-${stage.model}`}><strong>{stage.model}</strong>{stage.year}</span>)}</div>
-        <div className="module-list">{courseModules.map((module) => <details key={module.id} open={module.chapter === 1}><summary><span>{String(module.chapter).padStart(2, '0')}</span><div><small>{courseStages.find((stage) => stage.id === module.stage)?.model}</small><strong>{module.title}</strong></div><em>{module.unlock}</em></summary><div className="module-contract"><p><b>Driving question</b>{module.drivingQuestion}</p><p><b>Student can</b>{module.measurableOutcome}</p><p><b>Mathematics</b>{module.mathematics.join(' · ')}</p><p><b>Vehicle investigation</b>{module.investigation}</p><p><b>Misconception check</b>{module.misconception}</p><p><b>Evidence required</b>{module.assessment}</p><small>{module.standards.join(' · ')}</small></div></details>)}</div>
+        <div className="stage-strip">{curriculumLevels.map((level) => <span key={level.id}><strong>{level.model}</strong>{level.label}<small>{level.mathematics}</small></span>)}</div>
+        <div className="module-list">{courseModules.map((module) => <details key={module.id} open={module.chapter === 1}><summary><span>{String(module.chapter).padStart(2, '0')}</span><div><small>{module.vehicleSystems}</small><strong>{module.title}</strong></div><em>Five depth treatments</em></summary><div className="integrated-module"><p className="module-question"><b>Driving question</b>{module.drivingQuestion}</p><div className="depth-grid">{module.depths.map((depth) => {
+          const level = curriculumLevels.find((item) => item.id === depth.level)
+          return <article key={depth.level}><small>{level?.label}</small><h4>{depth.physics}</h4><p><b>Mathematics</b>{depth.mathematics.join(' · ')}</p><p><b>525i mission</b>{depth.vehicleMission}</p><p><b>Evidence</b>{depth.evidence}</p><span>{depth.unlock}</span></article>
+        })}</div></div></details>)}</div>
       </section>
-      <header className="map-subhead"><p className="eyebrow">Current playable prerequisite slice</p><h2>Motion certification map</h2><p>The detailed course above is the canonical sequence. This graph shows what is currently interactive—not a false claim that every chapter is already built.</p></header>
+      <header className="map-subhead"><p className="eyebrow">Current playable prerequisite slice</p><h2>Motion learning map</h2><p>The detailed course above is the canonical sequence. This graph shows what is currently interactive—not a false claim that every chapter is already built.</p></header>
       <div className="graph-summary"><span><strong>{mastered.length}</strong> broadly mastered</span><span><strong>{recommended.length}</strong> recommended next</span><span><strong>{concepts.length}</strong> mapped in slice</span></div>
       <label className="physics-search"><Search size={16} /><input aria-label="Search physics and vehicle systems" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search velocity, pressure, wheel, differential…" /></label>
       {lanes.map((lane) => (
@@ -60,7 +72,7 @@ export function LearnPage() {
       ))}
       <section className="math-map">
         <header><div><p className="eyebrow">Parallel mathematics graph</p><h2>Just enough mathematics, exactly when needed.</h2><p>Mathematics evidence is tracked separately so a calculation error is not mistaken for a physics misconception.</p></div><span><strong>{demonstratedMathematics}</strong> demonstrated</span></header>
-        {(['foundation', 'algebra', 'calculus', 'advanced'] as const).map((tier) => <div className="math-tier" key={tier}><h3>{tier}</h3><div>{mathematicsConcepts.filter((concept) => concept.tier === tier).map((concept) => {
+        {mathTiers.map((tier) => <div className="math-tier" key={tier.id}><h3>{tier.label}</h3><div>{mathematicsConcepts.filter((concept) => concept.tier === tier.id).map((concept) => {
           const evidence = mathematicsMastery[concept.id]
           const demonstrated = Boolean(evidence && evidence.conceptual >= 0.6 && evidence.procedural >= 0.6)
           const implemented = wheelLabMathematics.has(concept.id)

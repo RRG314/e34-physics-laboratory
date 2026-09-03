@@ -12,6 +12,8 @@ The idea is not to decorate ordinary lessons with pictures of a car. A learner s
 
 The project currently runs as a browser-based research prototype. It is not a finished course, a driving simulator, or a source of repair or safety advice.
 
+The project is not an accredited school or credentialing body. Progress markers describe evidence produced inside the application; they are not degrees, professional qualifications, academic credit, or accredited certificates. Research claims, course completion, and future owner-issued acknowledgements must remain clearly separated.
+
 [Try the laboratory on GitHub Pages](https://rrg314.github.io/e34-physics-laboratory/). The hosted demo and the local application are the same static build; neither requires an application server or account.
 
 ## What you can explore today
@@ -20,7 +22,7 @@ The project currently runs as a browser-based research prototype. It is not a fi
 - A persistent evidence model that opens driving and inspection tools as the learner demonstrates understanding.
 - A wheel-and-tire mathematics investigation with free-response calculations, unit conversion, circle geometry, RPM, and interactive comparison of unloaded and loaded-radius models.
 - Adjustable ramp, impact-pulse, and ideal-drop models with synchronized graphs and visible assumptions.
-- A twelve-module curriculum map beginning with high-school physics and extending toward university and research work.
+- Ten recurring mathematics-and-physics domain families, each mapped from high-school foundations through research depth.
 - One consistent 525i whose model becomes more detailed as the learner's physics and mathematics advance.
 - A notebook, data import, model comparison, uncertainty labels, and source records.
 
@@ -58,13 +60,13 @@ npm run test:e2e
 
 ## How the learning design works
 
-The core loop is:
+The core lesson loop is:
 
-`observe → predict → calculate → test → explain → apply`
+`check readiness → observe → build the mathematics → predict → test → explain → transfer`
 
 Each chapter starts with a physical question and ends with evidence that the learner can use the idea in a different situation. Mathematics is taught alongside the physics rather than hidden inside an answer checker. Vehicle upgrades act as applications and design constraints, not as arbitrary rewards.
 
-The course structure draws on OpenStax High School Physics, the Next Generation Science Standards, AP Physics, MIT OpenCourseWare, Modeling Instruction, and research on active learning and course alignment. The [learning design](docs/LEARNING_DESIGN.md) explains how those sources are used and where the project still needs evaluation.
+The course structure draws on Physics Union Mathematics, OpenStax High School Physics, the Next Generation Science Standards, AP Physics, MIT OpenCourseWare, US Department of Education practice guides, and active-learning research. The [integrated mathematics and physics path](docs/INTEGRATED_MATH_PHYSICS_PATH.md) explains how those sources are combined; the shorter [learning design](docs/LEARNING_DESIGN.md) states the acceptance rules for lessons.
 
 ## Contributing
 
@@ -77,6 +79,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Go
 - [Project overview](docs/PROJECT_OVERVIEW.md)
 - [Current status and limitations](docs/PROJECT_STATUS.md)
 - [Learning design and curriculum](docs/LEARNING_DESIGN.md)
+- [Integrated mathematics and physics path](docs/INTEGRATED_MATH_PHYSICS_PATH.md)
 - [Educational audit and priorities](docs/EDUCATIONAL_AUDIT.md)
 - [Research and evidence methods](docs/RESEARCH_METHODS.md)
 - [Vehicle data and visual assets](docs/VEHICLE_DATA.md)

@@ -29,6 +29,9 @@ const shot = async (name) => {
   await page.waitForTimeout(name === '03-guided-drive' ? 2400 : 600)
   await page.screenshot({ path: new URL(`${name}.png`, output).pathname, fullPage: true, timeout: 30_000 })
 }
+const shotElement = async (name, selector) => {
+  await page.locator(selector).screenshot({ path: new URL(`${name}.png`, output).pathname, timeout: 30_000 })
+}
 const requireState = (condition, message) => { if (!condition) throw new Error(message) }
 
 try {
@@ -103,10 +106,18 @@ try {
   await shot('05-wheel-telemetry-exploded')
 
   await page.goto(route('/learn'), { waitUntil: 'commit' })
-  await page.getByText('Measurement, units & uncertainty').waitFor()
+  await page.getByText('Measurement, data & modeling').waitFor()
   await shot('06-knowledge-map')
+  await shotElement('06a-integrated-curriculum-desktop', '.syllabus-spine')
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.waitForTimeout(250)
+  const mobileWidth = await page.evaluate(() => ({ client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }))
+  requireState(mobileWidth.scroll <= mobileWidth.client + 1, `Course page overflows mobile width: ${JSON.stringify(mobileWidth)}`)
+  await shotElement('06b-integration-loop-mobile', '.integration-loop')
+  await shotElement('06c-first-domain-mobile', '.module-list details:first-child')
+  await page.setViewportSize({ width: 1440, height: 900 })
   await page.goto(route('/garage'), { waitUntil: 'commit' })
-  await page.getByText('Learn it. Certify it. Install it. Prove it.').waitFor()
+  await page.getByText('Learn it. Test it. Use it. Prove it.').waitFor()
   await shot('07-garage-progression')
   await page.goto(route('/track'), { waitUntil: 'commit' })
   await page.getByRole('tab', { name: 'Ramp' }).waitFor()

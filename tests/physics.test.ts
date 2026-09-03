@@ -14,7 +14,8 @@ import { diagnoseMotionAnswer } from '../src/domain/assessmentDiagnostics'
 import { generateMotionProblem, validateGeneratedProblem } from '../src/domain/problemGenerator'
 import { parseMeasurementCsv } from '../src/domain/experiments'
 import { motionLessons, validateMotionLessons } from '../src/data/motionLessons'
-import { courseStages, vehicleProgression } from '../src/data/courseArchitecture'
+import { courseModules, courseStages, curriculumLevels, validateCourseArchitecture, vehicleProgression } from '../src/data/courseArchitecture'
+import { sourceById } from '../src/data/sources'
 
 describe('kinematics', () => {
   it('matches the analytical constant-acceleration solution', () => {
@@ -66,6 +67,14 @@ describe('vehicle provenance', () => {
   it('keeps the first production course on one consistent 525i', () => {
     expect(courseStages.every((stage) => stage.model.includes('525i'))).toBe(true)
     expect(vehicleProgression.every((stage) => stage.model.includes('525i'))).toBe(true)
+  })
+
+  it('gives every recurring domain one treatment at every academic depth', () => {
+    expect(validateCourseArchitecture()).toEqual({ valid: true, duplicateModules: [], invalidDepths: [] })
+    expect(courseModules).toHaveLength(10)
+    expect(courseModules.every((module) => module.depths.length === curriculumLevels.length)).toBe(true)
+    expect(courseModules.flatMap((module) => module.depths).every((depth) => depth.mathematics.length > 0 && depth.vehicleMission && depth.evidence && depth.unlock)).toBe(true)
+    expect(courseModules.flatMap((module) => module.sourceIds).filter((sourceId) => !sourceById[sourceId])).toEqual([])
   })
 })
 

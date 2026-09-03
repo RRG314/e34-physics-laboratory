@@ -176,7 +176,7 @@ export function WheelMathLab() {
     <section className="wheel-math-lab" id="wheel-math-lab">
       <header>
         <div><p className="eyebrow">Playable chapter 01 · measurement and proportional reasoning</p><h2>Read a tire. Build a wheel model. Test its limit.</h2><p>This is the first complete mathematics investigation: each result depends on the previous measurement, and evidence is recorded only after you produce a defensible answer.</p></div>
-        <div className="lesson-progress"><span>{complete ? 'Certified' : `Evidence ${step} / 5`}</span><i><b style={{ width: `${progress}%` }} /></i></div>
+        <div className="lesson-progress"><span>{complete ? 'Investigation complete' : `Evidence ${step} / 5`}</span><i><b style={{ width: `${progress}%` }} /></i></div>
       </header>
       <div className="wheel-lab-grid">
         <aside className="wheel-specimen">

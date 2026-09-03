@@ -16,6 +16,8 @@ The next milestone is a short course that a high-school learner can follow from 
 - Test the sequence with learners and teachers; publish the method and limits of what was learned.
 - Replace or calibrate provisional 525i data where reliable variant-specific evidence is available.
 
+The first content target inside this milestone is one complete high-school motion treatment. It must include readiness checks, mathematics instruction, graph-rich experimentation, written explanation, transfer, delayed retrieval, and an accessible alternative to every visual interaction before another domain is expanded.
+
 ## Version 0.3 — 525i systems, upgrades, and competing solutions
 
 This release should make vehicle modifications meaningful. An upgrade will require the knowledge needed to predict its effects and the supporting systems needed to use it safely.
@@ -34,9 +36,9 @@ This release should make vehicle modifications meaningful. An upgrade will requi
 - Develop circuits, sensing, charging, starting, ignition, magnetism, and induction chapters.
 - Expand experimental data tools to support repeat trials, residuals, parameter fitting, and comparison with responsibly collected vehicle data.
 
-## Later work — university and research depth
+## Later work — college and research depth
 
-University-level and research pathways should grow only after the school-level foundation is usable and evaluated. Likely directions include multivariable mechanics, differential equations, numerical integration, tire and suspension models, controls, signal processing, materials, optics, and reproducible digital-twin calibration.
+College-level and research pathways should grow only after the school-level foundation is usable and evaluated. Likely directions include multivariable mechanics, differential equations, numerical integration, tire and suspension models, controls, signal processing, materials, optics, and reproducible digital-twin calibration. Each is a deeper treatment of a recurring domain, not a disconnected advanced-course catalog.
 
 Higher academic tiers do not require a different badge. Advanced work should use the same 525i until another configuration has enough evidence and visual coverage to answer a specific comparison question honestly.
 

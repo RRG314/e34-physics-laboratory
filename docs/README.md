@@ -7,6 +7,7 @@ E34 Physics Laboratory combines a learning product, a physics simulation, and a 
 - [Project overview](PROJECT_OVERVIEW.md) — the purpose of the project and the role of the E34.
 - [Project status](PROJECT_STATUS.md) — what works, what is provisional, and what has not been built.
 - [Learning design](LEARNING_DESIGN.md) — curriculum, mathematics, lesson structure, and assessment philosophy.
+- [Integrated mathematics and physics path](INTEGRATED_MATH_PHYSICS_PATH.md) — the full high-school-to-research hierarchy, recurring vehicle domains, and rules for combining the subjects.
 - [Educational audit](EDUCATIONAL_AUDIT.md) — the evidence-based quality review, corrected progression, and release gates for playable chapters.
 - [Research methods](RESEARCH_METHODS.md) — standards for sources, measurements, model validation, and educational evaluation.
 

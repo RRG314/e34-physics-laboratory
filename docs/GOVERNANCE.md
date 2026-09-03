@@ -22,6 +22,10 @@ When reasonable contributors disagree, the maintainer will seek the clearest evi
 
 The project will not describe an untested intervention as proven, a visual proxy as measured geometry, or a calibrated approximation as an exact digital twin. Conflicts of interest, sponsored material, and materially generated research or educational content should be disclosed.
 
+Academic honesty and transparency take priority over impressive claims. Sources, adaptations, unresolved disagreements, negative results, model assumptions, and meaningful use of generative tools should be recorded where a reviewer can inspect them. Work presented as a learner's own must actually be the learner's own; assistance should be disclosed according to the rules of the school or study involved.
+
+The project is not accredited and does not issue academic credit or recognized qualifications. A progress marker means only that the application recorded its stated evidence under its stated, still-evolving rules. Any future acknowledgement issued by the project owner must identify its issuer and must not imply outside accreditation.
+
 Research involving learners must use appropriate consent, privacy protection, and institutional review where required. Identifiable learner data does not belong in the repository.
 
 ## Releases
@@ -31,4 +35,3 @@ The maintainer prepares releases from reviewed commits on `main`. A release shou
 ## Conduct and security
 
 Community behavior is governed by [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md). Vulnerabilities are handled through [SECURITY.md](../SECURITY.md). These policies apply to maintainers as well as contributors.
-

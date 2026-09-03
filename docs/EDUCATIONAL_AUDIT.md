@@ -36,7 +36,7 @@ If those answers do not align, the screen can still be orientation or exploratio
 | Notebook | Evidence support | Entries persist, but retrieval, revision, and comparison are not prompted | Link claims to runs and graphs; add revision history and retrieval prompts |
 | Curriculum and math maps | Planning | Breadth is visible, but most topics are not playable | Label every item playable, prototype, mapped, or research-needed; planned content earns no credit |
 | Vehicle view | Licensed interactive 525i teaching mesh | Detailed enough for orientation and selection, but not factory CAD or measurement evidence | Expand semantic parts only when their visuals and data pass the vehicle evidence gate |
-| Mastery | Heuristic progression | Evidence is better tied to actions, but scores and thresholds are not validated | Store task-level evidence, require multiple contexts, and separate practice from certification |
+| Mastery | Heuristic progression | Evidence is better tied to actions, but scores and thresholds are not validated | Store task-level evidence, require multiple contexts, and separate practice from demonstrated capability |
 
 ## Course architecture
 
@@ -79,7 +79,7 @@ At college level, the same physical situation should be revisited with more powe
 
 The central loop is:
 
-**Receive a test order → inspect the stock vehicle → predict → build a model → run and measure → explain the residual → earn a certification → install or tune a compatible part → prove it in a changed scenario.**
+**Receive a test order → inspect the stock vehicle → predict → build a model → run and measure → explain the residual → demonstrate the capability → install or tune a compatible part → prove it in a changed scenario.**
 
 Progress comes from defensible evidence, not points or screen visits. Upgrades are consequential decisions. A larger engine can exceed driveline, cooling, braking, or tire limits; a brake change can alter thermal capacity and balance; a suspension change can improve one maneuver while worsening another. Learners should be allowed to make poor choices, observe the safe simulated consequence, revise the model, and try again.
 
@@ -103,7 +103,7 @@ Other E34 configurations are outside the first production release. They may beco
 
 A learner begins with no credited mastery. A diagnostic can shorten a route only after collecting evidence. Exposure, conceptual understanding, calculation, graph interpretation, prediction, measurement, experiment design, application, diagnosis, modeling, derivation, and validation are separate; one correct response cannot fill them all.
 
-Practice feedback should answer: Where am I going? How am I doing? What should I try next? It should name the likely error and offer a specific action. Certification should require multiple items, a constructed response, multiple representations, a changed context, and later retrieval. Confidence and mastery thresholds remain hypotheses until tested with learners.
+Practice feedback should answer: Where am I going? How am I doing? What should I try next? It should name the likely error and offer a specific action. A demonstrated capability should require multiple items, a constructed response, multiple representations, a changed context, and later retrieval. Confidence and mastery thresholds remain hypotheses until tested with learners.
 
 The revised motion sequence follows this rule more closely: estimate, entered calculation, and graph interpretation are separate actions. Driving no longer unlocks from preloaded credit or answer-choice arithmetic. This is an improved prototype, not a validated assessment.
 
@@ -132,7 +132,7 @@ Different entry points should not lower the intellectual goal. Useful supports i
 ### First: make one chapter trustworthy
 
 - Finish motion with generated variants, x–t/v–t/a–t comparison, transfer, and delayed retrieval.
-- Store task-level evidence and distinguish practice, demonstrated evidence, and certification.
+- Store task-level evidence and distinguish practice, demonstrated evidence, and later retrieval.
 - Turn guided drive into assigned maneuvers that produce notebook evidence.
 - Keep all unbuilt modules visibly labeled as planned.
 

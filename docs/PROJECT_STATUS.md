@@ -6,6 +6,8 @@ Current stage: research prototype
 
 E34 Physics Laboratory has a working browser application and a coherent direction, but it is not yet a complete course or a validated digital twin. This page is the plain-language boundary between what someone can use now, what has only been designed, and what still needs evidence.
 
+It is also not an accredited school or credentialing body. Its progress markers record work inside the application and do not represent academic credit, a professional qualification, or an accredited certificate.
+
 ## What works now
 
 The current build supports a first learning journey through motion and wheel rotation. A new learner can:
@@ -26,7 +28,7 @@ The application also distinguishes conceptual, arithmetic, sign, unit, model-sel
 | Area | Current maturity | What that means |
 | --- | --- | --- |
 | High-school mechanics sequence | Working opening chapter | Motion and introductory rotation are playable; later mechanics chapters remain planned |
-| Broader curriculum | Structured design | Twelve modules and their prerequisites are mapped, but most are not yet lessons |
+| Broader curriculum | Structured design | Ten recurring math-and-physics domains are mapped at five depths, but most treatments are not yet lessons |
 | Physics models | Educational prototypes | Core analytical cases are tested; road-load and crash models are simplified and uncalibrated |
 | E34 vehicle data | Mixed evidence | Several engine and transmission facts are sourced; mass, dimensions, gearing, and dynamics data still need variant-specific confirmation |
 | Vehicle graphics | Licensed interactive 525i teaching mesh | Detailed and selectable, but not factory CAD or measured production geometry |
@@ -57,6 +59,6 @@ The exact example-car mass, dimensions, factory wheel and tire fitment, final-dr
 
 ## What would justify the next release
 
-Version 0.2 should deliver a complete, teachable high-school mechanics arc rather than another broad set of placeholders. That means connected chapters on measurement, motion, forces, energy, momentum, and rotation; worked mathematics and practice; useful feedback and remediation; reviewed sources; accessible interaction paths; and evaluation with real learners.
+Version 0.2 should deliver a complete, teachable high-school mechanics arc rather than another broad set of placeholders. That means connected treatments of measurement, motion, forces, energy, momentum, and rotation; worked mathematics and practice; useful feedback and remediation; reviewed sources; accessible interaction paths; and evaluation with real learners. The [integrated mathematics and physics path](INTEGRATED_MATH_PHYSICS_PATH.md) defines the hierarchy the implementation now follows.
 
 Software passing its tests is necessary, but it will not by itself establish that the course teaches effectively. The [educational audit](EDUCATIONAL_AUDIT.md), [roadmap](ROADMAP.md), and [research methods](RESEARCH_METHODS.md) describe both kinds of work.
