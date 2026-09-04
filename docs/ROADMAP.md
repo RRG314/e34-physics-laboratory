@@ -4,19 +4,19 @@ The project is being built from the beginning of high-school physics outward. Ea
 
 Dates are intentionally absent until the work has maintainers and evidence behind it. The sequence below expresses dependencies and priorities.
 
-## Version 0.2 — a complete mechanics foundation
+## Version 0.2 — review and complete the mechanics foundation
 
-The next milestone is a short course that a high-school learner can follow from measurement through rotational motion using the 525i as the common system.
+The current application now has an eight-chapter route from wheel measurement through motion, force, energy, and impulse. The next milestone is to make that route defensible for real teaching and extend it through rotational dynamics without lowering the completion standard.
 
-- Complete connected chapters on measurement and uncertainty, kinematics, forces, work and energy, momentum, and rotation.
-- Give each chapter an observable question, prediction, mathematics lesson, controlled experiment, explanation, transfer problem, and useful remediation.
-- Turn ramps, braking, impacts, and drops into safe virtual investigations with explicit assumptions and graphs.
+- Add measurement uncertainty and complete the remaining rotational-dynamics treatment.
+- Add written explanations, generated variants, transfer problems, delayed retrieval, and more specific remediation to the eight implemented chapters.
+- Keep ramps and impact pulses as safe virtual investigations; add braking and drop investigations only when they meet the same instructional and safety standard.
 - Add free-body diagrams, energy and momentum representations, unit-aware calculations, and a larger bank of generated problems.
 - Complete keyboard, reduced-motion, contrast, narrow-screen, and screen-reader reviews.
 - Test the sequence with learners and teachers; publish the method and limits of what was learned.
 - Replace or calibrate provisional 525i data where reliable variant-specific evidence is available.
 
-The first content target inside this milestone is one complete high-school motion treatment. It must include readiness checks, mathematics instruction, graph-rich experimentation, written explanation, transfer, delayed retrieval, and an accessible alternative to every visual interaction before another domain is expanded.
+Before another domain is expanded, the two playable paths need formal physics review, teacher review, learner testing, and an accessible alternative to every visual interaction. Their current completion gates are useful product evidence, not validated mastery claims.
 
 ## Version 0.3 — 525i systems, upgrades, and competing solutions
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { deriveTireGeometry, distanceAfterRevolutions, teachingTire, wheelRpm } from '../src/domain/tireMath'
-import { idealDrop, rampClimb, rectangularImpactPulse } from '../src/domain/trackPhysics'
+import { idealClimbHeight, idealDrop, kineticEnergy, netForce, rampClimb, rectangularImpactPulse } from '../src/domain/trackPhysics'
 import { concepts } from '../src/data/curriculum'
 import { targetVehicle } from '../src/data/vehicle'
 import { validateConceptGraph } from '../src/domain/curriculumGraph'
@@ -17,6 +17,8 @@ import { motionLessons, validateMotionLessons } from '../src/data/motionLessons'
 import { courseModules, courseStages, curriculumLevels, validateCourseArchitecture, vehicleProgression } from '../src/data/courseArchitecture'
 import { sourceById } from '../src/data/sources'
 import { foundationProgress, getFoundationPath, getNextFoundationStage } from '../src/domain/foundationPath'
+import { getDynamicsPath, getNextHighSchoolStage, highSchoolProgress } from '../src/domain/highSchoolPath'
+import { dynamicsLessons, validateDynamicsLessons } from '../src/data/dynamicsLessons'
 
 describe('kinematics', () => {
   it('matches the analytical constant-acceleration solution', () => {
@@ -86,6 +88,29 @@ describe('foundation path', () => {
   })
 })
 
+describe('high-school mechanics path', () => {
+  const completeMath = Object.fromEntries(['math-ratios', 'math-unit-conversion', 'math-geometry', 'math-graph-interpretation'].map((id) => [id, { conceptual: .7, procedural: .7 }]))
+  const completeFoundation = { mathematicsMastery: completeMath, motionMissionIndex: 4, driveChallengeComplete: true, wheelMissionIndex: 2, dynamicsMissionIndex: 0 }
+
+  it('keeps Path 02 locked until every foundation stage is complete', () => {
+    const incomplete = { ...completeFoundation, wheelMissionIndex: 1 }
+    expect(getDynamicsPath(incomplete).every((stage) => !stage.available)).toBe(true)
+    expect(getNextHighSchoolStage(incomplete)?.id).toBe('wheel-telemetry')
+  })
+
+  it('opens one dynamics chapter at a time and reaches eight of eight', () => {
+    expect(getDynamicsPath(completeFoundation).map((stage) => stage.available)).toEqual([true, false, false, false])
+    expect(getNextHighSchoolStage({ ...completeFoundation, dynamicsMissionIndex: 2 })?.id).toBe('energy-climb')
+    expect(highSchoolProgress({ ...completeFoundation, dynamicsMissionIndex: 4 })).toEqual({ completed: 8, total: 8, percent: 100 })
+  })
+
+  it('defines valid prediction and graph evidence for every chapter', () => {
+    expect(validateDynamicsLessons()).toEqual({ valid: true, duplicates: [], invalid: [] })
+    expect(dynamicsLessons).toHaveLength(4)
+    expect(dynamicsLessons.every((lesson) => lesson.mathConceptIds.length > 0 && lesson.physicsConceptIds.length > 0 && lesson.assumptions.length > 0 && lesson.sourceIds.every((sourceId) => sourceById[sourceId]))).toBe(true)
+  })
+})
+
 describe('vehicle provenance', () => {
   it('does not fabricate the unresolved final-drive ratio', () => {
     expect(targetVehicle.drivetrain.finalDriveRatio.value).toBeNull()
@@ -148,6 +173,11 @@ describe('learning quality systems', () => {
 })
 
 describe('virtual proving ground', () => {
+  it('connects force, energy, and ideal climb height with dimensional models', () => {
+    expect(netForce(1600, 2.5)).toBe(4000)
+    expect(kineticEnergy(1600, 10)).toBe(80000)
+    expect(idealClimbHeight(10)).toBeCloseTo(5.0968, 3)
+  })
   it('conserves energy in the ideal drop model', () => {
     const drop = idealDrop(20)
     expect(.5 * drop.impactSpeed ** 2).toBeCloseTo(drop.specificEnergy, 10)

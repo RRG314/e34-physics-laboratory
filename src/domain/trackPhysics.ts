@@ -1,5 +1,17 @@
 export const STANDARD_GRAVITY = 9.81
 
+export function netForce(mass: number, acceleration: number) {
+  return mass * acceleration
+}
+
+export function kineticEnergy(mass: number, speed: number) {
+  return .5 * mass * speed ** 2
+}
+
+export function idealClimbHeight(speed: number, gravity = STANDARD_GRAVITY) {
+  return speed ** 2 / (2 * gravity)
+}
+
 export function rampClimb(initialSpeed: number, angleDegrees: number, gravity = STANDARD_GRAVITY) {
   const accelerationMagnitude = gravity * Math.sin(angleDegrees * Math.PI / 180)
   const stopTime = initialSpeed / accelerationMagnitude

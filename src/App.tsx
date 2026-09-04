@@ -17,7 +17,8 @@ import { vehicleSimulation } from './simulation/vehicleSimulation'
 import { canAccessTarget } from './domain/progressionEngine'
 import { isBroadlyMastered } from './domain/mastery'
 import { useLabLearningStore } from './store/labLearningStore'
-import { foundationProgress, getNextFoundationStage } from './domain/foundationPath'
+import { foundationProgress } from './domain/foundationPath'
+import { highSchoolProgress, getNextHighSchoolStage } from './domain/highSchoolPath'
 
 declare global {
   interface Window {
@@ -33,6 +34,7 @@ function RuntimeHooks() {
   const mastery = useLearnerStore((state) => state.mastery)
   const missionIndex = useLearnerStore((state) => state.motionMissionIndex)
   const wheelMissionIndex = useLearnerStore((state) => state.wheelMissionIndex)
+  const dynamicsMissionIndex = useLearnerStore((state) => state.dynamicsMissionIndex)
   const driveChallengeComplete = useLearnerStore((state) => state.driveChallengeComplete)
   const selectedComponentId = useLearnerStore((state) => state.selectedComponentId)
   const resetProgress = useLearnerStore((state) => state.resetProgress)
@@ -47,13 +49,14 @@ function RuntimeHooks() {
   useEffect(() => {
     window.render_game_to_text = () => {
       const liveSimulation = vehicleSimulation.getSnapshot()
-      const pathInput = { mathematicsMastery, motionMissionIndex: missionIndex, driveChallengeComplete, wheelMissionIndex }
-      const pathProgress = foundationProgress(pathInput)
-      const nextStage = getNextFoundationStage(pathInput)
+      const pathInput = { mathematicsMastery, motionMissionIndex: missionIndex, driveChallengeComplete, wheelMissionIndex, dynamicsMissionIndex }
+      const foundationPathProgress = foundationProgress(pathInput)
+      const pathProgress = highSchoolProgress(pathInput)
+      const nextStage = getNextHighSchoolStage(pathInput)
       return JSON.stringify({
       coordinateSystem: 'vehicle +X is forward; world +Y is up; distances are metres; SI units',
       route: location.pathname,
-      learner: { foundationPath: { ...pathProgress, nextStage: nextStage?.id ?? null }, motionMissionIndex: missionIndex, driveChallengeComplete, wheelMissionIndex, controlledDriveUnlocked: canAccessTarget('controlled-drive', mastery), wheelInspectionUnlocked: canAccessTarget('basic-wheel-inspection', mastery), wheelTelemetryUnlocked: canAccessTarget('wheel-telemetry', mastery), broadlyMasteredConcepts: Object.values(mastery).filter(isBroadlyMastered).map((entry) => entry.conceptId), selectedComponentId },
+      learner: { highSchoolPath: { ...pathProgress, nextStage: nextStage?.id ?? null }, foundationPath: foundationPathProgress, motionMissionIndex: missionIndex, driveChallengeComplete, wheelMissionIndex, dynamicsMissionIndex, controlledDriveUnlocked: canAccessTarget('controlled-drive', mastery), wheelInspectionUnlocked: canAccessTarget('basic-wheel-inspection', mastery), wheelTelemetryUnlocked: canAccessTarget('wheel-telemetry', mastery), broadlyMasteredConcepts: Object.values(mastery).filter(isBroadlyMastered).map((entry) => entry.conceptId), selectedComponentId },
       simulation: {
         mode: liveSimulation.mode,
         running: liveSimulation.running,
@@ -66,10 +69,10 @@ function RuntimeHooks() {
         modelLevel: liveSimulation.modelLevel,
       },
       learningQuality: { mathematicsConceptsWithEvidence: Object.keys(mathematicsMastery), latestDiagnostic: diagnostics[0]?.category ?? null, notebookEntries: notebook.length, selectedModelLevel: modelLevel, activeRepresentation: overlay },
-      visibleInteraction: location.pathname === '/laboratory' ? `motion mission ${Math.min(missionIndex + 1, 4)} of 4` : location.pathname === '/drive' ? 'controlled-stop challenge; W/up accelerate; S/down brake; contextual Why path' : location.pathname === '/explore' ? `wheel checkpoint ${Math.min(wheelMissionIndex + 1, 2)} of 2; select one of four wheels` : location.pathname === '/track' ? 'ramp, impact pulse, and ideal drop telemetry sandboxes' : location.pathname === '/garage' ? `Foundation Path ${pathProgress.completed} of ${pathProgress.total}; future paths are dependency-gated plans` : location.pathname === '/learn' ? 'playable wheel mathematics followed by the planned curriculum map' : 'navigation and licensed E34 visual reference',
+      visibleInteraction: location.pathname === '/laboratory' ? `motion mission ${Math.min(missionIndex + 1, 4)} of 4` : location.pathname === '/drive' ? 'controlled-stop challenge; W/up accelerate; S/down brake; contextual Why path' : location.pathname === '/explore' ? `wheel checkpoint ${Math.min(wheelMissionIndex + 1, 2)} of 2; select one of four wheels` : location.pathname === '/track' ? `forces and energy mission ${Math.min(dynamicsMissionIndex + 1, 4)} of 4; prediction, calculation, graph evidence` : location.pathname === '/garage' ? `High-school mechanics ${pathProgress.completed} of ${pathProgress.total}; later paths are dependency-gated plans` : location.pathname === '/learn' ? 'playable wheel mathematics followed by the planned curriculum map' : 'navigation and licensed E34 visual reference',
       })
     }
-  }, [location.pathname, mastery, missionIndex, driveChallengeComplete, wheelMissionIndex, selectedComponentId, simulation, mathematicsMastery, diagnostics, notebook.length, modelLevel, overlay])
+  }, [location.pathname, mastery, missionIndex, driveChallengeComplete, wheelMissionIndex, dynamicsMissionIndex, selectedComponentId, simulation, mathematicsMastery, diagnostics, notebook.length, modelLevel, overlay])
 
   useEffect(() => {
     window.advanceTime = (ms) => vehicleSimulation.step(ms / 1000)

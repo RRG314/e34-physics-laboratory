@@ -2,18 +2,14 @@ import { ArrowRight, Check, CheckCircle2, Circle, ExternalLink, GitBranch, LockK
 import { Link } from 'react-router-dom'
 import { lessonBlueprint, upgradeBranches, vehicleProgression } from '../../data/courseArchitecture'
 import { foundationProgress, getFoundationPath } from '../../domain/foundationPath'
+import { getDynamicsPath, getNextHighSchoolStage, highSchoolProgress } from '../../domain/highSchoolPath'
 import { useLabLearningStore } from '../../store/labLearningStore'
 import { useLearnerStore } from '../../store/learnerStore'
 
 const futurePaths = [
   {
-    number: '02', title: 'Forces, ramps, energy, and momentum', status: 'Next production path',
-    starts: 'Starts after the Foundation Path is stable and classroom-tested.',
-    scope: 'Free-body diagrams, friction, work and energy, momentum, impulse, ramps, and a safe virtual impact investigation.',
-  },
-  {
     number: '03', title: 'Rotation, traction, and a first modification', status: 'Planned',
-    starts: 'Starts after Path 02 supplies the force and energy prerequisites.',
+    starts: 'Starts after expert review and learner testing of the two playable paths.',
     scope: 'Torque, gear ratios, tire force limits, rotational inertia, and one bounded wheel or final-drive trade study.',
   },
   {
@@ -28,20 +24,23 @@ export function GaragePage() {
   const motionMissionIndex = useLearnerStore((state) => state.motionMissionIndex)
   const driveChallengeComplete = useLearnerStore((state) => state.driveChallengeComplete)
   const wheelMissionIndex = useLearnerStore((state) => state.wheelMissionIndex)
-  const input = { mathematicsMastery, motionMissionIndex, driveChallengeComplete, wheelMissionIndex }
+  const dynamicsMissionIndex = useLearnerStore((state) => state.dynamicsMissionIndex)
+  const input = { mathematicsMastery, motionMissionIndex, driveChallengeComplete, wheelMissionIndex, dynamicsMissionIndex }
   const stages = getFoundationPath(input)
-  const progress = foundationProgress(input)
-  const current = stages.find((stage) => !stage.complete)
+  const dynamicsStages = getDynamicsPath(input)
+  const foundation = foundationProgress(input)
+  const progress = highSchoolProgress(input)
+  const current = getNextHighSchoolStage(input)
 
   return (
     <div className="content-page garage-page">
       <header className="path-hero">
-        <div><p className="eyebrow">Current release · one supported 525i</p><h1>Your usable path starts here.</h1><p>Four connected activities form the first complete learning route. Each one records evidence and opens the next; the broader curriculum below is a build plan, not a claim that those lessons already exist.</p>{current ? <Link className="button button-primary" to={current.route}>Continue: {current.title} <ArrowRight size={15} /></Link> : <Link className="button button-primary" to="/learn">Review the completed path <ArrowRight size={15} /></Link>}</div>
-        <div className="path-meter"><span>Foundation Path</span><strong>{progress.completed}<i>/ {progress.total}</i></strong><p>{current ? `Next: ${current.title}` : 'All four stages complete'}</p><div><i style={{ width: `${progress.percent}%` }} /></div></div>
+        <div><p className="eyebrow">Current release · one supported 525i</p><h1>Your usable path starts here.</h1><p>Eight connected chapters now form two complete high-school mechanics paths. Each chapter records separate prediction, calculation, and representation evidence before it opens the next.</p>{current ? <Link className="button button-primary" to={current.route}>Continue: {current.title} <ArrowRight size={15} /></Link> : <Link className="button button-primary" to="/learn">Review the completed route <ArrowRight size={15} /></Link>}</div>
+        <div className="path-meter"><span>High-school mechanics</span><strong>{progress.completed}<i>/ {progress.total}</i></strong><p>{current ? `Next: ${current.title}` : 'Both playable paths complete'}</p><div><i style={{ width: `${progress.percent}%` }} /></div></div>
       </header>
 
       <section className="foundation-path" aria-label="Foundation learning path">
-        <header><div><p className="eyebrow">Playable now</p><h2>One route, four dependent stages.</h2></div><p>The same 525i moves from measurement to motion, then control, then wheel rotation. Locked stages name what is missing instead of pretending unfinished content is available.</p></header>
+        <header><div><p className="eyebrow">Path 01 · Playable now · {foundation.completed}/4</p><h2>Measurement and motion foundations.</h2></div><p>The same 525i moves from measurement to motion, then control, then wheel rotation. Locked stages name what is missing instead of pretending unfinished content is available.</p></header>
         <div className="foundation-stage-grid">{stages.map((stage) => {
           const state = stage.complete ? 'complete' : stage.available ? 'current' : 'locked'
           return <article key={stage.id} className={state}>
@@ -53,7 +52,20 @@ export function GaragePage() {
         })}</div>
       </section>
 
-      <section className="future-paths"><header><div><p className="eyebrow">What comes after Path 01</p><h2>Build order is based on prerequisites and evidence.</h2></div><p>No release dates are invented here. A path starts when its prerequisite learning works, its vehicle claims have sources, and its simulation can be checked.</p></header><div>{futurePaths.map((path) => <article key={path.number}><span>{path.number}</span><div><small>{path.status}</small><h3>{path.title}</h3><p>{path.scope}</p><strong>{path.starts}</strong></div></article>)}</div></section>
+      <section className="foundation-path dynamics-path" aria-label="Forces and energy learning path">
+        <header><div><p className="eyebrow">Path 02 · Playable now · {dynamicsMissionIndex}/4</p><h2>Forces, ramps, energy, and momentum.</h2></div><p>Every chapter starts with a qualitative prediction, develops the required mathematics, reveals a graph, and ends with a conclusion saved to the notebook.</p></header>
+        <div className="foundation-stage-grid">{dynamicsStages.map((stage) => {
+          const state = stage.complete ? 'complete' : stage.available ? 'current' : 'locked'
+          return <article key={stage.id} className={state}>
+            <div className="stage-state"><span>{String(stage.number).padStart(2, '0')}</span>{state === 'complete' ? <Check size={17} /> : state === 'locked' ? <LockKeyhole size={16} /> : <Circle size={16} />}</div>
+            <small>{state === 'complete' ? 'Complete' : state === 'current' ? 'Available now' : stage.number === 5 ? 'Requires Path 01' : 'Requires the previous chapter'}</small>
+            <h3>{stage.title}</h3><p>{stage.description}</p><strong>{stage.outcome}</strong>
+            {stage.available ? <Link to={stage.route}>{stage.complete ? 'Review chapter' : 'Open chapter'} <ArrowRight size={13} /></Link> : <span className="locked-label">Not yet available</span>}
+          </article>
+        })}</div>
+      </section>
+
+      <section className="future-paths"><header><div><p className="eyebrow">What comes after the playable mechanics route</p><h2>Build order is based on prerequisites and evidence.</h2></div><p>No release dates are invented here. A path starts when its prerequisite learning works, its vehicle claims have sources, and its simulation can be checked.</p></header><div>{futurePaths.map((path) => <article key={path.number}><span>{path.number}</span><div><small>{path.status}</small><h3>{path.title}</h3><p>{path.scope}</p><strong>{path.starts}</strong></div></article>)}</div></section>
 
       <section className="progression-rig"><p className="eyebrow">Planned academic depth · not five playable levels</p><h2>The same car can support deeper models later.</h2><div>{vehicleProgression.map((stage) => <article key={`${stage.year}-${stage.model}`} className={stage.year === 'High school foundations' ? 'active' : ''}><span>{stage.year}</span><strong>{stage.model}</strong><h3>{stage.system}</h3><p>{stage.learning}</p><small>{stage.reason}</small></article>)}</div><p className="metaphor-note"><ShieldCheck size={15} /> Only the 1995 US manual 525i sedan is an active teaching vehicle. Other E34s remain research candidates until their exact data and redistributable visuals pass the admission gate.</p></section>
 

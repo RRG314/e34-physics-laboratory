@@ -18,17 +18,20 @@ The project is not an accredited school or credentialing body. Progress markers 
 
 ## What you can explore today
 
-- A four-stage Foundation Path with visible prerequisites and persisted completion: wheel mathematics, motion, a controlled stop, and wheel telemetry.
+- Two connected four-stage high-school mechanics paths with visible prerequisites and persisted completion.
+- Path 01: wheel mathematics, motion, a controlled stop, and wheel telemetry.
+- Path 02: net force, ramp components, a mechanical-energy budget, and a safe virtual impulse-design investigation.
 - A guided sequence on position, displacement, speed, velocity, acceleration, and graph interpretation.
 - A persistent evidence model that opens driving and inspection tools as the learner demonstrates understanding.
 - A wheel-and-tire mathematics investigation that is the real prerequisite for later motion and wheel-system work, with free-response calculations, unit conversion, circle geometry, RPM, and interactive comparison of unloaded and loaded-radius models.
 - A measurable driving assignment that requires the learner to reach a target speed and stop inside a defined position window before wheel inspection opens.
-- Adjustable ramp, impact-pulse, and ideal-drop models with synchronized graphs and visible assumptions.
+- Adjustable force, ramp, energy, and impact-pulse models with prediction-gated graphs and visible assumptions.
 - Ten recurring mathematics-and-physics domain families, each mapped from high-school foundations through research depth.
 - One consistent 525i whose model becomes more detailed as the learner's physics and mathematics advance.
 - A notebook, data import, model comparison, uncertainty labels, and source records.
 
 The [project status](docs/PROJECT_STATUS.md) separates working features from planned ones. The [educational audit](docs/EDUCATIONAL_AUDIT.md) explains what is and is not yet good enough for teaching, the research behind the curriculum direction, and the release gate for future chapters.
+The [high-school mechanics path](docs/HIGH_SCHOOL_MECHANICS_PATH.md) lists the exact chapter order, mathematics, evidence, and remaining review limits.
 
 ## Run the laboratory
 
@@ -82,6 +85,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Go
 - [Current status and limitations](docs/PROJECT_STATUS.md)
 - [Learning design and curriculum](docs/LEARNING_DESIGN.md)
 - [Integrated mathematics and physics path](docs/INTEGRATED_MATH_PHYSICS_PATH.md)
+- [Playable high-school mechanics path](docs/HIGH_SCHOOL_MECHANICS_PATH.md)
 - [Educational audit and priorities](docs/EDUCATIONAL_AUDIT.md)
 - [Research and evidence methods](docs/RESEARCH_METHODS.md)
 - [Vehicle data and visual assets](docs/VEHICLE_DATA.md)

@@ -9,6 +9,7 @@ import { mathematicsConcepts, type MathematicsTier } from '../../data/mathematic
 import { useLabLearningStore } from '../../store/labLearningStore'
 import { courseModules, curriculumLevels } from '../../data/courseArchitecture'
 import { WheelMathLab } from '../WheelMathLab'
+import { useNavigate } from 'react-router-dom'
 
 const lanes = [
   { label: 'Pre-course foundations', tier: 'foundation' },
@@ -16,6 +17,7 @@ const lanes = [
 ] as const
 
 const wheelLabMathematics = new Set(['math-ratios', 'math-unit-conversion', 'math-geometry', 'math-graph-interpretation'])
+const dynamicsMathematics = new Set(['math-algebra', 'math-solving-equations', 'math-trigonometry', 'math-vectors', 'math-quadratics'])
 const mathTiers: { id: MathematicsTier; label: string }[] = [
   { id: 'foundation', label: 'Foundations' },
   { id: 'algebra', label: 'Algebra & functions' },
@@ -26,6 +28,7 @@ const mathTiers: { id: MathematicsTier; label: string }[] = [
 ]
 
 export function LearnPage() {
+  const navigate = useNavigate()
   const mastery = useLearnerStore((state) => state.mastery)
   const mastered = concepts.filter((concept) => isBroadlyMastered(mastery[concept.id])).map((concept) => concept.id)
   const recommended = getNextRecommendedConcepts(mastery)
@@ -75,8 +78,9 @@ export function LearnPage() {
         {mathTiers.map((tier) => <div className="math-tier" key={tier.id}><h3>{tier.label}</h3><div>{mathematicsConcepts.filter((concept) => concept.tier === tier.id).map((concept) => {
           const evidence = mathematicsMastery[concept.id]
           const demonstrated = Boolean(evidence && evidence.conceptual >= 0.6 && evidence.procedural >= 0.6)
-          const implemented = wheelLabMathematics.has(concept.id)
-          return <article key={concept.id} className={demonstrated ? 'mastered' : ''}><span>{demonstrated ? <Check size={13} /> : null}{concept.physicsLinks.slice(0, 2).join(' · ')}</span><h4>{concept.title}</h4><p>{concept.contextualModule}</p><small>{concept.prerequisites.length ? `Requires ${concept.prerequisites.join(', ')}` : 'Entry mathematics'}</small>{implemented ? <button onClick={() => document.getElementById('wheel-math-lab')?.scrollIntoView({ behavior: 'smooth' })}>{demonstrated ? 'Review wheel lab' : 'Begin wheel lab'}</button> : <button disabled>Planned · no credit</button>}</article>
+          const wheelImplemented = wheelLabMathematics.has(concept.id)
+          const dynamicsImplemented = dynamicsMathematics.has(concept.id)
+          return <article key={concept.id} className={demonstrated ? 'mastered' : ''}><span>{demonstrated ? <Check size={13} /> : null}{concept.physicsLinks.slice(0, 2).join(' · ')}</span><h4>{concept.title}</h4><p>{concept.contextualModule}</p><small>{concept.prerequisites.length ? `Requires ${concept.prerequisites.join(', ')}` : 'Entry mathematics'}</small>{wheelImplemented ? <button onClick={() => document.getElementById('wheel-math-lab')?.scrollIntoView({ behavior: 'smooth' })}>{demonstrated ? 'Review wheel lab' : 'Begin wheel lab'}</button> : dynamicsImplemented ? <button onClick={() => navigate('/track')}>{demonstrated ? 'Review Path 02' : 'Learn in Path 02'}</button> : <button disabled>Planned · no credit</button>}</article>
         })}</div></div>)}
       </section>
     </div>

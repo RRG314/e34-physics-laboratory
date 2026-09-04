@@ -1,6 +1,6 @@
 # Project status
 
-Last reviewed: 3 September 2026
+Last reviewed: 4 September 2026
 
 Current stage: research prototype
 
@@ -10,14 +10,15 @@ It is also not an accredited school or credentialing body. Its progress markers 
 
 ## What works now
 
-The current build supports one connected four-stage Foundation Path through wheel mathematics, motion, controlled driving, and wheel rotation. A new learner can:
+The current build supports two connected four-stage paths. Path 01 covers wheel mathematics, motion, controlled driving, and wheel rotation. Path 02 continues through net force, ramp components, mechanical energy, and momentum/impulse. A new learner can:
 
 - investigate position, displacement, speed, velocity, acceleration, and motion graphs through qualitative estimates, entered calculations, and graph-reading checks;
 - complete a scaffolded wheel-and-tire mathematics investigation using free-response quantities, unit conversion, circle geometry, RPM, and an interactive model-comparison graph;
 - make a qualitative prediction before calculating and running an experiment;
 - unlock guided driving after showing several kinds of motion evidence, then complete a target-speed and controlled-stop assignment;
 - select individual wheels and connect road speed to circumference, angular velocity, RPM, and revolutions;
-- run idealized ramp, impact-pulse, and drop experiments with synchronized plots;
+- complete four force-and-energy chapters that require a qualitative prediction, constructed numerical calculation, graph interpretation, and saved conclusion;
+- change declared force, ramp, energy, and stopping-pulse inputs and inspect synchronized plots only after predicting the relationship;
 - compare model assumptions, import simple measurements, and save notebook entries locally;
 - inspect the proposed curriculum, 525i model-fidelity progression, prerequisite map, and evidence boundary.
 
@@ -27,7 +28,7 @@ The application also distinguishes conceptual, arithmetic, sign, unit, model-sel
 
 | Area | Current maturity | What that means |
 | --- | --- | --- |
-| High-school mechanics sequence | One connected foundation path | Wheel mathematics, motion, controlled stopping, and introductory rotation are playable; later mechanics chapters remain planned |
+| High-school mechanics sequence | Two connected playable paths | Eight chapters run from wheel mathematics and motion through forces, ramps, energy, and impulse; rotation/traction and later systems remain planned |
 | Broader curriculum | Structured design | Ten recurring math-and-physics domains are mapped at five depths, but most treatments are not yet lessons |
 | Physics models | Educational prototypes | Core analytical cases are tested; road-load and crash models are simplified and uncalibrated |
 | E34 vehicle data | Mixed evidence | Several engine and transmission facts are sourced; mass, dimensions, gearing, and dynamics data still need variant-specific confirmation |
@@ -46,12 +47,12 @@ The exact example-car mass, dimensions, factory wheel and tire fitment, final-dr
 ## Important limitations
 
 - Driving is presently a controlled longitudinal experiment, not a tire-force or handling simulation.
-- Ramp and drop modes are idealized teaching models. The impact mode uses an adjustable pulse, not a structural crash or injury model.
+- Ramp and energy modes are idealized teaching models. The impact chapter uses an adjustable rectangular pulse, not a structural crash or injury model. A cliff/drop chapter is not part of the current learning route.
 - Road-load coefficients are sensitivity-study values and have not been calibrated against a real E34.
 - Wheel rolling assumes no slip and begins with nominal unloaded tire geometry.
 - The Foundation Path is usable from start to finish, but its motion assessment still needs generated variants, written explanation, transfer, delayed retrieval, and learner testing before it can support a strong mastery claim.
 - Mastery thresholds are unvalidated design hypotheses. The current build should be read as evidence-gated progression, not a psychometrically validated assessment.
-- Most mathematics cards are an honest roadmap only. They are labeled as planned and award no evidence; the wheel-and-tire investigation is the first implemented mathematics sequence.
+- Mathematics used in the wheel and Path 02 mechanics chapters now records separate evidence. Most later mathematics cards remain an honest roadmap, are labeled planned, and award no evidence.
 - The curriculum map extends far beyond the amount of finished teaching content.
 - Local progress can be cleared by the browser and does not transfer between devices.
 - The hosted copy is not yet an installable offline web app; offline use currently means running the static build locally after dependencies have been installed.
@@ -59,6 +60,6 @@ The exact example-car mass, dimensions, factory wheel and tire fitment, final-dr
 
 ## What would justify the next release
 
-Version 0.2 should extend the working Foundation Path into a complete, teachable high-school mechanics arc rather than add another broad set of placeholders. The next production path is forces, ramps, energy, and momentum. It should begin only after the present path is classroom-tested and should include worked mathematics, useful feedback and remediation, reviewed vehicle claims, accessible interaction paths, and evaluation with real learners. The [integrated mathematics and physics path](INTEGRATED_MATH_PHYSICS_PATH.md) defines the hierarchy the implementation now follows.
+The force, ramp, energy, and impulse path is now implemented, but “implemented” is not the same as classroom-validated. The next release should review and strengthen both playable paths before expanding breadth: teacher/physicist review, learner observation, written explanations, generated variants, delayed retrieval, keyboard and assistive-technology testing, and revision from evidence. After that, Path 03 can connect rotation, traction, gear ratios, torque, and one bounded modification decision. The [playable mechanics path](HIGH_SCHOOL_MECHANICS_PATH.md) defines the current sequence and remaining quality limits.
 
 Software passing its tests is necessary, but it will not by itself establish that the course teaches effectively. The [educational audit](EDUCATIONAL_AUDIT.md), [roadmap](ROADMAP.md), and [research methods](RESEARCH_METHODS.md) describe both kinds of work.
