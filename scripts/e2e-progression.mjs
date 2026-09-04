@@ -169,6 +169,7 @@ try {
   requireState(mechanicsState.learningQuality.notebookEntries >= 4, 'Completed Path 02 investigations did not preserve their notebook evidence.')
   await page.evaluate(() => document.querySelector('.track-page')?.scrollTo(0, 0))
   await shot('06-path-02-complete')
+  await shotElement('06b-multi-scale-telemetry', '.telemetry-plot')
   await page.setViewportSize({ width: 390, height: 844 })
   const trackMobileWidth = await page.evaluate(() => ({ client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }))
   requireState(trackMobileWidth.scroll <= trackMobileWidth.client + 1, `Path 02 overflows mobile width: ${JSON.stringify(trackMobileWidth)}`)
