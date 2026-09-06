@@ -10,6 +10,7 @@ E34 Physics Laboratory combines a learning product, a physics simulation, and a 
 - [Integrated mathematics and physics path](INTEGRATED_MATH_PHYSICS_PATH.md) — the full high-school-to-research hierarchy, recurring vehicle domains, and rules for combining the subjects.
 - [Playable high-school mechanics path](HIGH_SCHOOL_MECHANICS_PATH.md) — the eight implemented chapters, their prerequisites and evidence, and what still needs review.
 - [Educational audit](EDUCATIONAL_AUDIT.md) — the evidence-based quality review, corrected progression, and release gates for playable chapters.
+- [Learning validation plan](LEARNING_VALIDATION_PLAN.md) — a concrete protocol for content review, learner observation, retention, accessibility, and revision decisions.
 - [Research methods](RESEARCH_METHODS.md) — standards for sources, measurements, model validation, and educational evaluation.
 
 ## For contributors

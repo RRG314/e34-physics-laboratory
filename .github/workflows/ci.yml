@@ -51,6 +51,11 @@ jobs:
           E34_LAB_URL: http://127.0.0.1:4173
         run: npm run test:e2e
 
+      - name: Run automated accessibility checks
+        env:
+          E34_LAB_URL: http://127.0.0.1:4173
+        run: npm run test:a11y
+
       - name: Keep browser evidence after a failure
         if: failure()
         uses: actions/upload-artifact@v7

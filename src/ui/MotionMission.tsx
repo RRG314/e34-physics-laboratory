@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { ArrowRight, Check, LockKeyhole, RotateCcw } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { motionLessons } from '../data/motionLessons'
+import { motionLessonForVariant, motionLessons } from '../data/motionLessons'
 import { diagnoseMotionAnswer, type DiagnosticEvent } from '../domain/assessmentDiagnostics'
 import { useVehicleSimulation } from '../hooks/useVehicleSimulation'
 import { vehicleSimulation } from '../simulation/vehicleSimulation'
@@ -26,15 +26,28 @@ export function MotionMission() {
   const [calculationAccepted, setCalculationAccepted] = useState(false)
   const [graphChoice, setGraphChoice] = useState<string | null>(null)
   const [graphAccepted, setGraphAccepted] = useState(false)
+  const [transferChoice, setTransferChoice] = useState<string | null>(null)
+  const [transferAccepted, setTransferAccepted] = useState(false)
+  const [reasoning, setReasoning] = useState('')
+  const [variation, setVariation] = useState(0)
   const [lastDiagnostic, setLastDiagnostic] = useState<DiagnosticEvent | null>(null)
-  const mission = motionLessons[Math.min(missionIndex, motionLessons.length - 1)]
+  const mission = motionLessonForVariant(Math.min(missionIndex, motionLessons.length - 1), variation)
   const complete = missionIndex >= motionLessons.length
+  const explanationReady = reasoning.trim().split(/\s+/).filter(Boolean).length >= 12
 
   useEffect(() => {
     setEntry(''); setFeedback('idle'); setEstimateAccepted(false)
     setEstimateFeedback('Choose a qualitative estimate before exact calculation.')
-    setCalculationAccepted(false); setGraphChoice(null); setGraphAccepted(false); setLastDiagnostic(null)
+    setCalculationAccepted(false); setGraphChoice(null); setGraphAccepted(false); setTransferChoice(null); setTransferAccepted(false); setReasoning(''); setVariation(0); setLastDiagnostic(null)
   }, [missionIndex])
+
+  const newNumberSet = () => {
+    setVariation((current) => (current + 1) % 3)
+    setEntry(''); setFeedback('idle'); setEstimateAccepted(false)
+    setEstimateFeedback('Choose a qualitative estimate before exact calculation.')
+    setCalculationAccepted(false); setGraphChoice(null); setGraphAccepted(false); setTransferChoice(null); setTransferAccepted(false); setReasoning(''); setLastDiagnostic(null)
+    vehicleSimulation.reset()
+  }
 
   const submitCalculation = (event: FormEvent) => {
     event.preventDefault()
@@ -42,7 +55,10 @@ export function MotionMission() {
     const value = Number(entry)
     if (!Number.isFinite(value) || Math.abs(value - mission.answer) > mission.tolerance) {
       setFeedback('wrong')
-      const diagnostic = diagnoseMotionAnswer(missionIndex, mission.focusConcept, value)
+      const diagnostic = variation === 0 ? diagnoseMotionAnswer(missionIndex, mission.focusConcept, value) : {
+        id: `${Date.now()}-${mission.id}-variant`, conceptId: mission.focusConcept, category: 'arithmetic error' as const, response: String(value),
+        remediation: 'This number set differs from the worked route. Rebuild the equation from the values currently shown and check the sign and unit.', createdAt: new Date().toISOString(),
+      }
       setLastDiagnostic(diagnostic); recordDiagnostic(diagnostic)
       if (diagnostic.mathConceptId) recordMathematicsEvidence(diagnostic.mathConceptId, 0.15, 0.15)
       recordAttempt(mission.focusConcept, {}, false)
@@ -81,10 +97,23 @@ export function MotionMission() {
     setGraphAccepted(true); setLastDiagnostic(null)
   }
 
+  const chooseTransfer = (value: string) => {
+    setTransferChoice(value)
+    if (value !== mission.transferCheck.answer) {
+      setTransferAccepted(false)
+      recordAttempt(mission.focusConcept, {}, false)
+      return
+    }
+    setTransferAccepted(true)
+    recordAttempt(mission.focusConcept, { applicationSkill: .35 }, true)
+  }
+
   const advance = () => {
     setEntry(''); setFeedback('idle'); setEstimateAccepted(false)
     setEstimateFeedback('Choose a qualitative estimate before exact calculation.')
-    setCalculationAccepted(false); setGraphChoice(null); setGraphAccepted(false); setLastDiagnostic(null)
+    if (!transferAccepted || !explanationReady) return
+    addNotebookEntry({ kind: 'conclusion', title: `${mission.title} — transfer explanation`, body: `${reasoning.trim()} Transfer check: ${mission.transferCheck.rationale}` })
+    setCalculationAccepted(false); setGraphChoice(null); setGraphAccepted(false); setTransferChoice(null); setTransferAccepted(false); setReasoning(''); setVariation(0); setLastDiagnostic(null)
     completeMotionStep(missionIndex)
   }
 
@@ -102,6 +131,7 @@ export function MotionMission() {
     <aside className="mission-panel" data-testid={`mission-${missionIndex + 1}`}>
       <div className="mission-progress" aria-label={`Investigation ${missionIndex + 1} of ${motionLessons.length}`}>{motionLessons.map((_, index) => <i key={index} className={index <= missionIndex ? 'active' : ''} />)}</div>
       <p className="eyebrow">{mission.eyebrow}</p><h2>{mission.title}</h2><p className="mission-prompt">{mission.prompt}</p>
+      <button className="button button-quiet variant-button" type="button" onClick={newNumberSet}><RotateCcw size={14} /> New number set</button>
       <div className="equation-card"><span>Model A</span><strong>{mission.equation}</strong></div>
       <div className={`estimate-gate ${estimateAccepted ? 'accepted' : ''}`}>
         <span>Physical estimate</span><p>{mission.estimate.prompt}</p><div>{mission.estimate.options.map((option) => <button key={option} type="button" className={estimateAccepted && option === mission.estimate.answer ? 'active' : ''} onClick={() => chooseEstimate(option)}>{option}</button>)}</div><small>{estimateFeedback}</small>
@@ -121,7 +151,8 @@ export function MotionMission() {
         <span>Read the representation</span><p>{mission.graphCheck.prompt}</p>
         <div>{mission.graphCheck.options.map((option) => <button key={option} type="button" className={graphChoice === option ? (graphAccepted ? 'correct' : 'selected') : ''} onClick={() => chooseGraph(option)}>{option}</button>)}</div>
         <small>{graphAccepted ? mission.graphCheck.rationale : lastDiagnostic?.category === 'graph interpretation error' ? lastDiagnostic.remediation : 'Use the plotted shape and labeled axes, not the equation alone.'}</small>
-        {graphAccepted && <button className="button graph-continue" type="button" onClick={advance}>Complete investigation <Check size={14} /></button>}
+        {graphAccepted && <div className={`transfer-check ${transferAccepted ? 'accepted' : ''}`}><span>Transfer to a changed situation</span><p>{mission.transferCheck.prompt}</p><div>{mission.transferCheck.options.map((option) => <button key={option} type="button" className={transferChoice === option ? (transferAccepted ? 'correct' : 'selected') : ''} onClick={() => chooseTransfer(option)}>{option}</button>)}</div><small>{transferChoice ? (transferAccepted ? mission.transferCheck.rationale : 'Re-read what stays fixed and what changes. Use the relationship, not the numbers from the first problem.') : 'The quantities have changed; the underlying relationship has not.'}</small></div>}
+        {transferAccepted && <div className="reasoning-check"><label htmlFor={`motion-reasoning-${missionIndex}`}>Explain why your calculation, graph, and transfer answer agree.</label><textarea id={`motion-reasoning-${missionIndex}`} value={reasoning} onChange={(event) => setReasoning(event.target.value)} placeholder="Name the quantities, their relationship, and what the sign, slope, or change means physically." /><small>{explanationReady ? 'Explanation length is sufficient to record. Its scientific quality should still be discussed with a teacher or peer.' : 'Write at least 12 words. This response is preserved as evidence; it is not automatically graded as scientifically correct.'}</small><button className="button graph-continue" type="button" disabled={!explanationReady} onClick={advance}>Complete investigation <Check size={14} /></button></div>}
       </div>}
     </aside>
   )

@@ -1,6 +1,6 @@
 # Project status
 
-Last reviewed: 4 September 2026
+Last reviewed: 6 September 2026
 
 Current stage: research prototype
 
@@ -18,6 +18,8 @@ The current build supports two connected four-stage paths. Path 01 covers wheel 
 - unlock guided driving after showing several kinds of motion evidence, then complete a target-speed and controlled-stop assignment;
 - select individual wheels and connect road speed to circumference, angular velocity, RPM, and revolutions;
 - complete four force-and-energy chapters that require a qualitative prediction, constructed numerical calculation, graph interpretation, and saved conclusion;
+- use changed number sets, complete changed-context transfer questions, and preserve written explanations as evidence without automated claims about their quality;
+- return after 24 hours for a mixed retrieval check connecting wheel motion, ramps, energy, and impulse;
 - change declared force, ramp, energy, and stopping-pulse inputs and inspect synchronized plots only after predicting the relationship;
 - compare model assumptions, import simple measurements, and save notebook entries locally;
 - inspect the proposed curriculum, 525i model-fidelity progression, prerequisite map, and evidence boundary.
@@ -36,7 +38,7 @@ The application also distinguishes conceptual, arithmetic, sign, unit, model-sel
 | Learning effectiveness | Not yet established | The design follows published practice, but no learner study has demonstrated outcomes |
 | Persistence | Local browser storage | There are no accounts, cloud sync, or remote learner analytics |
 | Hosting | Static build | GitHub Pages and local static serving require no application backend |
-| Accessibility | Partial | Ordinary controls and text state exist, but a full keyboard and assistive-technology audit is still required |
+| Accessibility | Automated baseline passes | Serious/critical WCAG A/AA findings, representative mobile overflow, and visible first-tab focus are checked in CI; human assistive-technology evaluation is still required |
 
 ## Vehicle evidence
 
@@ -50,7 +52,7 @@ The exact example-car mass, dimensions, factory wheel and tire fitment, final-dr
 - Ramp and energy modes are idealized teaching models. The impact chapter uses an adjustable rectangular pulse, not a structural crash or injury model. A cliff/drop chapter is not part of the current learning route.
 - Road-load coefficients are sensitivity-study values and have not been calibrated against a real E34.
 - Wheel rolling assumes no slip and begins with nominal unloaded tire geometry.
-- The Foundation Path is usable from start to finish, but its motion assessment still needs generated variants, written explanation, transfer, delayed retrieval, and learner testing before it can support a strong mastery claim.
+- The Foundation Path is usable from start to finish and now includes generated values, written explanation, transfer, and delayed retrieval. These mechanisms still need teacher review and learner testing before they can support a strong mastery claim.
 - Mastery thresholds are unvalidated design hypotheses. The current build should be read as evidence-gated progression, not a psychometrically validated assessment.
 - Mathematics used in the wheel and Path 02 mechanics chapters now records separate evidence. Most later mathematics cards remain an honest roadmap, are labeled planned, and award no evidence.
 - The curriculum map extends far beyond the amount of finished teaching content.
@@ -60,6 +62,6 @@ The exact example-car mass, dimensions, factory wheel and tire fitment, final-dr
 
 ## What would justify the next release
 
-The force, ramp, energy, and impulse path is now implemented, but “implemented” is not the same as classroom-validated. The next release should review and strengthen both playable paths before expanding breadth: teacher/physicist review, learner observation, written explanations, generated variants, delayed retrieval, keyboard and assistive-technology testing, and revision from evidence. After that, Path 03 can connect rotation, traction, gear ratios, torque, and one bounded modification decision. The [playable mechanics path](HIGH_SCHOOL_MECHANICS_PATH.md) defines the current sequence and remaining quality limits.
+The force, ramp, energy, and impulse path is implemented, but “implemented” is not the same as classroom-validated. The next release should put the current variants, transfer, explanations, and delayed retrieval through teacher/physicist review, learner observation, human assistive-technology testing, and revision from evidence. After that, Path 03 can connect rotation, traction, gear ratios, torque, and one bounded modification decision. The [playable mechanics path](HIGH_SCHOOL_MECHANICS_PATH.md) defines the current sequence and the [learning validation plan](LEARNING_VALIDATION_PLAN.md) defines the review work.
 
 Software passing its tests is necessary, but it will not by itself establish that the course teaches effectively. The [educational audit](EDUCATIONAL_AUDIT.md), [roadmap](ROADMAP.md), and [research methods](RESEARCH_METHODS.md) describe both kinds of work.

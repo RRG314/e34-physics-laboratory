@@ -22,6 +22,8 @@ interface LearnerState {
   motionMissionIndex: number
   wheelMissionIndex: number
   dynamicsMissionIndex: number
+  mechanicsReviewDueAt: string | null
+  mechanicsReviewComplete: boolean
   driveChallengeComplete: boolean
   selectedComponentId: string | null
   exploded: boolean
@@ -29,6 +31,9 @@ interface LearnerState {
   completeMotionStep: (step: number) => void
   completeWheelStep: (step: number) => void
   completeDynamicsStep: (step: number) => void
+  completeMechanicsReview: () => void
+  scheduleMechanicsReview: () => void
+  makeMechanicsReviewDueForTesting: () => void
   completeDriveChallenge: () => void
   recordAttempt: (conceptId: string, gains: Partial<Record<MasteryDimension, number>>, correct: boolean) => void
   selectComponent: (id: string | null) => void
@@ -51,13 +56,18 @@ export const useLearnerStore = create<LearnerState>()(
       motionMissionIndex: 0,
       wheelMissionIndex: 0,
       dynamicsMissionIndex: 0,
+      mechanicsReviewDueAt: null,
+      mechanicsReviewComplete: false,
       driveChallengeComplete: false,
       selectedComponentId: null,
       exploded: false,
       fidelity: 'A',
       completeMotionStep: (step) => set((state) => step === state.motionMissionIndex ? { motionMissionIndex: Math.min(4, step + 1) } : state),
       completeWheelStep: (step) => set((state) => step === state.wheelMissionIndex ? { mastery: applyGains(state.mastery, wheelGains[step] ?? []), wheelMissionIndex: Math.min(2, step + 1) } : state),
-      completeDynamicsStep: (step) => set((state) => step === state.dynamicsMissionIndex ? { mastery: applyGains(state.mastery, dynamicsGains[step] ?? []), dynamicsMissionIndex: Math.min(4, step + 1) } : state),
+      completeDynamicsStep: (step) => set((state) => step === state.dynamicsMissionIndex ? { mastery: applyGains(state.mastery, dynamicsGains[step] ?? []), dynamicsMissionIndex: Math.min(4, step + 1), mechanicsReviewDueAt: step === 3 && !state.mechanicsReviewDueAt ? new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() : state.mechanicsReviewDueAt } : state),
+      completeMechanicsReview: () => set({ mechanicsReviewComplete: true }),
+      scheduleMechanicsReview: () => set((state) => ({ mechanicsReviewDueAt: state.mechanicsReviewDueAt ?? new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() })),
+      makeMechanicsReviewDueForTesting: () => set({ mechanicsReviewDueAt: new Date(0).toISOString(), mechanicsReviewComplete: false }),
       completeDriveChallenge: () => set((state) => ({
         driveChallengeComplete: true,
         mastery: applyGains(state.mastery, [
@@ -69,7 +79,7 @@ export const useLearnerStore = create<LearnerState>()(
       selectComponent: (selectedComponentId) => set({ selectedComponentId }),
       setExploded: (exploded) => set({ exploded }),
       setFidelity: (fidelity) => set({ fidelity }),
-      resetProgress: () => set({ mastery: {}, motionMissionIndex: 0, wheelMissionIndex: 0, dynamicsMissionIndex: 0, driveChallengeComplete: false, selectedComponentId: null, exploded: false, fidelity: 'A' }),
+      resetProgress: () => set({ mastery: {}, motionMissionIndex: 0, wheelMissionIndex: 0, dynamicsMissionIndex: 0, mechanicsReviewDueAt: null, mechanicsReviewComplete: false, driveChallengeComplete: false, selectedComponentId: null, exploded: false, fidelity: 'A' }),
       unlockForTesting: () => set((state) => ({
         mastery: applyGains(state.mastery, [
           { conceptId: 'speed', gains: { exposure: 1, conceptualUnderstanding: 1, calculationSkill: 1 } },
@@ -82,12 +92,14 @@ export const useLearnerStore = create<LearnerState>()(
         motionMissionIndex: 4,
         wheelMissionIndex: 2,
         dynamicsMissionIndex: 4,
+        mechanicsReviewDueAt: new Date(0).toISOString(),
+        mechanicsReviewComplete: false,
         driveChallengeComplete: true,
       })),
     }),
     {
       name: 'e34-physics-lab-learner-v3', version: 3, storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({ mastery: state.mastery, motionMissionIndex: state.motionMissionIndex, wheelMissionIndex: state.wheelMissionIndex, dynamicsMissionIndex: state.dynamicsMissionIndex, driveChallengeComplete: state.driveChallengeComplete, fidelity: state.fidelity }),
+      partialize: (state) => ({ mastery: state.mastery, motionMissionIndex: state.motionMissionIndex, wheelMissionIndex: state.wheelMissionIndex, dynamicsMissionIndex: state.dynamicsMissionIndex, mechanicsReviewDueAt: state.mechanicsReviewDueAt, mechanicsReviewComplete: state.mechanicsReviewComplete, driveChallengeComplete: state.driveChallengeComplete, fidelity: state.fidelity }),
     },
   ),
 )

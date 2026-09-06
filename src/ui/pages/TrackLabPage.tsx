@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { ArrowRight, Check, CheckCircle2, LockKeyhole, Shield, Sigma } from 'lucide-react'
+import { ArrowRight, Check, CheckCircle2, LockKeyhole, RotateCcw, Shield, Sigma } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { dynamicsLessons } from '../../data/dynamicsLessons'
 import { highSchoolProgress, isFoundationPathComplete } from '../../domain/highSchoolPath'
@@ -10,6 +10,16 @@ import { TelemetryPlot } from '../TelemetryPlot'
 
 const samples = Array.from({ length: 41 }, (_, index) => index / 40)
 type FeedbackState = 'idle' | 'correct' | 'wrong'
+
+const inputPresets = [
+  { mass: 1600, acceleration: 2.5, angle: 20, speed: 10, stopTime: .4 },
+  { mass: 1400, acceleration: 3, angle: 15, speed: 12, stopTime: .3 },
+  { mass: 1800, acceleration: 1.5, angle: 25, speed: 8, stopTime: .5 },
+]
+
+function RampForceDiagram({ angle }: { angle: number }) {
+  return <figure className="ramp-force-diagram"><figcaption><strong>Free-body diagram</strong><span>Not to scale · uphill is +x</span></figcaption><svg viewBox="0 0 420 210" role="img" aria-label={`Free-body diagram for a car on a ${angle} degree ideal ramp`}><path d="M35 180 L380 180 L380 55 Z" className="ramp-ground"/><g transform="translate(235 119) rotate(-20)"><rect x="-42" y="-18" width="84" height="34" rx="5" className="ramp-car"/><circle cx="-27" cy="20" r="8"/><circle cx="27" cy="20" r="8"/></g><line x1="235" y1="115" x2="235" y2="190" className="force-vector weight"/><polygon points="235,195 229,184 241,184"/><text x="245" y="175">mg</text><line x1="235" y1="115" x2="280" y2="32" className="force-vector normal"/><polygon points="283,27 280,40 271,34"/><text x="288" y="34">N</text><line x1="235" y1="115" x2="169" y2="139" className="force-vector parallel"/><polygon points="162,142 172,133 176,145"/><text x="103" y="151">mg sin θ</text><text x="337" y="172">θ = {angle}°</text></svg><p>The normal force is perpendicular to the surface. Only the downhill component, <b>mg sin θ</b>, changes velocity along the ideal ramp.</p></figure>
+}
 
 export function TrackLabPage() {
   const mathematicsMastery = useLabLearningStore((state) => state.mathematicsMastery)
@@ -38,12 +48,18 @@ export function TrackLabPage() {
   const [calculation, setCalculation] = useState('')
   const [calculationState, setCalculationState] = useState<FeedbackState>('idle')
   const [graphChoice, setGraphChoice] = useState<string | null>(null)
+  const [transferChoice, setTransferChoice] = useState<string | null>(null)
+  const [reasoning, setReasoning] = useState('')
+  const [variation, setVariation] = useState(0)
 
   useEffect(() => {
     setPrediction(null)
     setCalculation('')
     setCalculationState('idle')
     setGraphChoice(null)
+    setTransferChoice(null)
+    setReasoning('')
+    setVariation(0)
     document.querySelector('.track-page')?.scrollTo({ top: 0, behavior: 'instant' })
   }, [lessonIndex])
 
@@ -98,8 +114,16 @@ export function TrackLabPage() {
 
   const predictionCorrect = prediction === lesson.predictionAnswer
   const graphCorrect = graphChoice === lesson.graphAnswer
-  const ready = predictionCorrect && calculationState === 'correct' && graphCorrect
+  const transferCorrect = transferChoice === lesson.transferAnswer
+  const explanationReady = reasoning.trim().split(/\s+/).filter(Boolean).length >= 12
+  const ready = predictionCorrect && calculationState === 'correct' && graphCorrect && transferCorrect && explanationReady
   const resetCalculation = () => { setCalculation(''); setCalculationState('idle') }
+  const newNumberSet = () => {
+    const next = (variation + 1) % inputPresets.length
+    const preset = inputPresets[next]
+    setVariation(next); setMass(preset.mass); setAcceleration(preset.acceleration); setAngle(preset.angle); setSpeed(preset.speed); setStopTime(preset.stopTime)
+    setPrediction(null); setCalculation(''); setCalculationState('idle'); setGraphChoice(null); setTransferChoice(null); setReasoning('')
+  }
   const checkCalculation = () => {
     const parsed = Number(calculation.replace(',', '').trim())
     setCalculationState(Number.isFinite(parsed) && Math.abs(parsed - model.expected) <= model.tolerance ? 'correct' : 'wrong')
@@ -109,7 +133,7 @@ export function TrackLabPage() {
     if (isReview) { setReviewIndex(null); return }
     for (const conceptId of lesson.mathConceptIds) recordMathematicsEvidence(conceptId, .7, .7)
     for (const conceptId of lesson.physicsConceptIds) recordAttempt(conceptId, { exposure: .2, conceptualUnderstanding: .15, calculationSkill: .15, graphInterpretation: .15, predictionSkill: .15 }, true)
-    addNotebookEntry({ kind: 'conclusion', title: `Path 02 · ${lesson.shortTitle}`, body: `${lesson.notebookConclusion} Inputs: ${model.note}` })
+    addNotebookEntry({ kind: 'conclusion', title: `Path 02 · ${lesson.shortTitle}`, body: `${lesson.notebookConclusion} Learner explanation: ${reasoning.trim()} Inputs: ${model.note}` })
     completeDynamicsStep(lessonIndex)
     if (lessonIndex === dynamicsLessons.length - 1) document.querySelector('.track-page')?.scrollTo({ top: 0, behavior: 'instant' })
   }
@@ -121,7 +145,7 @@ export function TrackLabPage() {
   return (
     <div className="content-page track-page">
       <header className="content-header dynamics-header">
-        <div><p className="eyebrow">High-school mechanics · Path 02 · Stage {lesson.number} of 4</p><h1>{dynamicsMissionIndex >= 4 && !isReview ? 'Mechanics path complete.' : lesson.title}</h1><p>{lesson.objective} Every chapter requires a prediction, a constructed calculation, and graph evidence before it records progress.</p></div>
+        <div><p className="eyebrow">High-school mechanics · Path 02 · Stage {lesson.number} of 4</p><h1>{dynamicsMissionIndex >= 4 && !isReview ? 'Mechanics path complete.' : lesson.title}</h1><p>{lesson.objective} Every chapter requires a prediction, a constructed calculation, graph evidence, transfer, and a written explanation before it records progress.</p></div>
         <div className="path-score"><span>High-school route</span><strong>{overallProgress.completed}/{overallProgress.total}</strong><i><b style={{ width: `${overallProgress.percent}%` }} /></i></div>
       </header>
 
@@ -136,7 +160,7 @@ export function TrackLabPage() {
 
       {dynamicsMissionIndex >= 4 && !isReview && <section className="path-complete-banner" data-testid="dynamics-path-complete"><CheckCircle2 size={22} /><div><strong>Path 02 evidence recorded</strong><p>You connected motion to force, resolved a ramp, closed an energy budget, and defended a stopping-pulse design. Your notebook contains the conclusion from each investigation.</p></div><Link to="/garage">See full progression <ArrowRight size={14} /></Link></section>}
 
-      <section className="dynamics-brief"><div><p className="eyebrow">Vehicle question</p><h2>{lesson.vehicleQuestion}</h2></div><dl><div><dt>Mathematics</dt><dd>{lesson.mathematics}</dd></div><div><dt>Model</dt><dd>525i · idealized Model A</dd></div><div><dt>Success</dt><dd>Prediction + calculation + graph interpretation</dd></div></dl></section>
+      <section className="dynamics-brief"><div><p className="eyebrow">Vehicle question</p><h2>{lesson.vehicleQuestion}</h2><button className="button button-quiet variant-button" onClick={newNumberSet}><RotateCcw size={14}/> New number set</button></div><dl><div><dt>Mathematics</dt><dd>{lesson.mathematics}</dd></div><div><dt>Model</dt><dd>525i · idealized Model A</dd></div><div><dt>Success</dt><dd>Predict + calculate + graph + transfer + explain</dd></div></dl></section>
       <div className="safety-banner"><Shield size={22} /><div><strong>Simulation only</strong><span>Ramp and impact scenarios are mathematical models. Never reproduce uncontrolled ramps, impacts, or drops with a real vehicle.</span></div></div>
 
       <section className="track-workbench">
@@ -150,14 +174,16 @@ export function TrackLabPage() {
           <div className="prediction-block"><span>Predict before telemetry</span><p>{lesson.predictionPrompt}</p><div>{lesson.predictionChoices.map((choice) => <button key={choice.id} className={prediction === choice.id ? (predictionCorrect ? 'correct' : 'wrong') : ''} onClick={() => setPrediction(choice.id)}>{choice.label}</button>)}</div>{prediction && <small className={predictionCorrect ? 'correct' : 'wrong'}>{predictionCorrect ? lesson.predictionFeedback : 'That prediction does not follow the equation yet. Compare which quantities are fixed and which change.'}</small>}</div>
           <details open><summary>Model assumptions</summary><ul>{lesson.assumptions.map((assumption) => <li key={assumption}>{assumption}</li>)}</ul></details>
         </div>
-        <div className="track-graphs">{predictionCorrect ? <><TelemetryPlot title={model.title} series={model.series} /><div className="result-block"><span>{model.label}</span><strong>{model.headline}</strong><code>{lesson.equation}</code><p>{model.note}</p></div></> : <div className="telemetry-lock"><Sigma size={28} /><strong>Telemetry is covered.</strong><p>Commit a correct qualitative prediction first. This keeps the graph as evidence rather than an answer key.</p></div>}</div>
+        <div className="track-graphs">{predictionCorrect ? <>{lesson.id === 'ramp-forces' && <RampForceDiagram angle={angle}/>}<TelemetryPlot title={model.title} series={model.series} /><div className="result-block"><span>{model.label}</span><strong>{model.headline}</strong><code>{lesson.equation}</code><p>{model.note}</p></div></> : <div className="telemetry-lock"><Sigma size={28} /><strong>Telemetry is covered.</strong><p>Commit a correct qualitative prediction first. This keeps the graph as evidence rather than an answer key.</p></div>}</div>
       </section>
 
       <section className="evidence-workbench">
         <article className="math-studio"><p className="eyebrow">02 · Build the mathematics</p><h3>Worked example, then your values</h3><code>{lesson.equation}</code><ol>{lesson.workedExample.map((line) => <li key={line}>{line}</li>)}</ol><p>The example uses different values. Carry units through your own calculation and enter only the requested final number below.</p></article>
         <article className="evidence-card"><p className="eyebrow">03 · Construct a result</p><h3>{lesson.calculationPrompt}</h3><label><span>Your result</span><div><input aria-label="Dynamics calculated result" inputMode="decimal" value={calculation} onChange={(event) => { setCalculation(event.target.value); setCalculationState('idle') }} /><b>{lesson.calculationUnit}</b></div></label><button onClick={checkCalculation}>Check calculation</button>{calculationState !== 'idle' && <p className={`evidence-feedback ${calculationState}`}>{calculationState === 'correct' ? 'Correct. The value and requested unit agree with the declared model.' : `Not yet. Rebuild ${lesson.equation}, keep the units visible, and check whether the requested answer is in ${lesson.calculationUnit}.`}</p>}</article>
         <article className="evidence-card"><p className="eyebrow">04 · Read the representation</p><h3>{lesson.graphPrompt}</h3><div className="graph-choices">{lesson.graphChoices.map((choice) => <button key={choice.id} disabled={!predictionCorrect} className={graphChoice === choice.id ? (graphCorrect ? 'correct' : 'wrong') : ''} onClick={() => setGraphChoice(choice.id)}>{choice.label}</button>)}</div>{graphChoice && <p className={`evidence-feedback ${graphCorrect ? 'correct' : 'wrong'}`}>{graphCorrect ? lesson.graphFeedback : 'That feature does not support the claim. Match the graph’s slope, area, or level to the equation.'}</p>}</article>
-        <article className="evidence-submit"><p className="eyebrow">05 · Record evidence</p><h3>{ready ? 'All three evidence checks agree.' : 'Finish the evidence chain.'}</h3><ul><li className={predictionCorrect ? 'done' : ''}>{predictionCorrect ? <Check size={14} /> : null}Prediction</li><li className={calculationState === 'correct' ? 'done' : ''}>{calculationState === 'correct' ? <Check size={14} /> : null}Calculation</li><li className={graphCorrect ? 'done' : ''}>{graphCorrect ? <Check size={14} /> : null}Graph interpretation</li></ul><button className="button button-primary" disabled={!ready} onClick={finishLesson}>{isReview ? 'Return to current assignment' : lessonIndex === dynamicsLessons.length - 1 ? 'Complete Path 02' : 'Record and continue'} <ArrowRight size={14} /></button><small>A conclusion and the declared inputs will be saved in Notes.</small></article>
+        <article className="evidence-card"><p className="eyebrow">05 · Transfer the relationship</p><h3>{lesson.transferPrompt}</h3><div className="graph-choices">{lesson.transferChoices.map((choice) => <button key={choice.id} disabled={!graphCorrect} className={transferChoice === choice.id ? (transferCorrect ? 'correct' : 'wrong') : ''} onClick={() => setTransferChoice(choice.id)}>{choice.label}</button>)}</div>{transferChoice && <p className={`evidence-feedback ${transferCorrect ? 'correct' : 'wrong'}`}>{transferCorrect ? lesson.transferFeedback : 'Not yet. Identify what changed, what stayed fixed, and whether the equation shows direct, inverse, or squared dependence.'}</p>}</article>
+        <article className="evidence-card"><p className="eyebrow">06 · Explain the agreement</p><h3>Connect the physics in your own words.</h3><label><span>Why do your result, graph, and transfer answer agree?</span><textarea aria-label="Dynamics written explanation" disabled={!transferCorrect} value={reasoning} onChange={(event) => setReasoning(event.target.value)} placeholder="Name the quantities, their relationship, and what the graph shows physically."/></label><p className={`evidence-feedback ${explanationReady ? 'correct' : ''}`}>{explanationReady ? 'Explanation length is sufficient to preserve as evidence. Scientific quality is not automatically graded.' : 'Write at least 12 words after completing the transfer task.'}</p></article>
+        <article className="evidence-submit"><p className="eyebrow">07 · Record evidence</p><h3>{ready ? 'The full evidence chain is present.' : 'Finish the evidence chain.'}</h3><ul><li className={predictionCorrect ? 'done' : ''}>{predictionCorrect ? <Check size={14} /> : null}Prediction</li><li className={calculationState === 'correct' ? 'done' : ''}>{calculationState === 'correct' ? <Check size={14} /> : null}Calculation</li><li className={graphCorrect ? 'done' : ''}>{graphCorrect ? <Check size={14} /> : null}Graph interpretation</li><li className={transferCorrect ? 'done' : ''}>{transferCorrect ? <Check size={14} /> : null}Transfer</li><li className={explanationReady ? 'done' : ''}>{explanationReady ? <Check size={14} /> : null}Written reasoning</li></ul><button className="button button-primary" disabled={!ready} onClick={finishLesson}>{isReview ? 'Return to current assignment' : lessonIndex === dynamicsLessons.length - 1 ? 'Complete Path 02' : 'Record and continue'} <ArrowRight size={14} /></button><small>Your explanation and declared inputs will be saved in Notes. Written quality is deliberately left for human review.</small></article>
       </section>
     </div>
   )

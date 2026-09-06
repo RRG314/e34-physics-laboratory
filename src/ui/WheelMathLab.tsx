@@ -119,9 +119,13 @@ export function WheelMathLab() {
   const [message, setMessage] = useState('Use the tire marking and diagram. Enter a number; the unit is already shown.')
   const [revolutions, setRevolutions] = useState(10)
   const [modelChoice, setModelChoice] = useState<string | null>(null)
+  const [modelAccepted, setModelAccepted] = useState(previouslyCompleted)
+  const [transferChoice, setTransferChoice] = useState<string | null>(null)
+  const [reasoning, setReasoning] = useState('')
   const [complete, setComplete] = useState(previouslyCompleted)
   const task = tasks[Math.min(step, tasks.length - 1)]
-  const progress = useMemo(() => complete ? 100 : step / 5 * 100, [complete, step])
+  const evidenceCount = complete ? 7 : step + (modelAccepted ? 1 : 0) + (transferChoice === 'increase' ? 1 : 0)
+  const progress = useMemo(() => evidenceCount / 7 * 100, [evidenceCount])
 
   const submit = (event: FormEvent) => {
     event.preventDefault()
@@ -157,13 +161,19 @@ export function WheelMathLab() {
       setMessage('Changing π or wheel revolutions would change the mathematics, not the physical model. Look for an assumption that changes under vehicle load.')
       return
     }
-    if (!complete) {
+    setModelAccepted(true)
+    setMessage('Model distinction accepted. Now transfer the relationship to a changed radius and explain the model in your own words.')
+  }
+
+  const explanationReady = reasoning.trim().split(/\s+/).filter(Boolean).length >= 12
+  const transferAccepted = transferChoice === 'increase'
+  const recordExplanation = () => {
+    if (!modelAccepted || !transferAccepted || !explanationReady || complete) return
       recordMathematicsEvidence('math-graph-interpretation', 0.72, 0.66)
       recordAttempt('wheel-circumference', { exposure: 0.65, conceptualUnderstanding: 0.4, calculationSkill: 0.5, graphInterpretation: 0.3, modelingSkill: 0.3 }, true)
-      addNotebookEntry({ kind: 'conclusion', title: '205/65 R15 wheel model', body: `Unloaded geometry predicts ${geometry.circumferenceM.toFixed(3)} m per revolution. A 0.312 m loaded-radius model predicts ${(2 * Math.PI * loadedRadiusM).toFixed(3)} m. Tire deformation explains why nominal geometry and road measurement can differ.` })
-    }
+      addNotebookEntry({ kind: 'conclusion', title: '205/65 R15 wheel model', body: `Unloaded geometry predicts ${geometry.circumferenceM.toFixed(3)} m per revolution. A 0.312 m loaded-radius model predicts ${(2 * Math.PI * loadedRadiusM).toFixed(3)} m. Learner explanation: ${reasoning.trim()}` })
     setComplete(true)
-    setMessage('Model distinction accepted. Your notebook now contains the prediction, alternative model, and physical explanation.')
+    setMessage('Evidence recorded. Your notebook contains the calculations, model distinction, transfer result, and written explanation.')
   }
 
   const reset = () => {
@@ -172,6 +182,9 @@ export function WheelMathLab() {
     setAttempts(0)
     setMessage('Use the tire marking and diagram. Enter a number; the unit is already shown.')
     setModelChoice(null)
+    setModelAccepted(false)
+    setTransferChoice(null)
+    setReasoning('')
     setComplete(false)
     setRevolutions(10)
   }
@@ -180,7 +193,7 @@ export function WheelMathLab() {
     <section className="wheel-math-lab" id="wheel-math-lab">
       <header>
         <div><p className="eyebrow">Playable chapter 01 · measurement and proportional reasoning</p><h2>Read a tire. Build a wheel model. Test its limit.</h2><p>This is the first complete mathematics investigation: each result depends on the previous measurement, and evidence is recorded only after you produce a defensible answer.</p></div>
-        <div className="lesson-progress"><span>{complete ? 'Investigation complete' : `Evidence ${step} / 5`}</span><i><b style={{ width: `${progress}%` }} /></i></div>
+        <div className="lesson-progress"><span>{complete ? 'Investigation complete' : `Evidence ${evidenceCount} / 7`}</span><i><b style={{ width: `${progress}%` }} /></i></div>
       </header>
       <div className="wheel-lab-grid">
         <aside className="wheel-specimen">
@@ -209,6 +222,8 @@ export function WheelMathLab() {
               <button className={modelChoice === 'loaded' ? 'selected correct' : ''} onClick={() => chooseModel('loaded')}>The tire deflects, reducing effective rolling radius</button>
               <button className={modelChoice === 'revolutions' ? 'selected' : ''} onClick={() => chooseModel('revolutions')}>The graph secretly adds revolutions</button>
             </div>
+            {modelAccepted && <div className="wheel-transfer"><span>Transfer to a changed condition</span><p>At the same road speed, a smaller effective rolling radius makes wheel rpm do what?</p><div className="model-choice"><button className={transferChoice === 'decrease' ? 'selected' : ''} onClick={() => setTransferChoice('decrease')}>Decrease</button><button className={transferChoice === 'same' ? 'selected' : ''} onClick={() => setTransferChoice('same')}>Stay the same</button><button className={transferChoice === 'increase' ? 'selected correct' : ''} onClick={() => setTransferChoice('increase')}>Increase</button></div>{transferChoice && <small>{transferAccepted ? 'Correct. A smaller circumference covers less distance per revolution, so more revolutions are needed each minute.' : 'Use rpm = road speed ÷ distance per revolution. A smaller radius means a smaller circumference.'}</small>}</div>}
+            {transferAccepted && <div className="wheel-reasoning"><label htmlFor="wheel-model-reasoning">Explain why unloaded geometry and the loaded-radius graph differ.</label><textarea id="wheel-model-reasoning" value={reasoning} onChange={(event) => setReasoning(event.target.value)} placeholder="Name the physical assumption, how radius changes, and how that affects distance or rpm."/><small>{explanationReady ? 'Ready to record. Scientific quality should still be reviewed by a teacher or peer.' : 'Write at least 12 words. The app preserves this response but does not pretend to grade its scientific quality.'}</small><button className="button button-primary" disabled={!explanationReady} onClick={recordExplanation}>Record explanation <Check size={14}/></button></div>}
             {complete && <div className="wheel-complete-actions"><Link className="button button-primary" to="/laboratory">Continue to motion <ArrowRight size={14} /></Link><button className="button button-quiet wheel-reset" onClick={reset}><RotateCcw size={14} /> Practice again</button></div>}
           </>}
           <div className={`wheel-feedback ${complete ? 'complete' : attempts ? 'needs-work' : ''}`}>{complete && <Check size={15} />}{message}</div>

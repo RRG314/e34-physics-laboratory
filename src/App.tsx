@@ -11,6 +11,7 @@ import { ExperimentPage } from './ui/pages/ExperimentPage'
 import { NotebookPage } from './ui/pages/NotebookPage'
 import { GaragePage } from './ui/pages/GaragePage'
 import { TrackLabPage } from './ui/pages/TrackLabPage'
+import { ReviewPage } from './ui/pages/ReviewPage'
 import { useLearnerStore } from './store/learnerStore'
 import { useVehicleSimulation } from './hooks/useVehicleSimulation'
 import { vehicleSimulation } from './simulation/vehicleSimulation'
@@ -24,7 +25,7 @@ declare global {
   interface Window {
     render_game_to_text: () => string
     advanceTime: (ms: number) => void
-    __E34_LAB__: { reset: () => void; unlockMotion: () => void }
+    __E34_LAB__: { reset: () => void; unlockMotion: () => void; unlockAll: () => void; makeReviewDue: () => void }
   }
 }
 
@@ -35,16 +36,21 @@ function RuntimeHooks() {
   const missionIndex = useLearnerStore((state) => state.motionMissionIndex)
   const wheelMissionIndex = useLearnerStore((state) => state.wheelMissionIndex)
   const dynamicsMissionIndex = useLearnerStore((state) => state.dynamicsMissionIndex)
+  const mechanicsReviewDueAt = useLearnerStore((state) => state.mechanicsReviewDueAt)
+  const mechanicsReviewComplete = useLearnerStore((state) => state.mechanicsReviewComplete)
   const driveChallengeComplete = useLearnerStore((state) => state.driveChallengeComplete)
   const selectedComponentId = useLearnerStore((state) => state.selectedComponentId)
   const resetProgress = useLearnerStore((state) => state.resetProgress)
   const unlockForTesting = useLearnerStore((state) => state.unlockForTesting)
+  const makeMechanicsReviewDueForTesting = useLearnerStore((state) => state.makeMechanicsReviewDueForTesting)
+  const scheduleMechanicsReview = useLearnerStore((state) => state.scheduleMechanicsReview)
   const mathematicsMastery = useLabLearningStore((state) => state.mathematicsMastery)
   const diagnostics = useLabLearningStore((state) => state.diagnostics)
   const notebook = useLabLearningStore((state) => state.notebook)
   const modelLevel = useLabLearningStore((state) => state.modelLevel)
   const overlay = useLabLearningStore((state) => state.overlay)
   const resetLearning = useLabLearningStore((state) => state.resetLearning)
+  const recordMathematicsEvidence = useLabLearningStore((state) => state.recordMathematicsEvidence)
 
   useEffect(() => {
     window.render_game_to_text = () => {
@@ -56,7 +62,7 @@ function RuntimeHooks() {
       return JSON.stringify({
       coordinateSystem: 'vehicle +X is forward; world +Y is up; distances are metres; SI units',
       route: location.pathname,
-      learner: { highSchoolPath: { ...pathProgress, nextStage: nextStage?.id ?? null }, foundationPath: foundationPathProgress, motionMissionIndex: missionIndex, driveChallengeComplete, wheelMissionIndex, dynamicsMissionIndex, controlledDriveUnlocked: canAccessTarget('controlled-drive', mastery), wheelInspectionUnlocked: canAccessTarget('basic-wheel-inspection', mastery), wheelTelemetryUnlocked: canAccessTarget('wheel-telemetry', mastery), broadlyMasteredConcepts: Object.values(mastery).filter(isBroadlyMastered).map((entry) => entry.conceptId), selectedComponentId },
+      learner: { highSchoolPath: { ...pathProgress, nextStage: nextStage?.id ?? null }, foundationPath: foundationPathProgress, motionMissionIndex: missionIndex, driveChallengeComplete, wheelMissionIndex, dynamicsMissionIndex, mechanicsReviewDueAt, mechanicsReviewComplete, controlledDriveUnlocked: canAccessTarget('controlled-drive', mastery), wheelInspectionUnlocked: canAccessTarget('basic-wheel-inspection', mastery), wheelTelemetryUnlocked: canAccessTarget('wheel-telemetry', mastery), broadlyMasteredConcepts: Object.values(mastery).filter(isBroadlyMastered).map((entry) => entry.conceptId), selectedComponentId },
       simulation: {
         mode: liveSimulation.mode,
         running: liveSimulation.running,
@@ -69,16 +75,25 @@ function RuntimeHooks() {
         modelLevel: liveSimulation.modelLevel,
       },
       learningQuality: { mathematicsConceptsWithEvidence: Object.keys(mathematicsMastery), latestDiagnostic: diagnostics[0]?.category ?? null, notebookEntries: notebook.length, selectedModelLevel: modelLevel, activeRepresentation: overlay },
-      visibleInteraction: location.pathname === '/laboratory' ? `motion mission ${Math.min(missionIndex + 1, 4)} of 4` : location.pathname === '/drive' ? 'controlled-stop challenge; W/up accelerate; S/down brake; contextual Why path' : location.pathname === '/explore' ? `wheel checkpoint ${Math.min(wheelMissionIndex + 1, 2)} of 2; select one of four wheels` : location.pathname === '/track' ? `forces and energy mission ${Math.min(dynamicsMissionIndex + 1, 4)} of 4; prediction, calculation, graph evidence` : location.pathname === '/garage' ? `High-school mechanics ${pathProgress.completed} of ${pathProgress.total}; later paths are dependency-gated plans` : location.pathname === '/learn' ? 'playable wheel mathematics followed by the planned curriculum map' : 'navigation and licensed E34 visual reference',
+      visibleInteraction: location.pathname === '/laboratory' ? `motion mission ${Math.min(missionIndex + 1, 4)} of 4; changed numbers, transfer, written explanation` : location.pathname === '/drive' ? 'controlled-stop challenge; W/up accelerate; S/down brake; contextual Why path' : location.pathname === '/explore' ? `wheel checkpoint ${Math.min(wheelMissionIndex + 1, 2)} of 2; select one of four wheels` : location.pathname === '/track' ? `forces and energy mission ${Math.min(dynamicsMissionIndex + 1, 4)} of 4; prediction, calculation, graph, transfer, written explanation` : location.pathname === '/review' ? `mixed delayed retrieval; complete=${mechanicsReviewComplete}` : location.pathname === '/garage' ? `High-school mechanics ${pathProgress.completed} of ${pathProgress.total}; later paths are dependency-gated plans` : location.pathname === '/learn' ? 'playable wheel mathematics followed by the planned curriculum map' : 'navigation and licensed E34 visual reference',
       })
     }
-  }, [location.pathname, mastery, missionIndex, driveChallengeComplete, wheelMissionIndex, dynamicsMissionIndex, selectedComponentId, simulation, mathematicsMastery, diagnostics, notebook.length, modelLevel, overlay])
+  }, [location.pathname, mastery, missionIndex, driveChallengeComplete, wheelMissionIndex, dynamicsMissionIndex, mechanicsReviewDueAt, mechanicsReviewComplete, selectedComponentId, simulation, mathematicsMastery, diagnostics, notebook.length, modelLevel, overlay])
+
+  useEffect(() => {
+    if (dynamicsMissionIndex >= 4 && !mechanicsReviewDueAt) scheduleMechanicsReview()
+  }, [dynamicsMissionIndex, mechanicsReviewDueAt, scheduleMechanicsReview])
 
   useEffect(() => {
     window.advanceTime = (ms) => vehicleSimulation.step(ms / 1000)
     window.__E34_LAB__ = {
       reset: () => { resetProgress(); resetLearning(); vehicleSimulation.reset() },
       unlockMotion: () => unlockForTesting(),
+      unlockAll: () => {
+        unlockForTesting()
+        for (const conceptId of ['math-ratios', 'math-unit-conversion', 'math-geometry', 'math-graph-interpretation']) recordMathematicsEvidence(conceptId, 1, 1)
+      },
+      makeReviewDue: () => makeMechanicsReviewDueForTesting(),
     }
     const onKeyDown = async (event: KeyboardEvent) => {
       if (event.key.toLowerCase() !== 'f') return
@@ -87,7 +102,7 @@ function RuntimeHooks() {
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [resetLearning, resetProgress, unlockForTesting])
+  }, [makeMechanicsReviewDueForTesting, recordMathematicsEvidence, resetLearning, resetProgress, unlockForTesting])
 
   useEffect(() => {
     vehicleSimulation.setModelLevel(modelLevel)
@@ -105,6 +120,7 @@ function AppRoutes() {
           <Route path="/learn" element={<LearnPage />} />
           <Route path="/garage" element={<GaragePage />} />
           <Route path="/track" element={<TrackLabPage />} />
+          <Route path="/review" element={<ReviewPage />} />
           <Route path="/laboratory" element={<LaboratoryPage />} />
           <Route path="/drive" element={<DrivePage />} />
           <Route path="/explore" element={<ExplorePage />} />

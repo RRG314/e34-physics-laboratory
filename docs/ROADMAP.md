@@ -9,10 +9,10 @@ Dates are intentionally absent until the work has maintainers and evidence behin
 The current application now has an eight-chapter route from wheel measurement through motion, force, energy, and impulse. The next milestone is to make that route defensible for real teaching and extend it through rotational dynamics without lowering the completion standard.
 
 - Add measurement uncertainty and complete the remaining rotational-dynamics treatment.
-- Add written explanations, generated variants, transfer problems, delayed retrieval, and more specific remediation to the eight implemented chapters.
+- Review and expand the implemented written explanations, generated values, transfer problems, delayed retrieval, and misconception-specific remediation.
 - Keep ramps and impact pulses as safe virtual investigations; add braking and drop investigations only when they meet the same instructional and safety standard.
-- Add free-body diagrams, energy and momentum representations, unit-aware calculations, and a larger bank of generated problems.
-- Complete keyboard, reduced-motion, contrast, narrow-screen, and screen-reader reviews.
+- Extend the implemented ramp free-body diagram, energy and momentum representations, unit-aware calculations, and problem banks.
+- Maintain automated contrast, narrow-screen, and keyboard-focus checks; complete human keyboard, reduced-motion, zoom, and screen-reader reviews.
 - Test the sequence with learners and teachers; publish the method and limits of what was learned.
 - Replace or calibrate provisional 525i data where reliable variant-specific evidence is available.
 

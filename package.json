@@ -18,6 +18,7 @@
     "test:watch": "vitest",
     "typecheck": "tsc -b --pretty false",
     "test:e2e": "node scripts/e2e-progression.mjs",
+    "test:a11y": "node scripts/e2e-accessibility.mjs",
     "check": "npm run typecheck && npm test && npm run build"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "zustand": "^5.0.15"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@types/three": "^0.185.0",

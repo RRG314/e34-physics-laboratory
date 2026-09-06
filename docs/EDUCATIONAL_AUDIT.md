@@ -1,10 +1,10 @@
 # Educational audit and curriculum direction
 
-Last reviewed: 2 September 2026
+Last reviewed: 6 September 2026
 
 ## Conclusion
 
-E34 Physics Laboratory is a promising interactive prototype. It is not yet a complete physics course and it is not yet a digital twin. Its strongest teaching work is the tire mathematics investigation and the revised introductory motion sequence. Most other routes currently describe a future course, expose a simulation sandbox, or provide reference material. Those screens are useful, but they should not award mastery until a learner produces evidence that matches a stated objective.
+E34 Physics Laboratory is a promising interactive prototype. It is not yet a complete physics course and it is not yet a digital twin. Its strongest teaching work is an eight-chapter mechanics route from wheel mathematics through impulse, followed by mixed delayed retrieval. Most later curriculum routes remain plans or research tools. Those screens are useful, but they do not award mastery until a learner produces evidence that matches a stated objective.
 
 The product should be built as a sequence of vehicle investigations, not as a textbook pasted onto a car. Every chapter should begin with a physical question, require a prediction and a model, expose measurements in more than one representation, diagnose likely errors, and end with a transfer task. The E34 family can organize the campaign, but engine size, trim, price, and academic ability must never be treated as equivalent.
 
@@ -27,10 +27,10 @@ If those answers do not align, the screen can still be orientation or exploratio
 
 | Area | Present role | Finding | Required next step |
 | --- | --- | --- | --- |
-| Tire mathematics | Playable investigation | Entered calculations, linked graph, model comparison, feedback, and notebook conclusion form the strongest current chapter | Add varied values, uncertainty, delayed retrieval, and transfer to a second tire |
-| One-dimensional motion | Playable introduction | Now requires an estimate, numerical entry, and graph interpretation before driving unlocks | Add generated variants, x–t/v–t/a–t comparison, written justification, and a transfer run |
+| Tire mathematics | Playable investigation | Entered calculations, linked graph, model comparison, changed-condition transfer, written explanation, feedback, and notebook conclusion | Add varied tire sets, uncertainty, and test the transfer task with learners |
+| One-dimensional motion | Playable sequence | Requires an estimate, generated-value calculation, graph interpretation, transfer, and written explanation before driving unlocks | Add x–t/v–t/a–t comparison and review feedback with teachers and learners |
 | Guided drive | Exploratory practice | Controls and telemetry make relationships visible; free driving alone is not learning evidence | Add assigned maneuvers, predictions, graph annotation, and post-run explanation |
-| Ramp, impact, and drop | Simulation sandbox | Useful physics kernels exist, but sliders and outputs do not form lessons | Wrap each in predict–test–explain missions and gate advanced controls behind prerequisites |
+| Force, ramp, energy, and impact | Four playable chapters | Each requires prediction, calculation, graph evidence, changed-context transfer, and written explanation; the ramp adds a free-body diagram | Expert-review the content and add misconception-specific remediation; drop remains outside the route |
 | Garage | Campaign explanation | Vehicle and upgrade ideas are static cards; there is no install, compatibility, or proof loop | Build one real upgrade decision from requirement to proving-ground test |
 | Experiments | Method reference and import demo | The scientific method is described rather than enacted | Implement hypothesis, controls, trials, residuals, conclusion, and revision as reusable states |
 | Notebook | Evidence support | Entries persist, but retrieval, revision, and comparison are not prompted | Link claims to runs and graphs; add revision history and retrieval prompts |
@@ -129,23 +129,23 @@ Different entry points should not lower the intellectual goal. Useful supports i
 
 ## Delivery priorities
 
-### First: make one chapter trustworthy
+### First: validate the implemented mechanics route
 
-- Finish motion with generated variants, x–t/v–t/a–t comparison, transfer, and delayed retrieval.
-- Store task-level evidence and distinguish practice, demonstrated evidence, and later retrieval.
+- Test the generated values, transfer, written evidence, and delayed retrieval with teachers and representative learners.
+- Refine task-level evidence and distinguish practice, demonstrated evidence, and later retrieval.
 - Turn guided drive into assigned maneuvers that produce notebook evidence.
 - Keep all unbuilt modules visibly labeled as planned.
 
 ### Next: prove the campaign loop
 
 - Build one tire or brake upgrade from inspection through compatibility calculation to proving-ground test.
-- Convert ramp, impact, and drop kernels into complete lessons before adding more sandboxes.
+- Refine the implemented ramp and impact chapters; treat any future drop chapter as a separate safety and learning-design decision.
 - Implement the experiment workflow and link conclusions to runs and datasets.
 - Preserve the licensed 525i visual while adding semantic parts only where evidence and component visuals support the lesson.
 
 ### Then: expand and validate
 
-- Add forces and ramps, momentum and constrained impact safety, energy and braking, then rotation and drivetrain.
+- Extend the current force, ramp, momentum, and energy route into rotation and drivetrain only after review.
 - Add thermal, fluids, waves, circuits, optics, and the integrated high-school capstone.
 - Pilot with physics teachers and representative learners; revise prompts, feedback, timing, and thresholds from evidence.
 - Add connected vehicle data only after privacy, provenance, uncertainty, and validation protocols exist.

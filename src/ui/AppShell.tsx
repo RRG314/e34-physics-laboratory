@@ -1,4 +1,4 @@
-import { BookOpenText, CarFront, FlaskConical, Gauge, LayoutDashboard, Map, Microscope, Network, NotebookPen, ScanLine, Wrench } from 'lucide-react'
+import { BookOpenText, Brain, CarFront, FlaskConical, Gauge, LayoutDashboard, Map, Microscope, Network, NotebookPen, ScanLine, Wrench } from 'lucide-react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { useLearnerStore } from '../store/learnerStore'
 import { getFoundationPath, type FoundationPathStage } from '../domain/foundationPath'
@@ -13,6 +13,7 @@ const nav = [
   { to: '/drive', label: 'Drive', icon: Gauge, stage: 'controlled-drive' },
   { to: '/explore', label: 'Explore', icon: ScanLine, stage: 'wheel-telemetry' },
   { to: '/track', label: 'Forces', icon: Map, requiresFoundation: true },
+  { to: '/review', label: 'Review', icon: Brain, requiresMechanics: true },
   { to: '/experiments', label: 'Research', icon: Microscope },
   { to: '/notebook', label: 'Notes', icon: NotebookPen },
   { to: '/reference', label: 'Sources', icon: BookOpenText },
@@ -37,7 +38,7 @@ export function AppShell() {
       <nav className="sidenav" aria-label="Primary">
         {nav.map((item) => {
           const stage = 'stage' in item ? stages.find((candidate) => candidate.id === item.stage as FoundationPathStage['id']) : undefined
-          const locked = Boolean((stage && !stage.available) || ('requiresFoundation' in item && item.requiresFoundation && !isFoundationPathComplete(pathInput)))
+          const locked = Boolean((stage && !stage.available) || ('requiresFoundation' in item && item.requiresFoundation && !isFoundationPathComplete(pathInput)) || ('requiresMechanics' in item && item.requiresMechanics && dynamicsMissionIndex < 4))
           return (
             <NavLink key={item.to} to={item.to} end={item.to === '/'} className={({ isActive }) => `${isActive ? 'active' : ''} ${locked ? 'nav-locked' : ''}`}>
               <item.icon size={19} />

@@ -19,6 +19,8 @@ The project is not an accredited school or credentialing body. Progress markers 
 ## What you can explore today
 
 - Two connected four-stage high-school mechanics paths with visible prerequisites and persisted completion.
+- Changed number sets, transfer questions, and saved written explanations in the wheel, motion, and forces/energy instruction.
+- A mixed retrieval laboratory that opens 24 hours after the eight-chapter route is completed.
 - Path 01: wheel mathematics, motion, a controlled stop, and wheel telemetry.
 - Path 02: net force, ramp components, a mechanical-energy budget, and a safe virtual impulse-design investigation.
 - A guided sequence on position, displacement, speed, velocity, acceleration, and graph interpretation.
@@ -32,6 +34,7 @@ The project is not an accredited school or credentialing body. Progress markers 
 
 The [project status](docs/PROJECT_STATUS.md) separates working features from planned ones. The [educational audit](docs/EDUCATIONAL_AUDIT.md) explains what is and is not yet good enough for teaching, the research behind the curriculum direction, and the release gate for future chapters.
 The [high-school mechanics path](docs/HIGH_SCHOOL_MECHANICS_PATH.md) lists the exact chapter order, mathematics, evidence, and remaining review limits.
+The [learning validation plan](docs/LEARNING_VALIDATION_PLAN.md) defines the teacher, physicist, learner, retention, and accessibility work still required before making effectiveness claims.
 
 ## Run the laboratory
 
@@ -61,6 +64,7 @@ To run the full check locally:
 npm run check
 npx playwright install chromium
 npm run test:e2e
+npm run test:a11y
 ```
 
 ## How the learning design works
@@ -87,6 +91,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Go
 - [Integrated mathematics and physics path](docs/INTEGRATED_MATH_PHYSICS_PATH.md)
 - [Playable high-school mechanics path](docs/HIGH_SCHOOL_MECHANICS_PATH.md)
 - [Educational audit and priorities](docs/EDUCATIONAL_AUDIT.md)
+- [Learning validation plan](docs/LEARNING_VALIDATION_PLAN.md)
 - [Research and evidence methods](docs/RESEARCH_METHODS.md)
 - [Vehicle data and visual assets](docs/VEHICLE_DATA.md)
 - [525i release scope and evidence boundary](docs/VEHICLE_EVIDENCE_PLAN.md)

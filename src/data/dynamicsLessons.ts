@@ -25,6 +25,10 @@ export interface DynamicsLesson {
   graphChoices: DynamicsChoice[]
   graphAnswer: string
   graphFeedback: string
+  transferPrompt: string
+  transferChoices: DynamicsChoice[]
+  transferAnswer: string
+  transferFeedback: string
   assumptions: string[]
   sourceIds: string[]
   mathConceptIds: string[]
@@ -51,6 +55,8 @@ export const dynamicsLessons: DynamicsLesson[] = [
     graphPrompt: 'Which feature of the velocity graph is evidence of a constant positive net force?',
     graphChoices: [{ id: 'slope', label: 'Its constant positive slope' }, { id: 'height', label: 'Its starting height' }, { id: 'area', label: 'The area under it is zero' }],
     graphAnswer: 'slope', graphFeedback: 'A constant positive slope means constant positive acceleration; with fixed mass, ΣF = ma is constant and positive.',
+    transferPrompt: 'A second vehicle has twice the mass but must achieve the same acceleration. What net force does it require?',
+    transferChoices: [{ id: 'half', label: 'Half as much' }, { id: 'same', label: 'The same force' }, { id: 'double', label: 'Twice as much' }], transferAnswer: 'double', transferFeedback: 'The context changed from acceleration to mass, but the proportional structure of ΣF = ma still applies.',
     assumptions: ['One-dimensional motion', 'Learner-declared constant mass', 'Constant net force', 'Road load and rotating parts omitted'], sourceIds: ['ngss-hs-forces-interactions', 'openstax-high-school-physics', 'ap-physics-1'],
     mathConceptIds: ['math-algebra', 'math-solving-equations'], physicsConceptIds: ['newtons-laws'],
     notebookConclusion: 'For fixed mass, the velocity slope and net force change in direct proportion through ΣF = ma.',
@@ -69,6 +75,8 @@ export const dynamicsLessons: DynamicsLesson[] = [
     graphPrompt: 'Where does the car reach its highest point in the ideal ramp trace?',
     graphChoices: [{ id: 'vzero', label: 'Where velocity reaches zero' }, { id: 'pzero', label: 'Where position reaches zero' }, { id: 'amax', label: 'Where acceleration is largest' }],
     graphAnswer: 'vzero', graphFeedback: 'Position reaches a maximum at the instant the uphill velocity becomes zero.',
+    transferPrompt: 'The same model coasts up a steeper ideal ramp at the same speed. What happens to its stopping distance?',
+    transferChoices: [{ id: 'longer', label: 'It becomes longer' }, { id: 'same', label: 'It stays the same' }, { id: 'shorter', label: 'It becomes shorter' }], transferAnswer: 'shorter', transferFeedback: 'A steeper ramp increases g sin θ, so the car loses its uphill velocity over a shorter distance.',
     assumptions: ['Point-mass vehicle', 'Constant ramp angle', 'No drag or rolling resistance', 'No wheel rotational energy'], sourceIds: ['ngss-hs-forces-interactions', 'openstax-high-school-physics', 'ap-physics-1'],
     mathConceptIds: ['math-trigonometry', 'math-vectors'], physicsConceptIds: ['newtons-laws'],
     notebookConclusion: 'On an ideal ramp, the parallel component of gravity is mg sin θ and produces acceleration −g sin θ for an uphill-positive axis.',
@@ -87,6 +95,8 @@ export const dynamicsLessons: DynamicsLesson[] = [
     graphPrompt: 'What must the total-energy line do in this closed ideal model?',
     graphChoices: [{ id: 'constant', label: 'Remain constant' }, { id: 'rise', label: 'Rise with height' }, { id: 'fall', label: 'Fall with speed' }],
     graphAnswer: 'constant', graphFeedback: 'Kinetic energy falls while gravitational potential energy rises by the same amount, so their total remains constant.',
+    transferPrompt: 'If initial speed doubles in the same ideal model, how does initial kinetic energy change?',
+    transferChoices: [{ id: 'double', label: 'It doubles' }, { id: 'quadruple', label: 'It becomes four times larger' }, { id: 'same', label: 'It stays the same' }], transferAnswer: 'quadruple', transferFeedback: 'Speed is squared in KE = ½mv², so doubling speed multiplies kinetic energy by four.',
     assumptions: ['Closed mechanical-energy model', 'No drag, rolling resistance, or braking', 'Uniform g = 9.81 m/s²', 'Vehicle treated as a point mass'], sourceIds: ['ngss-hs-energy', 'openstax-high-school-physics', 'ap-physics-1'],
     mathConceptIds: ['math-quadratics', 'math-solving-equations'], physicsConceptIds: ['mechanical-energy'],
     notebookConclusion: 'In the ideal climb model, kinetic energy transfers to gravitational potential energy while total mechanical energy remains constant.',
@@ -105,6 +115,8 @@ export const dynamicsLessons: DynamicsLesson[] = [
     graphPrompt: 'When stopping time increases but momentum change is fixed, what remains the same on a force–time graph?',
     graphChoices: [{ id: 'height', label: 'Pulse height' }, { id: 'area', label: 'Area under the force curve' }, { id: 'slope', label: 'Velocity slope' }],
     graphAnswer: 'area', graphFeedback: 'Force–time area is impulse. The pulse becomes wider and lower while its area remains the required momentum change.',
+    transferPrompt: 'A second stop has half the stopping time but the same momentum change. What happens to average force?',
+    transferChoices: [{ id: 'half', label: 'It is halved' }, { id: 'double', label: 'It doubles' }, { id: 'same', label: 'It stays the same' }], transferAnswer: 'double', transferFeedback: 'Average force and stopping time are inversely proportional when impulse is fixed.',
     assumptions: ['One-dimensional stop', 'Constant rectangular average-force pulse', 'Learner-declared mass', 'Vehicle deformation, restraints, occupants, and structures are not predicted'], sourceIds: ['ngss-hs-forces-interactions', 'openstax-high-school-physics', 'ap-physics-1'],
     mathConceptIds: ['math-solving-equations', 'math-graph-interpretation'], physicsConceptIds: ['momentum-impulse'],
     notebookConclusion: 'For a fixed momentum change, increasing stopping time lowers average force while force–time area remains equal to impulse.',
@@ -114,6 +126,6 @@ export const dynamicsLessons: DynamicsLesson[] = [
 export function validateDynamicsLessons() {
   const ids = dynamicsLessons.map((lesson) => lesson.id)
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index)
-  const invalid = dynamicsLessons.filter((lesson) => !lesson.predictionChoices.some((choice) => choice.id === lesson.predictionAnswer) || !lesson.graphChoices.some((choice) => choice.id === lesson.graphAnswer) || lesson.sourceIds.length === 0).map((lesson) => lesson.id)
+  const invalid = dynamicsLessons.filter((lesson) => !lesson.predictionChoices.some((choice) => choice.id === lesson.predictionAnswer) || !lesson.graphChoices.some((choice) => choice.id === lesson.graphAnswer) || !lesson.transferChoices.some((choice) => choice.id === lesson.transferAnswer) || lesson.sourceIds.length === 0).map((lesson) => lesson.id)
   return { valid: duplicates.length === 0 && invalid.length === 0, duplicates, invalid }
 }

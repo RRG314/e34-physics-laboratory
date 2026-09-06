@@ -25,6 +25,8 @@ export function GaragePage() {
   const driveChallengeComplete = useLearnerStore((state) => state.driveChallengeComplete)
   const wheelMissionIndex = useLearnerStore((state) => state.wheelMissionIndex)
   const dynamicsMissionIndex = useLearnerStore((state) => state.dynamicsMissionIndex)
+  const mechanicsReviewDueAt = useLearnerStore((state) => state.mechanicsReviewDueAt)
+  const mechanicsReviewComplete = useLearnerStore((state) => state.mechanicsReviewComplete)
   const input = { mathematicsMastery, motionMissionIndex, driveChallengeComplete, wheelMissionIndex, dynamicsMissionIndex }
   const stages = getFoundationPath(input)
   const dynamicsStages = getDynamicsPath(input)
@@ -66,6 +68,8 @@ export function GaragePage() {
       </section>
 
       <section className="future-paths"><header><div><p className="eyebrow">What comes after the playable mechanics route</p><h2>Build order is based on prerequisites and evidence.</h2></div><p>No release dates are invented here. A path starts when its prerequisite learning works, its vehicle claims have sources, and its simulation can be checked.</p></header><div>{futurePaths.map((path) => <article key={path.number}><span>{path.number}</span><div><small>{path.status}</small><h3>{path.title}</h3><p>{path.scope}</p><strong>{path.starts}</strong></div></article>)}</div></section>
+
+      <section className="retention-card"><div><p className="eyebrow">After Path 02 · spaced retrieval</p><h2>Return after a delay and connect the chapters.</h2><p>The retention laboratory mixes wheel motion, ramps, energy, and impulse without replaying the worked examples. It opens 24 hours after the mechanics path is first completed.</p></div>{dynamicsMissionIndex < 4 ? <span><LockKeyhole size={15}/> Complete all eight chapters first</span> : <Link className="button button-primary" to="/review">{mechanicsReviewComplete ? 'Practice retrieval again' : mechanicsReviewDueAt && new Date(mechanicsReviewDueAt).getTime() <= Date.now() ? 'Begin delayed review' : 'See review schedule'} <ArrowRight size={14}/></Link>}</section>
 
       <section className="progression-rig"><p className="eyebrow">Planned academic depth · not five playable levels</p><h2>The same car can support deeper models later.</h2><div>{vehicleProgression.map((stage) => <article key={`${stage.year}-${stage.model}`} className={stage.year === 'High school foundations' ? 'active' : ''}><span>{stage.year}</span><strong>{stage.model}</strong><h3>{stage.system}</h3><p>{stage.learning}</p><small>{stage.reason}</small></article>)}</div><p className="metaphor-note"><ShieldCheck size={15} /> Only the 1995 US manual 525i sedan is an active teaching vehicle. Other E34s remain research candidates until their exact data and redistributable visuals pass the admission gate.</p></section>
 

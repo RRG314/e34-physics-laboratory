@@ -181,8 +181,8 @@ Installing a part is not proof of learning. The capstone is complete when the le
 
 The curriculum map is broad; production should be narrow and complete.
 
-1. Finish one high-school **motion** vertical slice: readiness, instruction, graph-rich experiment, explanation, transfer, delayed retrieval, and accessibility.
-2. Complete the high-school mechanics chain: measurement, motion, forces, energy and momentum, then rotation.
+1. Validate the implemented high-school mechanics slice: readiness, instruction, graphs, explanation, transfer, delayed retrieval, and accessibility.
+2. Extend the mechanics chain into rotation only after the existing measurement, motion, forces, energy, and momentum work survives review.
 3. Add the remaining high-school domains so the first course has genuine breadth.
 4. Build advanced-high-school treatments by revisiting those same families with Algebra II, trigonometry, functions, regression, and less scaffolding.
 5. Add the calculus-based treatments only after the school-level route has been tested with learners.

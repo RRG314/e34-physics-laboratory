@@ -13,7 +13,7 @@ import { convert, dimensions, quantity, validateDimensions } from '../src/domain
 import { diagnoseMotionAnswer } from '../src/domain/assessmentDiagnostics'
 import { generateMotionProblem, validateGeneratedProblem } from '../src/domain/problemGenerator'
 import { parseMeasurementCsv } from '../src/domain/experiments'
-import { motionLessons, validateMotionLessons } from '../src/data/motionLessons'
+import { motionLessonForVariant, motionLessons, validateMotionLessons } from '../src/data/motionLessons'
 import { courseModules, courseStages, curriculumLevels, validateCourseArchitecture, vehicleProgression } from '../src/data/courseArchitecture'
 import { sourceById } from '../src/data/sources'
 import { foundationProgress, getFoundationPath, getNextFoundationStage } from '../src/domain/foundationPath'
@@ -104,10 +104,10 @@ describe('high-school mechanics path', () => {
     expect(highSchoolProgress({ ...completeFoundation, dynamicsMissionIndex: 4 })).toEqual({ completed: 8, total: 8, percent: 100 })
   })
 
-  it('defines valid prediction and graph evidence for every chapter', () => {
+  it('defines valid prediction, graph, and transfer evidence for every chapter', () => {
     expect(validateDynamicsLessons()).toEqual({ valid: true, duplicates: [], invalid: [] })
     expect(dynamicsLessons).toHaveLength(4)
-    expect(dynamicsLessons.every((lesson) => lesson.mathConceptIds.length > 0 && lesson.physicsConceptIds.length > 0 && lesson.assumptions.length > 0 && lesson.sourceIds.every((sourceId) => sourceById[sourceId]))).toBe(true)
+    expect(dynamicsLessons.every((lesson) => lesson.transferChoices.some((choice) => choice.id === lesson.transferAnswer) && lesson.mathConceptIds.length > 0 && lesson.physicsConceptIds.length > 0 && lesson.assumptions.length > 0 && lesson.sourceIds.every((sourceId) => sourceById[sourceId]))).toBe(true)
   })
 })
 
@@ -132,9 +132,11 @@ describe('vehicle provenance', () => {
 })
 
 describe('learning quality systems', () => {
-  it('keeps motion lessons data-driven and requires calculation plus graph evidence', () => {
+  it('keeps motion lessons data-driven and requires calculation, graph, and transfer evidence', () => {
     expect(validateMotionLessons()).toEqual({ valid: true, duplicateIds: [], invalidIds: [] })
-    expect(motionLessons.every((lesson) => lesson.calculationEvidence.length > 0 && lesson.graphEvidence.length > 0)).toBe(true)
+    expect(motionLessons.every((lesson) => lesson.calculationEvidence.length > 0 && lesson.graphEvidence.length > 0 && lesson.transferCheck.options.includes(lesson.transferCheck.answer))).toBe(true)
+    expect(motionLessonForVariant(0, 1).answer).not.toBe(motionLessons[0].answer)
+    expect(motionLessonForVariant(0, 2).id).toBe(motionLessons[0].id)
   })
 
   it('keeps the mathematics graph valid and linked just in time to physics', () => {
